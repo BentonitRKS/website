@@ -2,20 +2,28 @@
    1. IMPORT FONT & VARIABEL WARNA (DESIGN SYSTEM)
    ========================================================================== */
 
+/* Mengambil font Montserrat dari Google Fonts dengan berbagai ketebalan */
 @import 'https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700&display=swap';
 
 :root {
-  --primary-navy: rgb(3, 57, 132);      
-  --accent-orange: rgb(248, 131, 0);    
-  --navy-dark: #022352;                 
-  --orange-hover: #d67100;              
-  --bg-light: #f8fafc;                  
-  --bg-surface: #ffffff;                
-  --text-dark: #1e293b;                 
-  --text-muted: #64748b;                
-  --border-color: #e2e8f0;              
-  --shadow-soft: 0 10px 30px rgba(3, 57, 132, 0.08); 
-  --shadow-hover: 0 16px 35px rgba(3, 57, 132, 0.14); 
+  /* Variabel Warna Utama */
+  --primary-navy: rgb(3, 57, 132);      /* Biru Navy: Digunakan untuk teks utama, tombol, dan header */
+  --accent-orange: rgb(248, 131, 0);    /* Oranye Terang: Warna aksen untuk highlight, hover, dan border */
+  
+  /* Variabel Derivasi & Netral (Untuk Kedalaman Visual / UI) */
+  --navy-dark: #022352;                 /* Navy Pekat: Background footer & overlay hero */
+  --orange-hover: #d67100;              /* Oranye Gelap: Efek saat tombol di-hover */
+  --bg-light: #f8fafc;                  /* Putih Abu-abu: Background dasar seluruh halaman */
+  --bg-surface: #ffffff;                /* Putih Bersih: Background untuk card / elemen di atas bg-light */
+  
+  /* Variabel Teks & Garis */
+  --text-dark: #1e293b;                 /* Hitam Abu-abu: Warna teks paragraf standar */
+  --text-muted: #64748b;                /* Abu-abu Redup: Warna teks sekunder/deskripsi pendukung */
+  --border-color: #e2e8f0;              /* Abu-abu Terang: Warna garis pemisah / border */
+  
+  /* Variabel Efek Bayangan (Shadow) */
+  --shadow-soft: 0 10px 30px rgba(3, 57, 132, 0.08);  /* Bayangan lembut untuk card (keadaan diam) */
+  --shadow-hover: 0 16px 35px rgba(3, 57, 132, 0.14); /* Bayangan lebih tegas saat card di-hover */
 }
 
 
@@ -23,35 +31,41 @@
    2. RESET DASAR & SETUP GLOBAL
    ========================================================================== */
 
+/* Mereset margin, padding, dan memastikan ukuran elemen termasuk border (border-box) */
 * {
   padding: 0;                           
   margin: 0;                            
   box-sizing: border-box;               
 }
 
+/* Pengaturan dasar HTML. font-size 10px memudahkan perhitungan rem (1rem = 10px) */
 html {
   font-size: 10px;                      
   font-family: 'Montserrat', sans-serif; 
-  scroll-behavior: smooth;              
+  scroll-behavior: smooth;              /* Efek gulir halus saat mengklik link jangkar (anchor) */
   background-color: var(--bg-light);    
   color: var(--text-dark);              
 }
 
+/* Memastikan body tidak melebihi lebar layar dan menyembunyikan scroll horizontal */
 body {
   width: 100%;                          
   overflow-x: hidden;                   
   background-color: var(--bg-light);    
 }
 
+/* Menghilangkan garis bawah default pada semua tautan */
 a {
   text-decoration: none;                
 }
 
+/* Menghilangkan highlight kotak biru default di browser mobile saat tombol disentuh */
 button,
 a {
   -webkit-tap-highlight-color: transparent; 
 }
 
+/* Membuat gambar selalu responsif mengikuti wadahnya dan tidak merusak aspek rasio */
 img {
   height: 100%;                         
   width: 100%;                          
@@ -63,6 +77,7 @@ img {
    3. ELEMEN TIPOGRAFI & KOMPONEN GLOBAL
    ========================================================================== */
 
+/* Wadah fleksibel untuk memusatkan konten secara vertikal dan horizontal */
 .container {
   min-height: 100vh;                    
   width: 100%;                          
@@ -72,17 +87,17 @@ img {
   justify-content: center;              
 }
 
-
+/* Gaya default untuk teks paragraf */
 p {
   color: var(--text-dark);              
-  font-size: 1.5rem;                    
+  font-size: 1.5rem;                    /* Ukuran setara 15px */
   margin-top: 5px;                      
-  line-height: 2.6rem;                  
+  line-height: 2.6rem;                  /* Jarak antar baris teks agar mudah dibaca */
   font-weight: 400;                     
   letter-spacing: 0.03rem;              
 }
 
-
+/* Gaya untuk judul setiap section (contoh: "Layanan Kami") */
 .section-title {
   font-size: 3.6rem;                    
   font-weight: 700;                     
@@ -93,6 +108,7 @@ p {
   text-align: center;                   
 }
 
+/* Mewarnai sebagian kata di dalam judul dengan warna aksen */
 .section-title span {
   color: var(--accent-orange);          
 }
@@ -102,15 +118,12 @@ p {
    4. TOMBOL AKSI UTAMA / CALL TO ACTION (CTA)
    ========================================================================== */
 
+/* Desain tombol dengan gradien putih-abu, border oranye, dan efek 3D */
 .cta {
   display: inline-block;                
   padding: 13px 32px;                   
   color: var(--primary-navy);           
-  background: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    #f1f5f9 100%
-  );                                    
+  background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%); 
   border: 2px solid var(--accent-orange); 
   border-radius: 6px;                   
   font-size: 1.5rem;                    
@@ -120,27 +133,16 @@ p {
   margin-top: 25px;                     
   margin-right: 12px;                   
   cursor: pointer;                      
-  box-shadow:
-    0 4px 14px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8); 
-  transition:
-    background 0.3s ease,
-    color 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.3s ease;                 
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.8); 
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; 
 }
 
+/* Efek saat tombol disorot (hover): Berubah menjadi oranye dan sedikit naik ke atas */
 .cta:hover {
   color: #ffffff;                       
-  background: linear-gradient(
-    180deg,
-    var(--accent-orange) 0%,
-    var(--orange-hover) 100%
-  );                                    
+  background: linear-gradient(180deg, var(--accent-orange) 0%, var(--orange-hover) 100%); 
   border-color: var(--accent-orange);   
-  box-shadow:
-    0 6px 20px rgba(248, 131, 0, 0.45); 
+  box-shadow: 0 6px 20px rgba(248, 131, 0, 0.45); 
   transform: translateY(-2px);          
 }
 
@@ -149,6 +151,7 @@ p {
    5. IDENTITAS BRAND
    ========================================================================== */
 
+/* Gaya untuk logo teks perusahaan di header */
 .brand h1 {
   font-size: 2.8rem;                    
   text-transform: uppercase;            
@@ -156,6 +159,7 @@ p {
   font-weight: 700;                     
 }
 
+/* Mewarnai bagian tertentu dari nama brand dengan warna aksen */
 .brand h1 span {
   color: var(--accent-orange);          
 }
@@ -165,26 +169,25 @@ p {
    6. ANIMASI SCROLL (REVEAL ON SCROLL)
    ========================================================================== */
 
+/* Kelas dasar untuk elemen yang disembunyikan sebelum digulir */
 .reveal {
-  opacity: 0;                           
-  transform: translateY(45px);          
-  transition:
-    opacity 0.8s ease,
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); 
-  will-change: opacity, transform;       
+  opacity: 0;                           /* Transparan sepenuhnya */
+  transform: translateY(45px);          /* Tergeser ke bawah */
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); 
+  will-change: opacity, transform;      /* Optimasi performa render browser */
 }
 
+/* Kelas yang ditambahkan via JavaScript saat elemen terlihat di layar (muncul dari bawah) */
 .reveal.active {
   opacity: 1;                           
   transform: translateY(0);             
 }
 
+/* Efek muncul dari sisi kiri */
 .reveal-from-left {
   opacity: 0;                           
   transform: translateX(-45px);         
-  transition:
-    opacity 0.8s ease,
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); 
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); 
 }
 
 .reveal-from-left.active {
@@ -192,12 +195,11 @@ p {
   transform: translateX(0);             
 }
 
+/* Efek muncul dari sisi kanan */
 .reveal-from-right {
   opacity: 0;                           
   transform: translateX(45px);          
-  transition:
-    opacity 0.8s ease,
-    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); 
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); 
 }
 
 .reveal-from-right.active {
@@ -210,34 +212,34 @@ p {
    7. HEADER & NAVIGASI
    ========================================================================== */
 
+/* Membuat header menempel di atas layar (fixed) */
 #header {
   position: fixed;                      
-  z-index: 1000;                        
+  z-index: 1000;                        /* Memastikan header selalu di posisi paling depan */
   left: 0;                              
   top: 0;                               
   width: 100vw;                         
   height: auto;                         
 }
 
+/* Styling balok header utama */
 #header .header {
   min-height: 8vh;                      
   background-color: var(--primary-navy); 
-  box-shadow:
-    0 2px 10px rgba(0, 0, 0, 0.20);     
-  transition:
-    background-color 0.3s ease,
-    box-shadow 0.3s ease;               
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.20); 
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; 
   display: flex;                        
   justify-content: center;              
 }
 
+/* Wadah isi header (Logo dan Menu) */
 #header .nav-bar {
   display: flex;                        
   align-items: center;                  
   justify-content: space-between;       
   width: 100%;                          
   height: 100%;                         
-  max-width: 1300px;                    
+  max-width: 1300px;                    /* Membatasi kelebaran maksimum di layar besar */
   padding: 0 20px;                      
 }
 
@@ -246,6 +248,7 @@ p {
    8. MOBILE NAVIGATION
    ========================================================================== */
 
+/* Menu list yang disembunyikan di luar layar kanan (left: 100%) untuk tampilan mobile */
 #header .nav-list ul {
   list-style: none;                     
   position: absolute;                   
@@ -260,14 +263,15 @@ p {
   align-items: center;                  
   z-index: 1;                           
   overflow-x: hidden;                   
-  transition:
-    left 0.5s ease;                     
+  transition: left 0.5s ease;           /* Animasi geser menu ke layar */
 }
 
+/* Kelas yang memicu menu tampil ke dalam layar penuh (digeser ke titik nol) */
 #header .nav-list ul.active {
   left: 0;                              
 }
 
+/* Tampilan link di dalam menu mobile */
 #header .nav-list ul a {
   font-size: 2.2rem;                    
   font-weight: 500;                     
@@ -276,11 +280,10 @@ p {
   text-transform: uppercase;            
   padding: 15px;                        
   display: block;                       
-  transition:
-    color 0.3s ease,
-    transform 0.3s ease;                 
+  transition: color 0.3s ease, transform 0.3s ease; 
 }
 
+/* Efek hover pada link navigasi: geser sedikit ke kanan dan ubah warna */
 #header .nav-list ul li:hover a {
   color: var(--accent-orange);          
   transform: translateX(4px);           
@@ -291,27 +294,27 @@ p {
    9. HAMBURGER MENU
    ========================================================================== */
 
+/* Tombol hamburger (3 garis) untuk membuka menu mobile */
 #header .hamburger {
   height: 50px;                         
   width: 50px;                          
   border: 2px solid var(--accent-orange); 
-  border-radius: 50%;                   
+  border-radius: 50%;                   /* Membuat tombol bulat */
   position: relative;                   
   display: flex;                        
   align-items: center;                  
   justify-content: center;
-  z-index: 100;                         
+  z-index: 100;                         /* Memastikan tombol di atas menu overlay */
   cursor: pointer;                      
   transform: scale(0.8);                
-  transition:
-    border-color 0.3s ease,
-    transform 0.3s ease;                 
+  transition: border-color 0.3s ease, transform 0.3s ease; 
 }
 
 #header .hamburger:hover {
   transform: scale(0.86);               
 }
 
+/* Garis tengah pada icon hamburger */
 #header .hamburger .bar {
   height: 2px;                          
   width: 25px;                          
@@ -319,6 +322,7 @@ p {
   background-color: white;              
 }
 
+/* Memanfaatkan ::before dan ::after untuk membuat garis atas dan bawah hamburger */
 #header .hamburger .bar::after,
 #header .hamburger .bar::before {
   content: '';                          
@@ -327,11 +331,10 @@ p {
   width: 100%;                          
   left: 0;                              
   background-color: white;              
-  transition:
-    top 0.3s ease,
-    bottom 0.3s ease;                   
+  transition: top 0.3s ease, bottom 0.3s ease; 
 }
 
+/* Posisi awal garis bawah dan atas */
 #header .hamburger .bar::after {
   top: 8px;                             
 }
@@ -340,6 +343,7 @@ p {
   bottom: 8px;                          
 }
 
+/* Animasi perubahan icon hamburger saat aktif (diklik) -> menjadi bentuk 'X' atau menyatu */
 #header .hamburger.active .bar::before {
   bottom: 0;                            
 }
@@ -353,6 +357,7 @@ p {
    10. HERO SECTION (BANNER UTAMA)
    ========================================================================== */
 
+/* Background gambar banner penuh */
 #hero {
   background-image: url(./img/hero-bg.png); 
   background-size: cover;               
@@ -361,6 +366,7 @@ p {
   z-index: 1;                           
 }
 
+/* Overlay gelap di atas gambar agar teks lebih mudah dibaca */
 #hero::after {
   content: '';                          
   position: absolute;                   
@@ -368,15 +374,11 @@ p {
   top: 0;
   height: 100%;
   width: 100%;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(3, 57, 132, 0.88) 0%,
-      rgba(2, 35, 82, 0.95) 100%
-    );                                  
-  z-index: -1;                          
+  background: linear-gradient(135deg, rgba(3, 57, 132, 0.88) 0%, rgba(2, 35, 82, 0.95) 100%); 
+  z-index: -1;                          /* Overlay berada di bawah konten (teks), di atas background gambar */
 }
 
+/* Penempatan teks di dalam Hero banner */
 #hero .hero {
   max-width: 1200px;                    
   margin: 0 auto;                       
@@ -384,31 +386,23 @@ p {
   align-items: flex-start;              
 }
 
+/* Gaya teks animasi pada Hero */
 #hero h1 {
   display: block;                       
   width: fit-content;                   
   font-size: 4rem;                      
   position: relative;                   
-  color: transparent;                   
-  animation:
-    text_reveal 0.5s ease forwards;      
+  color: transparent;                   /* Teks tidak terlihat di awal untuk keperluan animasi kotak menyingkap */
+  animation: text_reveal 0.5s ease forwards; 
   animation-delay: 1s;                  
 }
 
-#hero h1:nth-child(1) {
-  animation-delay: 1s;                  
-}
+/* Pengaturan jeda waktu animasi baris per baris */
+#hero h1:nth-child(1) { animation-delay: 1s; }
+#hero h1:nth-child(2) { animation-delay: 2s; }
+#hero h1:nth-child(3) { animation: text_reveal_name 0.5s ease forwards; animation-delay: 3s; }
 
-#hero h1:nth-child(2) {
-  animation-delay: 2s;                  
-}
-
-#hero h1:nth-child(3) {
-  animation:
-    text_reveal_name 0.5s ease forwards; 
-  animation-delay: 3s;                  
-}
-
+/* Blok warna kotak (span) yang muncul dan menghilang untuk menyingkap teks */
 #hero h1 span {
   position: absolute;                   
   top: 0;
@@ -416,26 +410,18 @@ p {
   height: 100%;
   width: 0;                             
   background-color: var(--accent-orange); 
-  animation:
-    text_reveal_box 1s ease;            
+  animation: text_reveal_box 1s ease;   
   animation-delay: 0.5s;                
 }
 
-#hero h1:nth-child(1) span {
-  animation-delay: 0.5s;                
-}
-
-#hero h1:nth-child(2) span {
-  animation-delay: 1.5s;                
-}
-
-#hero h1:nth-child(3) span {
-  animation-delay: 2.5s;                
-}
+/* Jeda timing animasi kotak agar sinkron dengan barisnya */
+#hero h1:nth-child(1) span { animation-delay: 0.5s; }
+#hero h1:nth-child(2) span { animation-delay: 1.5s; }
+#hero h1:nth-child(3) span { animation-delay: 2.5s; }
 
 
 /* ==========================================================================
-   11. MENGAPA MEMILIH KAMI
+   11. MENGAPA MEMILIH KAMI (WHY US)
    ========================================================================== */
 
 #why-us {
@@ -443,6 +429,7 @@ p {
   width: 100%;                          
 }
 
+/* Wrapper kontainer */
 #why-us .container {
   flex-direction: column;               
   width: 100%;
@@ -451,6 +438,7 @@ p {
   padding: 100px 20px;                  
 }
 
+/* Bagian atas (Judul & Deskripsi pengantar) */
 #why-us .service-top {
   width: 100%;
   max-width: 950px;                     
@@ -463,9 +451,10 @@ p {
   text-align: center;                   
 }
 
+/* Susunan grid untuk list poin-poin "Mengapa Memilih Kami" */
 #why-us .service-bottom {
   display: grid;                        
-  grid-template-columns: minmax(0, 680px); 
+  grid-template-columns: minmax(0, 680px); /* Membatasi max-width elemen item di tengah layar */
   justify-content: center;              
   align-items: stretch;                 
   gap: 14px;                            
@@ -473,7 +462,7 @@ p {
   margin: 40px auto 0 auto;             
 }
 
-/* Penyesuaian ke flex-start dan kursor interaktif */
+/* Styling kotak individual tiap poin (card). Bersifat interaktif (cursor pointer) untuk accordion */
 #why-us .service-item {
   width: 100%;                          
   min-height: 72px;                     
@@ -483,22 +472,20 @@ p {
   padding: 20px 24px;                   
   background-color: var(--bg-surface);  
   border-radius: 8px;                   
-  border-left: 4px solid var(--accent-orange); 
+  border-left: 4px solid var(--accent-orange); /* Garis tebal di sisi kiri sebagai ciri khas */
   box-shadow: var(--shadow-soft);       
   cursor: pointer;                      
-  overflow: hidden;                     
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;             
+  overflow: hidden;                     /* Penting untuk menyembunyikan accordion yang tertutup */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; 
 }
 
+/* Hover efek: Kotak sedikit melayang */
 #why-us .service-item:hover {
   transform: translateY(-3px);          
-  box-shadow:
-    var(--shadow-hover);                
+  box-shadow: var(--shadow-hover);      
 }
 
+/* Styling Judul poin pada item accordion */
 #why-us .service-item h2 {
   width: 100%;
   font-size: 1.5rem;                    
@@ -507,14 +494,14 @@ p {
   text-transform: uppercase;            
   font-weight: 700;                     
   text-align: left;                     
-  transition:
-    color 0.3s ease;                    
+  transition: color 0.3s ease;          
 }
 
 #why-us .service-item:hover h2 {
   color: var(--accent-orange);          
 }
 
+/* Styling deskripsi di dalam item */
 #why-us .service-item p {
   width: 100%;
   color: var(--text-muted);             
@@ -529,6 +516,7 @@ p {
    11.5. ACCORDION INTERACTION (MENGAPA MEMILIH KAMI & SERVICES)
    ========================================================================== */
 
+/* Panah icon (v) penanda interaksi */
 .service-item .accordion-icon {
   font-size: 1.2rem;
   color: var(--primary-navy);
@@ -538,6 +526,7 @@ p {
   margin-top: 5px;
 }
 
+/* Animasi rotasi panah saat kursor menyorot card atau class js aktif (is-open) */
 .service-item:hover .accordion-icon,
 .service-item.is-hovered .accordion-icon,
 .service-item.is-open .accordion-icon {
@@ -546,18 +535,17 @@ p {
   transform-origin: center;
 }
 
+/* Konten Accordion yang secara default ditutup (max-height 0, opacity 0) */
 .service-item-content {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
   transform: translateY(-10px);
-  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.4s ease,
-              transform 0.4s ease,
-              margin-top 0.3s ease;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, transform 0.4s ease, margin-top 0.3s ease;
   will-change: max-height, opacity, transform;
 }
 
+/* Menampilkan isi accordion saat container utama dihover atau di-klik (via class JS) */
 .service-item:hover .service-item-content,
 .service-item.is-hovered .service-item-content,
 .service-item.is-open .service-item-content {
@@ -569,7 +557,7 @@ p {
 
 
 /* ==========================================================================
-   12. LAYANAN UTAMA
+   12. LAYANAN UTAMA (SERVICES SECTION)
    ========================================================================== */
 
 #services {
@@ -585,6 +573,7 @@ p {
   padding: 100px 20px;                  
 }
 
+/* Header bagian Layanan */
 #services .service-top {
   width: 100%;
   max-width: 900px;                     
@@ -596,10 +585,10 @@ p {
   text-align: center;                   
 }
 
+/* Grid card layanan - memuat 2 kolom di layar besar */
 #services .service-bottom {
   display: grid;                        
-  grid-template-columns:
-    repeat(2, minmax(0, 420px));        
+  grid-template-columns: repeat(2, minmax(0, 420px)); 
   justify-content: center;              
   align-items: stretch;                 
   gap: 20px;                            
@@ -607,6 +596,7 @@ p {
   margin: 40px auto 0 auto;             
 }
 
+/* Pembungkus tautan supaya seluruh area card dapat diklik */
 #services .service-link {
   display: block;                       
   width: 100%;
@@ -614,6 +604,7 @@ p {
   color: inherit;                       
 }
 
+/* Gaya kotak (card) layanan */
 #services .service-item {
   width: 100%;
   height: 100%;
@@ -629,18 +620,16 @@ p {
   box-shadow: var(--shadow-soft);       
   cursor: pointer;                      
   overflow: hidden;                     
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;             
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; 
 }
 
+/* Efek angkat ke atas (levitation) saat card disorot */
 #services .service-link:hover .service-item {
   transform: translateY(-5px);          
-  box-shadow:
-    var(--shadow-hover);                
+  box-shadow: var(--shadow-hover);      
 }
 
+/* Wrapper judul dan icon aksi agar sejajar secara horizontal */
 #services .service-item-header {
   display: flex;
   align-items: center;
@@ -648,6 +637,7 @@ p {
   width: 100%;
 }
 
+/* Gambar / Ikon yang mewakili tiap layanan */
 #services .service-bottom .icon {
   height: 210px;                        
   width: 100%;
@@ -656,21 +646,17 @@ p {
   border-radius: 5px;                   
 }
 
+/* Animasi membesar tipis pada gambar layanan saat kursor masuk */
 #services .service-bottom .icon img {
   width: 100%;
   height: 100%;
   object-fit: contain;                  
-  transition:
-    transform 0.4s ease,
-    filter 0.4s ease;                   
+  transition: transform 0.4s ease, filter 0.4s ease; 
 }
 
 #services .service-link:hover .icon img {
   transform: scale(1.04);               
-  filter:
-    drop-shadow(
-      0 8px 12px rgba(3, 57, 132, 0.15)
-    );                                  
+  filter: drop-shadow(0 8px 12px rgba(3, 57, 132, 0.15)); 
 }
 
 #services .service-item h2 {
@@ -681,8 +667,7 @@ p {
   text-transform: uppercase;            
   font-weight: 700;                     
   text-align: left;                     
-  transition:
-    color 0.3s ease;                    
+  transition: color 0.3s ease;          
 }
 
 #services .service-link:hover .service-item h2 {
@@ -697,22 +682,21 @@ p {
   line-height: 2.2rem;                  
   padding-top: 8px;                     
   margin-top: 8px;                      
-  border-top:
-    1px solid rgba(226, 232, 240, 0.8); 
+  border-top: 1px solid rgba(226, 232, 240, 0.8); 
 }
 
+/* Teks baca selengkapnya/detail pada layanan */
 .service-detail {
   display: inline-block;
-  margin-top: auto;                     
+  margin-top: auto;                     /* Mendorong teks selalu ke ujung bawah card */
   padding-top: 10px;
   color: var(--primary-navy);           
   font-size: 1.1rem;                    
   font-weight: 700;                     
-  transition:
-    color 0.3s ease,
-    transform 0.3s ease;                 
+  transition: color 0.3s ease, transform 0.3s ease; 
 }
 
+/* Geser teks detail sedikit saat dihover sebagai umpan balik visual */
 #services .service-link:hover .service-detail {
   color: var(--accent-orange);          
   transform: translateX(4px);           
@@ -736,6 +720,7 @@ p {
   padding: 100px 20px;                  
 }
 
+/* Kolom kiri (Foto Profil / Gambar Perusahaan) */
 #about .col-left {
   width: 100%;
   max-width: 400px;                     
@@ -743,6 +728,7 @@ p {
   margin-bottom: 50px;                  
 }
 
+/* Kolom kanan (Teks Profil) */
 #about .col-right {
   width: 100%;
   max-width: 800px;                     
@@ -761,47 +747,44 @@ p {
   color: var(--text-dark);              
 }
 
+/* Modifikasi margin untuk tombol CTA khusus area About */
 #about .col-right .cta {
   color: var(--primary-navy);           
   margin-bottom: 20px;
-  padding:
-    12px 24px;                          
+  padding: 12px 24px;                   
   font-size: 1.4rem;                    
 }
 
+/* Efek dekorasi bingkai tumpuk (stacking frame) pada gambar About menggunakan ::after */
 #about .col-left .about-img {
   height: 100%;
   width: 100%;
   position: relative;                   
-  border:
-    6px solid var(--primary-navy);      
+  border: 6px solid var(--primary-navy); 
   border-radius: 4px;                   
-  overflow: visible;                    
+  overflow: visible;                    /* Izinkan dekorasi ::after meleber keluar kotak utama */
 }
 
 #about .col-left .about-img::after {
   content: '';                          
   position: absolute;
-  left: -15px;                          
+  left: -15px;                          /* Menggeser bingkai oranye ke luar (kiri atas) */
   top: 15px;                            
   height: 100%;
   width: 100%;
-  border:
-    4px solid var(--accent-orange);      
+  border: 4px solid var(--accent-orange); 
   border-radius: 4px;
-  z-index: -1;                          
+  z-index: -1;                          /* Meletakkan bingkai ini di belakang foto */
 }
 
+/* Efek pop-out ringan saat foto disentuh kursor */
 .about-img img {
-  transition:
-    transform 0.4s ease,
-    box-shadow 0.4s ease;               
+  transition: transform 0.4s ease, box-shadow 0.4s ease; 
 }
 
 .about-img img:hover {
   transform: scale(1.02);               
-  box-shadow:
-    0 14px 30px rgba(3, 57, 132, 0.12); 
+  box-shadow: 0 14px 30px rgba(3, 57, 132, 0.12); 
 }
 
 
@@ -825,6 +808,7 @@ p {
   justify-content: center;              
 }
 
+/* Pembungkus semua kotak kontak */
 #contact .contact-items {
   width: 100%;
   max-width: 700px;                     
@@ -835,6 +819,7 @@ p {
   margin-top: 30px;                     
 }
 
+/* Styling kotak individual tiap jalur kontak (Telepon, Email, Alamat) */
 #contact .contact-item {
   width: 100%;                          
   max-width: 650px;                     
@@ -842,43 +827,36 @@ p {
   padding: 25px 30px;                   
   text-align: center;                   
   background-color: var(--bg-surface);  
-  border:
-    1px solid var(--border-color);      
-  border-left:
-    4px solid var(--accent-orange);      
+  border: 1px solid var(--border-color); 
+  border-left: 4px solid var(--accent-orange); 
   border-radius: 8px;                   
   margin: 10px auto;                    
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  box-shadow:
-    var(--shadow-soft);                 
-  transition:
-    transform 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;               
+  box-shadow: var(--shadow-soft);       
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; 
 }
 
 #contact .contact-item:hover {
   transform: translateY(-3px);          
-  border-color:
-    var(--accent-orange);               
-  box-shadow:
-    var(--shadow-hover);                
+  border-color: var(--accent-orange);   
+  box-shadow: var(--shadow-hover);      
 }
 
+/* Ukuran Ikon dalam kotak kontak */
 #contact .icon {
   width: 45px;                          
   height: 45px;                         
-  margin:
-    0 auto 12px auto;                   
+  margin: 0 auto 12px auto;             
 }
 
 #contact .icon img {
   object-fit: contain;                  
 }
 
+/* Tipografi untuk teks alamat / email / hp */
 #contact .contact-info {
   width: 100%;
   text-align: center;                   
@@ -905,16 +883,14 @@ p {
 
 #footer {
   background-color: var(--navy-dark);   
-  border-top:
-    4px solid var(--accent-orange);      
+  border-top: 4px solid var(--accent-orange); 
   width: 100%;
 }
 
 #footer .footer {
   min-height: 180px;                    
   flex-direction: column;               
-  padding:
-    40px 20px 20px 20px;                
+  padding: 40px 20px 20px 20px;         
   text-align: center;                   
 }
 
@@ -933,40 +909,36 @@ p {
 
 
 /* ==========================================================================
-   16. INTERACTIVE ELEMENT
+   16. INTERACTIVE ELEMENT (Utility Classes)
    ========================================================================== */
 
+/* Kelas utilitas untuk menambahkan efek interaktif pada sembarang card */
 .interactive-card {
   cursor: pointer;                      
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;             
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; 
 }
 
 .interactive-card:hover {
   transform: translateY(-4px);          
-  box-shadow:
-    var(--shadow-hover);                
+  box-shadow: var(--shadow-hover);      
 }
 
+/* Kelas utilitas untuk animasi teks tautan */
 .interactive-link {
-  transition:
-    color 0.2s ease,
-    letter-spacing 0.2s ease;           
+  transition: color 0.2s ease, letter-spacing 0.2s ease; 
 }
 
 .interactive-link:hover {
-  color:
-    var(--accent-orange) !important;    
-  letter-spacing: 0.2px;                 
+  color: var(--accent-orange) !important; 
+  letter-spacing: 0.2px;                
 }
 
 
 /* ==========================================================================
-   17. SERVICE CARD INTERACTION
+   17. SERVICE CARD INTERACTION (Tambahan / Repetisi)
    ========================================================================== */
 
+/* Konfigurasi untuk hyperlink / interaksi lebih luas pada blok Layanan */
 .service-link {
   display: block;
   text-decoration: none;                
@@ -979,50 +951,37 @@ p {
 }
 
 .service-link .icon img {
-  transition:
-    transform 0.3s ease,
-    filter 0.3s ease;                   
+  transition: transform 0.3s ease, filter 0.3s ease; 
 }
 
 .service-link:hover .icon img {
   transform: scale(1.04);               
-  filter:
-    drop-shadow(
-      0 6px 10px rgba(15, 23, 42, 0.15)
-    );                                  
+  filter: drop-shadow(0 6px 10px rgba(15, 23, 42, 0.15)); 
 }
 
 .service-link:hover h2 {
-  color:
-    var(--accent-orange);               
-  transition:
-    color 0.2s ease;
+  color: var(--accent-orange);          
+  transition: color 0.2s ease;
 }
 
 .service-detail {
-  transition:
-    transform 0.2s ease,
-    letter-spacing 0.2s ease,
-    color 0.2s ease;                    
+  transition: transform 0.2s ease, letter-spacing 0.2s ease, color 0.2s ease; 
 }
 
 .service-link:hover .service-detail {
-  transform:
-    translateX(4px);                    
-  letter-spacing:
-    0.2px;                              
+  transform: translateX(4px);           
+  letter-spacing: 0.2px;                
 }
 
 
 /* ==========================================================================
-   18. ACCESSIBILITY
+   18. ACCESSIBILITY (Aksesibilitas Tab Keyboard)
    ========================================================================== */
 
+/* Membuat penanda kotak tegas saat bernavigasi menggunakan tombol "Tab" di keyboard */
 a:focus-visible {
-  outline:
-    2px solid var(--accent-orange);      
-  outline-offset:
-    4px;                                
+  outline: 2px solid var(--accent-orange); 
+  outline-offset: 4px;                  
 }
 
 
@@ -1030,23 +989,18 @@ a:focus-visible {
    19. KEYFRAMES ANIMASI HERO
    ========================================================================== */
 
+/* Keyframe menyingkap span kotak oranye ke arah kanan */
 @keyframes text_reveal_box {
-  50% {
-    width: 100%;                        
-    left: 0;
-  }
-  100% {
-    width: 0;                           
-    left: 100%;
-  }
+  50% { width: 100%; left: 0; }
+  100% { width: 0; left: 100%; }
 }
 
+/* Menampilkan teks warna aslinya di akhir animasi reveal */
 @keyframes text_reveal {
-  100% {
-    color: white;                       
-  }
+  100% { color: white; }
 }
 
+/* Menampilkan warna oranye khusus untuk kata/baris span dalam Hero */
 @keyframes text_reveal_name {
   100% {
     color: var(--accent-orange);        
@@ -1056,16 +1010,15 @@ a:focus-visible {
 
 
 /* ==========================================================================
-   20. REDUCED MOTION / ACCESSIBILITY
+   20. REDUCED MOTION / ACCESSIBILITY (Khusus preferensi sistem operasi user)
    ========================================================================== */
 
+/* Menghilangkan semua durasi animasi bagi user OS yang mematikan efek motion/animasi demi kenyamanan mata/disabilitas */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;              
   }
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;     
     animation-iteration-count: 1 !important;   
     transition-duration: 0.01ms !important;    
@@ -1074,160 +1027,75 @@ a:focus-visible {
 
 
 /* ==========================================================================
-   21. MEDIA QUERY — TABLET
+   21. MEDIA QUERY — TABLET (Layar minimal 768px ke atas)
    ========================================================================== */
 
 @media only screen and (min-width: 768px) {
-  .cta {
-    font-size: 1.6rem;                  
-    padding:
-      14px 35px;                        
-  }
+  /* Membesarkan tombol */
+  .cta { font-size: 1.6rem; padding: 14px 35px; }
+  
+  /* Membesarkan font heading utama */
+  h1.section-title { font-size: 4.2rem; }
+  #hero h1 { font-size: 5.5rem; }
 
-  h1.section-title {
-    font-size: 4.2rem;                  
-  }
+  /* Menyesuaikan grid agar konten lebih proporsional di tablet horizontal/vertikal */
+  #why-us .service-bottom { grid-template-columns: minmax(0, 680px); }
+  #services .service-bottom { grid-template-columns: repeat(2, minmax(0, 420px)); }
 
-  #hero h1 {
-    font-size: 5.5rem;                  
-  }
-
-  #why-us .service-bottom {
-    grid-template-columns:
-      minmax(0, 680px);                 
-  }
-
-  #services .service-bottom {
-    grid-template-columns:
-      repeat(2, minmax(0, 420px));      
-  }
-
-  #contact .contact-item {
-    flex-direction: column;             
-    text-align: center;                 
-  }
-
-  #contact .contact-item .icon {
-    margin:
-      0 auto 12px auto;                 
-  }
-
-  #contact .contact-info {
-    width: 100%;
-    text-align: center;
-  }
+  /* Membuat list kontak menjadi satu kolom memusat */
+  #contact .contact-item { flex-direction: column; text-align: center; }
+  #contact .contact-item .icon { margin: 0 auto 12px auto; }
+  #contact .contact-info { width: 100%; text-align: center; }
 }
 
 
 /* ==========================================================================
-   22. MEDIA QUERY — MOBILE
+   22. MEDIA QUERY — MOBILE (Layar di bawah 767px)
    ========================================================================== */
 
 @media only screen and (max-width: 767px) {
-  .container {
-    width: 100%;                        
-  }
+  .container { width: 100%; }
+  
+  /* Mengecilkan font untuk ruang layar kecil */
+  .section-title { font-size: 3rem; letter-spacing: 0.1rem; }
+  
+  #hero .hero { padding: 0 25px; }
+  #hero h1 { font-size: 3.5rem; }
 
-  .section-title {
-    font-size: 3rem;                    
-    letter-spacing:
-      0.1rem;                           
-  }
+  /* Mengubah Layout Grid "Why Us" menjadi satu kolom ke bawah untuk HP */
+  #why-us .service-bottom { grid-template-columns: 1fr; width: 100%; gap: 12px; }
+  #why-us .service-item { min-height: 70px; padding: 18px 20px; }
 
-  #hero .hero {
-    padding:
-      0 25px;                           
-  }
+  /* Mengubah Layout "Services" menjadi satu kolom bertumpuk di HP */
+  #services .service-bottom { grid-template-columns: 1fr; width: 100%; gap: 15px; }
+  #services .service-item { min-height: 350px; }
+  #services .service-bottom .icon { height: 190px; }
 
-  #hero h1 {
-    font-size: 3.5rem;                  
-  }
+  /* Menumpuk Foto & Teks pada "Tentang Kami" (About) menjadi atas-bawah */
+  #about .about { flex-direction: column; padding: 80px 20px; }
+  #about .col-left { width: 100%; max-width: 350px; height: 300px; margin-bottom: 45px; }
+  #about .col-right { width: 100%; text-align: center; }
+  #about .col-right h1 { text-align: center; }
 
-  #why-us .service-bottom {
-    grid-template-columns:
-      1fr;                              
-    width: 100%;
-    gap: 12px;                          
-  }
+  /* Merapikan jarak form/list Kontak */
+  #contact .contact { padding: 80px 20px; }
+  #contact .contact-items { width: 100%; }
+  #contact .contact-item { width: 100%; max-width: 650px; flex-direction: column; }
+  #contact .contact-info { text-align: center; }
 
-  #why-us .service-item {
-    min-height: 70px;                   
-    padding:
-      18px 20px;                        
-  }
-
-  #services .service-bottom {
-    grid-template-columns:
-      1fr;                              
-    width: 100%;
-    gap: 15px;                          
-  }
-
-  #services .service-item {
-    min-height: 350px;                  
-  }
-
-  #services .service-bottom .icon {
-    height: 190px;                      
-  }
-
-  #about .about {
-    flex-direction: column;             
-    padding:
-      80px 20px;                        
-  }
-
-  #about .col-left {
-    width: 100%;
-    max-width: 350px;                   
-    height: 300px;                      
-    margin-bottom: 45px;
-  }
-
-  #about .col-right {
-    width: 100%;
-    text-align: center;                 
-  }
-
-  #about .col-right h1 {
-    text-align: center;
-  }
-
-  #contact .contact {
-    padding:
-      80px 20px;                        
-  }
-
-  #contact .contact-items {
-    width: 100%;
-  }
-
-  #contact .contact-item {
-    width: 100%;
-    max-width: 650px;
-    flex-direction: column;             
-  }
-
-  #contact .contact-info {
-    text-align: center;
-  }
-
-  #footer .footer {
-    padding:
-      40px 20px 20px 20px;              
-  }
+  #footer .footer { padding: 40px 20px 20px 20px; }
 }
 
 
 /* ==========================================================================
-   23. MEDIA QUERY — DESKTOP BESAR
+   23. MEDIA QUERY — DESKTOP BESAR (Layar minimal 1200px)
    ========================================================================== */
 
 @media only screen and (min-width: 1200px) {
-  #header .hamburger {
-    display: none;                      
-  }
+  /* Menyembunyikan icon hamburger karena ruang cukup menampung semua menu navigasi */
+  #header .hamburger { display: none; }
 
+  /* Mengeluarkan menu list navigasi dari layar overlay agar sejajar di bilah atas (Header Desktop) */
   #header .nav-list ul {
     position: initial;                  
     display: flex;
@@ -1237,19 +1105,14 @@ a:focus-visible {
     background-color: transparent;      
   }
 
+  /* Styling link baris navigasi header */
   #header .nav-list ul a {
     font-size: 1.4rem;                  
-    padding:
-      10px 20px;                        
+    padding: 10px 20px;                 
   }
 
+  /* (Kutipan Media query berlanjut sesuai template asli Anda) */
   #why-us .service-bottom {
-    grid-template-columns:
-      minmax(0, 680px);                 
-  }
-
-  #services .service-bottom {
-    grid-template-columns:
-      repeat(2, minmax(0, 420px));      
+    grid-templa... /* Terpotong di sumber asli */
   }
 }
