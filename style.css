@@ -96,7 +96,7 @@ img {
 
 /* Wadah fleksibel untuk memusatkan konten secara vertikal dan horizontal */
 .container {
-  height: auto;                         /* <--- Ubah dari 100vh menjadi auto agar menyesuaikan isi */
+  height: 100vh;                         /* <--- Ubah dari 100vh menjadi auto agar menyesuaikan isi */
   min-height: auto;                     /* <--- Pastikan tidak memaksa satu layar penuh */
   width: 100%;                          
   display: flex;                        
