@@ -318,7 +318,7 @@ p {
 #hero h1:nth-child(3) span { animation-delay: 2.5s; }
 
 /* ==========================================================================
-   7. SERVICES / LAYANAN UTAMA SECTION (VERTIKAL 1 KOLOM KEMBALI KE SEMULA)
+   7. SERVICES / LAYANAN UTAMA SECTION (GRID 2 KOLOM + UKURAN DIPERKECIL & CENTER)
    ========================================================================== */
 #services {
   background-color: var(--bg-light);
@@ -332,30 +332,37 @@ p {
   padding: 100px 20px;
 }
 
-/* Mengembalikan kontainer layanan utama menjadi susunan vertikal 1 kolom ke bawah */
+/* Mengubah kontainer layanan utama menjadi Grid 2 Kolom yang terpusat */
 .service-bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 420px)); /* Ukuran kotak diperkecil dengan batas lebar */
+  justify-content: center; /* Mengetengahkan seluruh grid secara horizontal */
   gap: 20px;
   width: 100%;
-  max-width: 800px; /* Lebar maksimal dibatasi agar tampil rapi di layar lebar */
   margin: 40px auto 0 auto;
 }
 
-/* Kartu Layanan Utama */
+/* Kartu Layanan Utama dengan ukuran lebih ringkas/kecil */
 .service-item {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 25px 30px;
+  padding: 18px 22px; /* Padding diperkecil agar ukuran kotak lebih kecil/kompak */
   border-radius: 8px;
   background-color: var(--bg-surface);
-  border-left: 6px solid var(--accent-orange); 
+  border-left: 5px solid var(--accent-orange); 
   box-shadow: var(--shadow-soft);
   cursor: pointer;
   overflow: hidden;
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Logika Merger Center (Full Lebar 2 Kolom) jika sisa 1 item di baris terakhir */
+.service-item:nth-last-child(1):nth-child(odd) {
+  grid-column: 1 / -1;
+  max-width: 420px; /* Lebar disamakan dengan kotak lainnya agar tetap proporsional di tengah */
+  margin: 0 auto;
+  width: 100%;
 }
 
 .service-item:hover {
@@ -371,7 +378,7 @@ p {
 }
 
 .service-item h2 {
-  font-size: 1.8rem;
+  font-size: 1.5rem; /* Ukuran font disesuaikan agar proporsional dengan kotak yang lebih kecil */
   color: var(--primary-navy);
   margin-bottom: 0;
   text-transform: uppercase;
@@ -387,7 +394,7 @@ p {
 }
 
 .service-item .accordion-icon {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   color: var(--primary-navy);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
   user-select: none;
@@ -420,7 +427,7 @@ p {
   max-height: 250px;
   opacity: 1;
   transform: translateY(0);
-  margin-top: 14px; 
+  margin-top: 10px; 
 }
 
 .service-item:hover .accordion-icon,
@@ -433,9 +440,9 @@ p {
 .service-item p {
   color: var(--text-dark);
   text-align: left;
-  font-size: 1.4rem;
-  line-height: 2.4rem;
-  padding-top: 10px;
+  font-size: 1.3rem;
+  line-height: 2.2rem;
+  padding-top: 8px;
   border-top: 1px solid rgba(226, 232, 240, 0.6); 
 }
 
@@ -499,7 +506,7 @@ p {
 }
 
 /* ==========================================================================
-   9. CONTACT SECTION (KONTAK & LOKASI)
+   9. CONTACT SECTION (KONTAK & LOKASI - DIPUSATKAN)
    ========================================================================== */
 #contact {
   background-color: var(--bg-light);
@@ -511,6 +518,8 @@ p {
   margin: 0 auto;
   width: 100%;
   padding: 100px 20px;
+  display: flex;
+  align-items: center; /* Memastikan seluruh isi section kontak terpusat sempurna */
 }
 
 #contact .contact-items {
@@ -518,6 +527,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center; /* Memastikan seluruh kartu kontak berposisi tepat di tengah secara horizontal */
+  justify-content: center;
 }
 
 /* Kartu Informasi Kontak */
@@ -529,7 +539,7 @@ p {
   background-color: var(--bg-surface);
   border-radius: 8px;
   border: 1px solid var(--border-color);
-  margin: 12px 0;
+  margin: 12px auto; /* Menggunakan auto pada margin kiri-kanan agar benar-benar di tengah */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -626,7 +636,7 @@ p {
     font-size: 5.5rem;
   }
 
-  /* Penyesuaian layout desktop untuk kartu kontak */
+  /* Penyesuaian layout desktop untuk kartu kontak agar tetap center secara rapi */
   #contact .contact-item {
     flex-direction: row;
     text-align: left;
@@ -646,7 +656,15 @@ p {
 }
 
 @media only screen and (max-width: 767px) {
-  /* Tampilan layar HP: Layanan utama tetap 1 kolom vertikal */
+  /* Tampilan layar HP: Layanan utama diubah menjadi 1 kolom vertikal agar responsif di layar kecil */
+  .service-bottom {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+  
+  .service-item:nth-last-child(1):nth-child(odd) {
+    max-width: 100%;
+  }
 }
 
 @media only screen and (min-width: 1200px) {
