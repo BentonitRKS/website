@@ -1,4 +1,5 @@
 @import 'https://fonts.googleapis.com/css?family=Montserrat:300, 400, 700&display=swap';
+
 * {
 	padding: 0;
 	margin: 0;
@@ -16,6 +17,7 @@ a {
 	min-height: 100vh;
 	width: 100%;
 	display: flex;
+    flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
@@ -71,6 +73,19 @@ p {
 	color: crimson;
 }
 
+/* =========================================
+   ANIMASI SCROLL (MUNCUL SEKALI & TETAP ADA)
+   ========================================= */
+.reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Header section */
 #header {
 	position: fixed;
@@ -84,6 +99,7 @@ p {
 	min-height: 8vh;
 	background-color: rgba(31, 30, 30, 0.24);
 	transition: 0.3s ease background-color;
+    flex-direction: row;
 }
 #header .nav-bar {
 	display: flex;
@@ -196,7 +212,6 @@ p {
 #header .hamburger.active .bar::after {
 	top: 0;
 }
-/* End Header section */
 
 /* Hero Section */
 #hero {
@@ -221,7 +236,7 @@ p {
 	max-width: 1200px;
 	margin: 0 auto;
 	padding: 0 50px;
-	justify-content: flex-start;
+    align-items: flex-start;
 }
 #hero h1 {
 	display: block;
@@ -232,12 +247,8 @@ p {
 	animation: text_reveal 0.5s ease forwards;
 	animation-delay: 1s;
 }
-#hero h1:nth-child(1) {
-	animation-delay: 1s;
-}
-#hero h1:nth-child(2) {
-	animation-delay: 2s;
-}
+#hero h1:nth-child(1) { animation-delay: 1s; }
+#hero h1:nth-child(2) { animation-delay: 2s; }
 #hero h1:nth-child(3) {
 	animation: text_reveal_name 0.5s ease forwards;
 	animation-delay: 3s;
@@ -252,23 +263,15 @@ p {
 	animation: text_reveal_box 1s ease;
 	animation-delay: 0.5s;
 }
-#hero h1:nth-child(1) span {
-	animation-delay: 0.5s;
-}
-#hero h1:nth-child(2) span {
-	animation-delay: 1.5s;
-}
-#hero h1:nth-child(3) span {
-	animation-delay: 2.5s;
-}
+#hero h1:nth-child(1) span { animation-delay: 0.5s; }
+#hero h1:nth-child(2) span { animation-delay: 1.5s; }
+#hero h1:nth-child(3) span { animation-delay: 2.5s; }
 
-/* End Hero Section */
-
-/* Services Section */
+/* Services Section / Why Us / Contact (Format Atas-Bawah / Vertikal) */
 #services .services {
 	flex-direction: column;
 	text-align: center;
-	max-width: 1500px;
+	max-width: 1000px;
 	margin: 0 auto;
 	padding: 100px 0;
 }
@@ -276,29 +279,31 @@ p {
 	max-width: 500px;
 	margin: 0 auto;
 }
-#services .service-bottom {
+.service-bottom {
 	display: flex;
+	flex-direction: column; /* Memastikan susunan lurus ke bawah */
 	align-items: center;
 	justify-content: center;
-	flex-wrap: wrap;
+	width: 100%;
 	margin-top: 50px;
 }
-#services .service-item {
-	flex-basis: 80%;
+.service-item {
+	width: 90%;
+    max-width: 800px; /* Maksimal lebar kartu */
 	display: flex;
 	align-items: flex-start;
 	justify-content: center;
 	flex-direction: column;
-	padding: 30px;
+	padding: 40px;
 	border-radius: 10px;
 	background-image: url(./img/img-1.png);
 	background-size: cover;
-	margin: 10px 5%;
+	margin: 15px 0;
 	position: relative;
 	z-index: 1;
 	overflow: hidden;
 }
-#services .service-item::after {
+.service-item::after {
 	content: '';
 	position: absolute;
 	left: 0;
@@ -309,107 +314,35 @@ p {
 	opacity: 0.9;
 	z-index: -1;
 }
-#services .service-bottom .icon {
+.service-bottom .icon {
 	height: 80px;
 	width: 80px;
 	margin-bottom: 20px;
 }
-#services .service-item h2 {
-	font-size: 2rem;
+.service-item h2 {
+	font-size: 2.5rem;
 	color: white;
 	margin-bottom: 10px;
 	text-transform: uppercase;
 }
-#services .service-item p {
+.service-item p {
 	color: white;
 	text-align: left;
 }
-/* End Services Section */
-
-/* Projects section */
-#projects .projects {
-	flex-direction: column;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 100px 0;
-}
-#projects .projects-header h1 {
-	margin-bottom: 50px;
-}
-#projects .all-projects {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-}
-#projects .project-item {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	width: 80%;
-	margin: 20px auto;
-	overflow: hidden;
-	border-radius: 10px;
-}
-#projects .project-info {
-	padding: 30px;
-	flex-basis: 50%;
-	height: 100%;
-	display: flex;
-	align-items: flex-start;
-	justify-content: center;
-	flex-direction: column;
-	background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
-	color: white;
-}
-#projects .project-info h1 {
-	font-size: 4rem;
-	font-weight: 500;
-}
-#projects .project-info h2 {
-	font-size: 1.8rem;
-	font-weight: 500;
-	margin-top: 10px;
-}
-#projects .project-info p {
-	color: white;
-}
-#projects .project-img {
-	flex-basis: 50%;
-	height: 300px;
-	overflow: hidden;
-	position: relative;
-}
-#projects .project-img:after {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
-	background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
-	opacity: 0.7;
-}
-#projects .project-img img {
-	transition: 0.3s ease transform;
-}
-#projects .project-item:hover .project-img img {
-	transform: scale(1.1);
-}
-/* End Projects section */
 
 /* About Section */
 #about .about {
-	flex-direction: column-reverse;
+	flex-direction: column; /* Teks di atas gambar, atau sebaliknya, susunan vertikal */
 	text-align: center;
-	max-width: 1200px;
+	max-width: 900px;
 	margin: 0 auto;
 	padding: 100px 20px;
 }
 #about .col-left {
-	width: 250px;
+	width: 100%;
+    max-width: 400px;
 	height: 360px;
+    margin-bottom: 50px;
 }
 #about .col-right {
 	width: 100%;
@@ -438,33 +371,35 @@ p {
 #about .col-left .about-img::after {
 	content: '';
 	position: absolute;
-	left: -33px;
-	top: 19px;
+	left: -20px;
+	top: 20px;
 	height: 98%;
 	width: 98%;
 	border: 7px solid crimson;
 	z-index: -1;
 }
-/* End About Section */
 
-/* contact Section */
+/* Contact Section */
 #contact .contact {
 	flex-direction: column;
 	max-width: 1200px;
 	margin: 0 auto;
 	width: 90%;
+    padding: 100px 0;
 }
 #contact .contact-items {
-	/* max-width: 400px; */
 	width: 100%;
+    display: flex;
+    flex-direction: column; /* Lurus atas ke bawah */
+    align-items: center;
 }
 #contact .contact-item {
-	width: 80%;
-	padding: 20px;
+	width: 90%;
+    max-width: 700px;
+	padding: 30px;
 	text-align: center;
 	border-radius: 10px;
-	padding: 30px;
-	margin: 30px;
+	margin: 15px 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -486,11 +421,10 @@ p {
 	margin-bottom: 5px;
 }
 #contact .contact-info h2 {
-	font-size: 1.3rem;
+	font-size: 1.5rem;
 	line-height: 2rem;
 	font-weight: 500;
 }
-/*End contact Section */
 
 /* Footer */
 #footer {
@@ -500,7 +434,8 @@ p {
 	min-height: 200px;
 	flex-direction: column;
 	padding-top: 50px;
-	padding-bottom: 10px;
+	padding-bottom: 20px;
+    text-align: center;
 }
 #footer h2 {
 	color: white;
@@ -510,194 +445,78 @@ p {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
-#footer .social-icon {
-	display: flex;
-	margin-bottom: 30px;
-}
-#footer .social-item {
-	height: 50px;
-	width: 50px;
-	margin: 0 5px;
-}
-#footer .social-item img {
-	filter: grayscale(1);
-	transition: 0.3s ease filter;
-}
-#footer .social-item:hover img {
-	filter: grayscale(0);
-}
 #footer p {
 	color: white;
 	font-size: 1.3rem;
 }
-/* End Footer */
 
 /* Keyframes */
 @keyframes hamburger_puls {
-	0% {
-		opacity: 1;
-		transform: scale(1);
-	}
-	100% {
-		opacity: 0;
-		transform: scale(1.4);
-	}
+	0% { opacity: 1; transform: scale(1); }
+	100% { opacity: 0; transform: scale(1.4); }
 }
 @keyframes text_reveal_box {
-	50% {
-		width: 100%;
-		left: 0;
-	}
-	100% {
-		width: 0;
-		left: 100%;
-	}
+	50% { width: 100%; left: 0; }
+	100% { width: 0; left: 100%; }
 }
 @keyframes text_reveal {
-	100% {
-		color: white;
-	}
+	100% { color: white; }
 }
 @keyframes text_reveal_name {
-	100% {
-		color: crimson;
-		font-weight: 500;
-	}
+	100% { color: crimson; font-weight: 500; }
 }
-/* End Keyframes */
 
-/* Media Query For Tablet */
+/* Media Query For Tablet & Desktop (Dimodifikasi untuk tetap vertikal) */
 @media only screen and (min-width: 768px) {
 	.cta {
 		font-size: 2.5rem;
 		padding: 20px 60px;
 	}
 	h1.section-title {
+		font-size: 5rem;
+	}
+
+	#hero h1 {
 		font-size: 6rem;
 	}
 
-	/* Hero */
-	#hero h1 {
-		font-size: 7rem;
-	}
-	/* End Hero */
-
-	/* Services Section */
-	#services .service-bottom .service-item {
-		flex-basis: 45%;
-		margin: 2.5%;
-	}
-	/* End Services Section */
-
-	/* Project */
-	#projects .project-item {
-		flex-direction: row;
-	}
-	#projects .project-item:nth-child(even) {
-		flex-direction: row-reverse;
-	}
-	#projects .project-item {
-		height: 400px;
-		margin: 0;
-		width: 100%;
-		border-radius: 0;
-	}
-	#projects .all-projects .project-info {
-		height: 100%;
-	}
-	#projects .all-projects .project-img {
-		height: 100%;
-	}
-	/* End Project */
-
-	/* About */
-	#about .about {
-		flex-direction: row;
-	}
-	#about .col-left {
-		width: 600px;
-		height: 400px;
-		padding-left: 60px;
-	}
-	#about .about .col-left .about-img::after {
-		left: -45px;
-		top: 34px;
-		height: 98%;
-		width: 98%;
-		border: 10px solid crimson;
-	}
-	#about .col-right {
-		text-align: left;
-		padding: 30px;
-	}
-	#about .col-right h1 {
-		text-align: left;
-	}
-	/* End About */
-
-	/* contact  */
-	#contact .contact {
-		flex-direction: column;
-		padding: 100px 0;
-		align-items: center;
-		justify-content: center;
-		min-width: 20vh;
-	}
-	#contact .contact-items {
-		width: 100%;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-evenly;
-		margin: 0;
-	}
-	#contact .contact-item {
-		width: 30%;
-		margin: 0;
-		flex-direction: row;
-	}
-	#contact .contact-item .icon {
-		height: 100px;
-		width: 100px;
-	}
-	#contact .contact-item .icon img {
-		object-fit: contain;
-	}
-	#contact .contact-item .contact-info {
-		width: 100%;
-		text-align: left;
-		padding-left: 20px;
-	}
-	/* End contact  */
+    /* Penyesuaian agar Contact lebih lebar namun tetap lurus ke bawah */
+    #contact .contact-item {
+        flex-direction: row;
+        text-align: left;
+    }
+    #contact .contact-item .icon {
+        margin-bottom: 0;
+        margin-right: 30px;
+    }
 }
-/* End Media Query For Tablet */
 
-/* Media Query For Desktop */
 @media only screen and (min-width: 1200px) {
-	/* header */
+	/* Header styling for desktop */
 	#header .hamburger {
 		display: none;
 	}
 	#header .nav-list ul {
 		position: initial;
-		display: block;
+		display: flex;
+        flex-direction: row;
 		height: auto;
-		width: fit-content;
+		width: auto;
 		background-color: transparent;
 	}
-	#header .nav-list ul li {
-		display: inline-block;
+	#header .nav-list ul a {
+		font-size: 1.5rem;
+		padding: 0 15px;
 	}
-	#header .nav-list ul li a {
-		font-size: 1.8rem;
-	}
-	#header .nav-list ul a:after {
+	#header .nav-list ul a::after {
 		display: none;
 	}
-	/* End header */
-
-	#services .service-bottom .service-item {
-		flex-basis: 22%;
-		margin: 1.5%;
-	}
+    /* Memastikan layout About Image and Text tetap rapi vertikal di desktop, atau letak disesuaikan */
+    #about .about {
+        flex-direction: column;
+    }
+    #about .col-left .about-img::after {
+        left: -30px;
+        top: 30px;
+    }
 }
-/* End  Media Query For Desktop */
