@@ -66,18 +66,14 @@ reveals.forEach(reveal => {
 // Mengatur perilaku hover (buka-tutup sementara) dan klik (kunci permanen / toggle)
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
-  // Menangkap seluruh elemen kartu accordion pada seksi Mengapa Memilih Kami
-  const serviceItems = document.querySelectorAll('#why-us .service-item, #services .service-item'); 
-  // Catatan: Pada HTML Anda, seksi ini berada di dalam id="why-us"
-
   const whyUsItems = document.querySelectorAll('#why-us .service-item');
 
   whyUsItems.forEach(item => {
     
     // A. KONDISI HOVER: Membuka teks sementara saat kursor mendekat
     item.addEventListener('mouseenter', () => {
-      // Hanya aktif membuka jika kartu belum dalam status terkunci (locked/clicked)
-      if (!item.classList.contains('is-locked')) {
+      // Hanya aktif membuka jika kartu belum dalam status terkunci (.is-open)
+      if (!item.classList.contains('is-open')) {
         item.classList.add('is-hovered');
         item.setAttribute('aria-expanded', 'true');
       }
@@ -85,8 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // B. KONDISI MOUSE LEAVE: Menutup teks kembali saat kursor dijauhkan
     item.addEventListener('mouseleave', () => {
-      // Hanya menutup jika tidak dalam status terkunci
-      if (!item.classList.contains('is-locked')) {
+      // Hanya menutup jika tidak dalam status terkunci (.is-open)
+      if (!item.classList.contains('is-open')) {
         item.classList.remove('is-hovered');
         item.setAttribute('aria-expanded', 'false');
       }
@@ -94,17 +90,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // C. KONDISI KLIK: Mengunci (lock) status terbuka secara permanen atau menutupnya kembali
     item.addEventListener('click', (e) => {
-      // Mencegah konflik event bubbling jika ada tag anak di dalamnya
-      const isLocked = item.classList.contains('is-locked');
+      const isOpen = item.classList.contains('is-open');
 
-      if (isLocked) {
-        // Jika sudah terkunci, klik kedua akan membuka kunci dan menutup kartu
-        item.classList.remove('is-locked', 'is-hovered');
+      if (isOpen) {
+        // Jika sudah terbuka permanen, klik lagi akan menutupnya
+        item.classList.remove('is-open', 'is-hovered');
         item.setAttribute('aria-expanded', 'false');
       } else {
-        // Jika belum terkunci, klik akan mengunci kartu terbuka selamanya sampai diklik lagi
-        item.classList.add('is-locked');
-        item.classList.remove('is-hovered'); // Bersihkan status hover agar fokus ke status locked
+        // Buka permanen dengan menambahkan kelas 'is-open'
+        item.classList.add('is-open');
+        item.classList.remove('is-hovered'); // Bersihkan status hover
         item.setAttribute('aria-expanded', 'true');
       }
     });
@@ -113,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     item.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        item.click(); // Memicu fungsi klik yang sama
+        item.click();
       }
     });
 
