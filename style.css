@@ -9,7 +9,7 @@
   /* Variabel Warna Utama */
   --primary-navy: rgb(3, 57, 132);      /* Biru Navy: Digunakan untuk teks utama, tombol, dan header */
   --accent-orange: rgb(248, 131, 0);    /* Oranye Terang: Warna aksen untuk highlight, hover, dan border */
-  
+ 
   /* Variabel Derivasi & Netral (Untuk Kedalaman Visual / UI) */
   --navy-dark: #022352;                 /* Navy Pekat: Background footer & overlay hero */
   --orange-hover: #d67100;              /* Oranye Gelap: Efek saat tombol di-hover */
@@ -26,6 +26,19 @@
   --shadow-hover: 0 16px 35px rgba(3, 57, 132, 0.14); /* Bayangan lebih tegas saat card di-hover */
 }
 
+/* Definisikan variabel padding global yang fleksibel */
+:root {
+  --section-padding: clamp(40px, 8vh, 90px);
+}
+
+/* Terapkan secara seragam ke semua kontainer section utama */
+#why-us .container,
+#services .services,
+#about .about,
+#contact .contact {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
 
 /* ==========================================================================
    2. RESET DASAR & SETUP GLOBAL
