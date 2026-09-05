@@ -1,193 +1,860 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="style.css">
+
   <title>PT BENTONIT REKAYASA SIPIL - Soil Investigation & Geotechnical Services</title>
+
   <style>
-    /* Variabel Warna RGB Utama */
+    /* =======================================================
+       00. VARIABEL WARNA UTAMA
+       Digunakan konsisten pada halaman utama.
+       ======================================================= */
+
     :root {
-      --primary-rgb: rgb(212, 143, 24);   /* Warna Oranye/Emas Geoteknik */
-      --secondary-rgb: rgb(30, 41, 59);  /* Warna Abu-abu Gelap Structural */
-      --text-dark-rgb: rgb(15, 23, 42);   /* Warna Teks Utama */
+      --primary-rgb: rgb(212, 143, 24);
+      --secondary-rgb: rgb(30, 41, 59);
+      --text-dark-rgb: rgb(15, 23, 42);
+      --text-muted-rgb: rgb(71, 85, 105);
+      --surface-rgb: rgb(248, 250, 252);
+      --white-rgb: rgb(255, 255, 255);
     }
-    
+
     .brand-accent {
       color: var(--primary-rgb) !important;
+    }
+
+
+    /* =======================================================
+       01. INTERACTIVE ELEMENT
+       Elemen yang dapat diklik dibuat memiliki respons visual
+       agar pengunjung mengetahui bahwa elemen tersebut aktif.
+       Efek dibuat halus dan profesional.
+       ======================================================= */
+
+    .interactive-card {
+      cursor: pointer;
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .interactive-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+    }
+
+    .interactive-link {
+      transition:
+        color 0.2s ease,
+        letter-spacing 0.2s ease;
+    }
+
+    .interactive-link:hover {
+      color: var(--primary-rgb) !important;
+      letter-spacing: 0.2px;
+    }
+
+
+    /* =======================================================
+       02. SERVICE CARD
+       Seluruh kartu layanan dapat diklik dan diarahkan ke
+       halaman teknis masing-masing.
+       ======================================================= */
+
+    .service-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      height: 100%;
+    }
+
+    .service-link .service-item {
+      height: 100%;
+    }
+
+    .service-link .icon img {
+      transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+    }
+
+    .service-link:hover .icon img {
+      transform: scale(1.08);
+      filter: drop-shadow(0 6px 10px rgba(15, 23, 42, 0.15));
+    }
+
+    .service-link:hover h2 {
+      color: var(--primary-rgb);
+      transition: color 0.2s ease;
+    }
+
+    .service-detail {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--primary-rgb);
+      font-weight: bold;
+      transition:
+        transform 0.2s ease,
+        letter-spacing 0.2s ease;
+    }
+
+    .service-link:hover .service-detail {
+      transform: translateX(4px);
+      letter-spacing: 0.2px;
+    }
+
+
+    /* =======================================================
+       03. ABOUT IMAGE
+       Jika gambar digunakan sebagai elemen visual biasa,
+       efek dibuat sangat ringan agar tidak terlihat seperti
+       tombol.
+       ======================================================= */
+
+    .about-img img {
+      transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    .about-img img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+    }
+
+
+    /* =======================================================
+       04. CONTACT INTERACTION
+       Informasi kontak dibuat terasa aktif ketika diarahkan.
+       ======================================================= */
+
+    .contact-item {
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.10);
+    }
+
+
+    /* =======================================================
+       05. ACCESSIBILITY
+       Efek keyboard focus dibuat jelas tanpa mengganggu desain.
+       ======================================================= */
+
+    a:focus-visible {
+      outline: 2px solid var(--primary-rgb);
+      outline-offset: 4px;
     }
   </style>
 </head>
 
+
 <body>
 
+
+  <!-- =======================================================
+       01. HEADER / NAVIGATION
+       Navigasi utama homepage.
+       Semua anchor mengarah ke section pada index.html.
+       ======================================================= -->
+
   <section id="header">
+
     <div class="header container">
+
       <div class="nav-bar">
+
         <div class="brand">
-          <a href="#hero">
+
+          <a href="#hero" aria-label="Kembali ke halaman utama">
+
             <h1>
-              <span style="color: rgb(212, 143, 24);">B</span>ENTONIT 
-              <span style="color: rgb(212, 143, 24);">R</span>EKAYASA 
+              <span style="color: rgb(212, 143, 24);">B</span>ENTONIT
+              <span style="color: rgb(212, 143, 24);">R</span>EKAYASA
               <span style="color: rgb(212, 143, 24);">S</span>IPIL
             </h1>
+
           </a>
+
         </div>
+
+
         <div class="nav-list">
-          <div class="hamburger"><div class="bar"></div></div>
+
+          <div class="hamburger">
+            <div class="bar"></div>
+          </div>
+
           <ul>
-            <li><a href="#hero" data-after="Home">Home</a></li>
-            <li><a href="#why-us" data-after="Keunggulan">Keunggulan</a></li>
-            <li><a href="#services" data-after="Layanan">Layanan</a></li>
-            <li><a href="#about" data-after="Tentang">Tentang Kami</a></li>
-            <li><a href="#contact" data-after="Kontak">Kontak</a></li>
+
+            <li>
+              <a href="#hero" data-after="Home">
+                Home
+              </a>
+            </li>
+
+            <li>
+              <a href="#why-us" data-after="Keunggulan">
+                Keunggulan
+              </a>
+            </li>
+
+            <li>
+              <a href="#services" data-after="Layanan">
+                Layanan
+              </a>
+            </li>
+
+            <li>
+              <a href="#about" data-after="Tentang">
+                Tentang Kami
+              </a>
+            </li>
+
+            <li>
+              <a href="#contact" data-after="Kontak">
+                Kontak
+              </a>
+            </li>
+
           </ul>
+
         </div>
+
       </div>
+
     </div>
+
   </section>
+
+
+
+  <!-- =======================================================
+       02. HERO
+       Fungsi:
+       - Memperkenalkan bidang perusahaan.
+       - Memberikan gambaran umum layanan.
+       - Mengarahkan pengunjung ke layanan atau kontak.
+
+       Jangan memasukkan detail teknis layanan di sini.
+       ======================================================= -->
 
   <section id="hero">
+
     <div class="hero container">
+
       <div>
-        <h1 style="color: rgb(255, 255, 255);">Penyelidikan Tanah & <span></span></h1>
-        <h1 style="color: rgb(255, 255, 255);">Geoteknik Terukur, <span></span></h1>
-        <h1>Presisi & Akurat <span></span></h1>
+
+        <h1 style="color: rgb(255, 255, 255);">
+          Penyelidikan Tanah &
+          <span></span>
+        </h1>
+
+        <h1 style="color: rgb(255, 255, 255);">
+          Geoteknik Terukur,
+          <span></span>
+        </h1>
+
+        <h1>
+          Presisi & Akurat
+          <span></span>
+        </h1>
+
+
         <p style="color: rgb(226, 232, 240); margin-bottom: 20px;">
-          Solusi terintegrasi Soil Investigation, CPT Sondir, Pengeboran Inti, Uji Laboratorium, hingga Topographic Survey untuk keamanan pondasi infrastruktur Anda.
+          Solusi terintegrasi Soil Investigation, CPT Sondir,
+          Pengeboran Inti, Uji Laboratorium, hingga Topographic
+          Survey untuk mendukung kebutuhan data teknis proyek
+          infrastruktur dan konstruksi.
         </p>
-        <a href="#contact" type="button" class="cta">Hubungi Kami</a>
-        <a href="#services" type="button" class="cta">Lihat Layanan</a>
+
+
+        <a href="#contact" class="cta interactive-link">
+          Hubungi Kami
+        </a>
+
+        <a href="#services" class="cta interactive-link">
+          Lihat Layanan
+        </a>
+
       </div>
+
     </div>
+
   </section>
 
-  <section id="why-us" style="padding: 50px 0; background-color: rgb(248, 250, 252);">
+
+
+  <!-- =======================================================
+       03. MENGAPA MEMILIH KAMI
+       Fungsi:
+       Menjelaskan nilai utama perusahaan secara singkat.
+
+       Detail teknis pembuktian setiap layanan ditempatkan
+       pada halaman layanan masing-masing.
+       ======================================================= -->
+
+  <section
+    id="why-us"
+    style="padding: 50px 0; background-color: rgb(248, 250, 252);"
+  >
+
     <div class="container">
+
       <div class="service-top">
-        <h1 class="section-title">Mengapa <span style="color: rgb(212, 143, 24);">Memilih Kami</span></h1>
-        <p style="color: rgb(71, 85, 105);">Komitmen teknis untuk memberikan data bawah permukaan (subsurface) yang teruji dan dapat dipertanggungjawabkan.</p>
+
+        <h1 class="section-title">
+          Mengapa
+          <span style="color: rgb(212, 143, 24);">
+            Memilih Kami
+          </span>
+        </h1>
+
+        <p style="color: rgb(71, 85, 105);">
+          Komitmen teknis untuk menghasilkan data lapangan
+          dan informasi geoteknik yang jelas, terukur,
+          serta dapat dipertanggungjawabkan.
+        </p>
+
       </div>
+
+
       <div class="service-bottom">
-        <div class="service-item">
-          <h2>Data Murni & Presisi</h2>
-          <p>Pengujian penetrasi dan pemboran dilakukan ketat mengacu pada standar SNI dan ASTM dengan ketersediaan peralatan mandiri.</p>
+
+
+        <!-- KEUNGGULAN 01 -->
+
+        <div class="service-item interactive-card">
+
+          <h2>
+            Data Terukur & Berkualitas
+          </h2>
+
+          <p>
+            Pelaksanaan investigasi dilakukan dengan prosedur
+            kerja yang terstruktur dan mengacu pada standar
+            teknis yang relevan untuk menghasilkan data yang
+            dapat digunakan dalam evaluasi kondisi tanah.
+          </p>
+
         </div>
-        <div class="service-item">
-          <h2>Analisis Geoteknik Handal</h2>
-          <p>Pengolahan data didukung oleh personel ahli geoteknik berpengalaman untuk hasil evaluasi profil tanah yang akurat.</p>
+
+
+        <!-- KEUNGGULAN 02 -->
+
+        <div class="service-item interactive-card">
+
+          <h2>
+            Pendekatan Teknis Terintegrasi
+          </h2>
+
+          <p>
+            Data lapangan, hasil pengujian, dan informasi
+            pendukung dapat dikombinasikan untuk memberikan
+            gambaran kondisi bawah permukaan secara lebih
+            menyeluruh sesuai kebutuhan pekerjaan.
+          </p>
+
         </div>
-        <div class="service-item">
-          <h2>Respon & Mobilisasi Cepat</h2>
-          <p>Ketersediaan armada alat yang sigap dimobilisasi ke berbagai area lokasi proyek dengan alur kerja komersial yang transparan.</p>
+
+
+        <!-- KEUNGGULAN 03 -->
+
+        <div class="service-item interactive-card">
+
+          <h2>
+            Responsif & Terkoordinasi
+          </h2>
+
+          <p>
+            Koordinasi pekerjaan dilakukan secara langsung
+            dengan memperhatikan kebutuhan lokasi, lingkup
+            pekerjaan, jadwal pelaksanaan, serta kebutuhan
+            output teknis proyek.
+          </p>
+
         </div>
+
       </div>
+
     </div>
+
   </section>
+
+
+
+  <!-- =======================================================
+       04. LAYANAN UTAMA
+       SETIAP CARD HARUS TERINTEGRASI DENGAN HALAMAN:
+       - sondir-cpt.html
+       - bor-spt.html
+       - laboratorium.html
+       - survey.html
+
+       Seluruh kartu dibuat clickable.
+       ======================================================= -->
 
   <section id="services">
+
     <div class="services container">
+
+
       <div class="service-top">
-        <h1 class="section-title">Layanan <span style="color: rgb(212, 143, 24);">Utama</span></h1>
-        <p style="color: rgb(71, 85, 105);">Klik pada layanan di bawah ini untuk melihat spesifikasi teknis, peralatan, metodologi, dan opsi konsultasi komersial secara rinci.</p>
+
+        <h1 class="section-title">
+          Layanan
+          <span style="color: rgb(212, 143, 24);">
+            Utama
+          </span>
+        </h1>
+
+        <p style="color: rgb(71, 85, 105);">
+          Jelajahi layanan kami untuk melihat lingkup pekerjaan,
+          spesifikasi peralatan, metodologi, tahapan pelaksanaan,
+          serta output pekerjaan secara lebih rinci.
+        </p>
+
       </div>
+
+
+
       <div class="service-bottom">
-        
-        <div class="service-item" onclick="window.location.href='sondir-cpt.html';" style="cursor: pointer;">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" alt="Uji Sondir" /></div>
-          <h2>Uji Sondir (CPT) &rarr;</h2>
-          <p>Pengujian penetrasi konus (CPT 2.5 Ton) mekanis/Dutch Penetrometer untuk profil perlawanan tanah (qc & friction) secara kontinyu.</p>
-          <a href="sondir-cpt.html" style="color: rgb(212, 143, 24); font-weight: bold; margin-top: 10px; display: inline-block;">Lihat Detail & Spesifikasi Alat &raquo;</a>
-        </div>
 
-        <div class="service-item" onclick="window.location.href='bor-spt.html';" style="cursor: pointer;">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" alt="Bor Mesin" /></div>
-          <h2>Bor Mesin & SPT &rarr;</h2>
-          <p>Pengeboran inti (Core Drilling YBM-1) dengan pengambilan contoh tanah UDS dan uji N-SPT untuk identifikasi perlapisan dalam.</p>
-          <a href="bor-spt.html" style="color: rgb(212, 143, 24); font-weight: bold; margin-top: 10px; display: inline-block;">Lihat Detail & Spesifikasi Alat &raquo;</a>
-        </div>
 
-        <div class="service-item" onclick="window.location.href='laboratorium.html';" style="cursor: pointer;">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" alt="Uji Lab" /></div>
-          <h2>Uji Laboratorium Tanah &rarr;</h2>
-          <p>Pengujian sifat indeks/fisik (Atterberg, Sieve) dan sifat mekanis (Triaxial, Direct Shear, Konsolidasi) di laboratorium.</p>
-          <a href="laboratorium.html" style="color: rgb(212, 143, 24); font-weight: bold; margin-top: 10px; display: inline-block;">Lihat Parameter Uji Lab &raquo;</a>
-        </div>
+        <!-- =================================================
+             SERVICE 01 — CPT / SONDIR
+             Tujuan link:
+             sondir-cpt.html
+             ================================================= -->
 
-        <div class="service-item" onclick="window.location.href='survey.html';" style="cursor: pointer;">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" alt="Survey" /></div>
-          <h2>Topographic & Survey &rarr;</h2>
-          <p>Pengukuran terestris dengan Total Station/GNSS Geodetic serta pemetaan kountur udara (Drone Mapping) presisi tinggi.</p>
-          <a href="survey.html" style="color: rgb(212, 143, 24); font-weight: bold; margin-top: 10px; display: inline-block;">Lihat Layanan Pemetaan &raquo;</a>
-        </div>
+        <a
+          href="sondir-cpt.html"
+          class="service-link"
+          aria-label="Lihat detail Uji Sondir CPT"
+        >
+
+          <div class="service-item interactive-card">
+
+            <div class="icon">
+
+              <img
+                src="https://img.icons8.com/bubbles/100/000000/services.png"
+                alt="Uji Sondir CPT"
+              >
+
+            </div>
+
+            <h2>
+              Uji Sondir (CPT) &rarr;
+            </h2>
+
+            <p>
+              Pengujian penetrasi konus untuk memperoleh profil
+              perlawanan tanah secara kontinu sebagai bagian dari
+              investigasi kondisi bawah permukaan.
+            </p>
+
+            <span class="service-detail">
+              Lihat Detail & Spesifikasi &raquo;
+            </span>
+
+          </div>
+
+        </a>
+
+
+
+        <!-- =================================================
+             SERVICE 02 — BOR MESIN & SPT
+             Tujuan link:
+             bor-spt.html
+             ================================================= -->
+
+        <a
+          href="bor-spt.html"
+          class="service-link"
+          aria-label="Lihat detail Bor Mesin dan SPT"
+        >
+
+          <div class="service-item interactive-card">
+
+            <div class="icon">
+
+              <img
+                src="https://img.icons8.com/bubbles/100/000000/services.png"
+                alt="Bor Mesin dan SPT"
+              >
+
+            </div>
+
+            <h2>
+              Bor Mesin & SPT &rarr;
+            </h2>
+
+            <p>
+              Pengeboran untuk memperoleh informasi stratigrafi
+              bawah permukaan yang dilengkapi pengambilan contoh
+              dan pengujian Standard Penetration Test sesuai
+              kebutuhan investigasi.
+            </p>
+
+            <span class="service-detail">
+              Lihat Detail & Spesifikasi &raquo;
+            </span>
+
+          </div>
+
+        </a>
+
+
+
+        <!-- =================================================
+             SERVICE 03 — LABORATORIUM TANAH
+             Tujuan link:
+             laboratorium.html
+             ================================================= -->
+
+        <a
+          href="laboratorium.html"
+          class="service-link"
+          aria-label="Lihat detail Uji Laboratorium Tanah"
+        >
+
+          <div class="service-item interactive-card">
+
+            <div class="icon">
+
+              <img
+                src="https://img.icons8.com/bubbles/100/000000/services.png"
+                alt="Uji Laboratorium Tanah"
+              >
+
+            </div>
+
+            <h2>
+              Uji Laboratorium Tanah &rarr;
+            </h2>
+
+            <p>
+              Pengujian karakteristik tanah untuk memperoleh
+              parameter sifat fisik dan mekanis sebagai data
+              pendukung evaluasi dan analisis geoteknik.
+            </p>
+
+            <span class="service-detail">
+              Lihat Parameter Uji &raquo;
+            </span>
+
+          </div>
+
+        </a>
+
+
+
+        <!-- =================================================
+             SERVICE 04 — SURVEY & MAPPING
+             Tujuan link:
+             survey.html
+             ================================================= -->
+
+        <a
+          href="survey.html"
+          class="service-link"
+          aria-label="Lihat detail Topographic dan Survey"
+        >
+
+          <div class="service-item interactive-card">
+
+            <div class="icon">
+
+              <img
+                src="https://img.icons8.com/bubbles/100/000000/services.png"
+                alt="Topographic Survey"
+              >
+
+            </div>
+
+            <h2>
+              Topographic & Survey &rarr;
+            </h2>
+
+            <p>
+              Pengukuran dan pemetaan kondisi eksisting untuk
+              menyediakan data topografi sebagai dasar perencanaan,
+              desain, dan kebutuhan pekerjaan proyek.
+            </p>
+
+            <span class="service-detail">
+              Lihat Layanan Pemetaan &raquo;
+            </span>
+
+          </div>
+
+        </a>
+
 
       </div>
+
     </div>
+
   </section>
+
+
+
+  <!-- =======================================================
+       05. TENTANG KAMI
+       Fungsi:
+       Memberikan profil singkat perusahaan.
+       Tidak mengulang detail teknis layanan.
+       ======================================================= -->
 
   <section id="about">
+
     <div class="about container">
+
+
       <div class="col-left">
+
         <div class="about-img">
-          <img src="./img/img-2.png" alt="PT Bentonit Rekayasa Sipil">
+
+          <img
+            src="./img/img-2.png"
+            alt="PT Bentonit Rekayasa Sipil"
+          >
+
         </div>
+
       </div>
+
+
+
       <div class="col-right">
-        <h1 class="section-title">Tentang <span style="color: rgb(212, 143, 24);">Kami</span></h1>
-        <h2>PT BENTONIT REKAYASA SIPIL</h2>
-        <p>Kami merupakan perusahaan penyedia jasa penyelidikan tanah, analisis geoteknik, dan pemetaan topografi. Didukung oleh unit alat operasional independen dan tim rekayasa terlatih, kami hadir memberikan data teknis yang informatif sebagai dasar perancangan pondasi yang aman dan efisien.</p>
-        <a href="#contact" class="cta">Minta Penawaran Proposal (RFQ)</a>
+
+        <h1 class="section-title">
+          Tentang
+          <span style="color: rgb(212, 143, 24);">
+            Kami
+          </span>
+        </h1>
+
+
+        <h2>
+          PT BENTONIT REKAYASA SIPIL
+        </h2>
+
+
+        <p>
+          Kami merupakan perusahaan penyedia jasa penyelidikan
+          tanah, pekerjaan geoteknik, pengujian laboratorium tanah,
+          serta pemetaan dan pengukuran. Dengan dukungan peralatan
+          operasional dan tim pelaksana teknis, kami berupaya
+          memberikan data dan output pekerjaan yang informatif
+          sebagai bagian dari kebutuhan perencanaan dan
+          pelaksanaan proyek.
+        </p>
+
+
+        <a
+          href="#contact"
+          class="cta interactive-link"
+        >
+          Minta Penawaran Proposal (RFQ)
+        </a>
+
       </div>
+
     </div>
+
   </section>
+
+
+
+  <!-- =======================================================
+       06. KONTAK
+       Informasi kontak utama perusahaan.
+
+       Jika nantinya ingin dibuat benar-benar clickable:
+       - WhatsApp dapat diarahkan ke wa.me
+       - Email dapat menggunakan mailto:
+       - Alamat dapat diarahkan ke Google Maps
+
+       Link tersebut dapat ditambahkan setelah URL final
+       perusahaan dikonfirmasi.
+       ======================================================= -->
 
   <section id="contact">
+
     <div class="contact container">
+
+
       <div>
-        <h1 class="section-title">Informasi <span style="color: rgb(212, 143, 24);">Kontak</span></h1>
+
+        <h1 class="section-title">
+          Informasi
+          <span style="color: rgb(212, 143, 24);">
+            Kontak
+          </span>
+        </h1>
+
       </div>
+
+
+
       <div class="contact-items">
-        <div class="contact-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/phone.png" alt="Telepon" /></div>
-          <div class="contact-info">
-            <h1>Telepon / WA</h1>
-            <h2>+62 813-7692-2750</h2>
+
+
+        <!-- KONTAK 01 -->
+
+        <div class="contact-item interactive-card">
+
+          <div class="icon">
+
+            <img
+              src="https://img.icons8.com/bubbles/100/000000/phone.png"
+              alt="Telepon dan WhatsApp"
+            >
+
           </div>
-        </div>
-        <div class="contact-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/new-post.png" alt="Email" /></div>
+
           <div class="contact-info">
-            <h1>Email</h1>
-            <h2>bentonit.id@gmail.com</h2>
+
+            <h1>
+              Telepon / WA
+            </h1>
+
+            <h2>
+              +62 813-7692-2750
+            </h2>
+
           </div>
+
         </div>
-        <div class="contact-item">
-          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/map-marker.png" alt="Alamat" /></div>
+
+
+
+        <!-- KONTAK 02 -->
+
+        <div class="contact-item interactive-card">
+
+          <div class="icon">
+
+            <img
+              src="https://img.icons8.com/bubbles/100/000000/new-post.png"
+              alt="Email"
+            >
+
+          </div>
+
           <div class="contact-info">
-            <h1>Workshop & Kantor</h1>
-            <h2>Jln Senam No. 15-A, Medan, Sumatera Utara, Indonesia</h2>
+
+            <h1>
+              Email
+            </h1>
+
+            <h2>
+              bentonit.id@gmail.com
+            </h2>
+
           </div>
+
         </div>
+
+
+
+        <!-- KONTAK 03 -->
+
+        <div class="contact-item interactive-card">
+
+          <div class="icon">
+
+            <img
+              src="https://img.icons8.com/bubbles/100/000000/map-marker.png"
+              alt="Alamat Workshop dan Kantor"
+            >
+
+          </div>
+
+          <div class="contact-info">
+
+            <h1>
+              Workshop & Kantor
+            </h1>
+
+            <h2>
+              Jln Senam No. 15-A, Medan,
+              Sumatera Utara, Indonesia
+            </h2>
+
+          </div>
+
+        </div>
+
+
       </div>
+
     </div>
+
   </section>
+
+
+
+  <!-- =======================================================
+       07. FOOTER
+       Footer global homepage.
+       ======================================================= -->
 
   <section id="footer">
+
     <div class="footer container">
+
       <div class="brand">
+
         <h1>
-          <span style="color: rgb(212, 143, 24);">B</span>ENTONIT 
-          <span style="color: rgb(212, 143, 24);">R</span>EKAYASA 
+
+          <span style="color: rgb(212, 143, 24);">B</span>ENTONIT
+          <span style="color: rgb(212, 143, 24);">R</span>EKAYASA
           <span style="color: rgb(212, 143, 24);">S</span>IPIL
+
         </h1>
+
       </div>
-      <h2 style="color: rgb(203, 213, 225);">Engineering • Geotechnical • Soil Testing • Surveying</h2>
-      <p style="color: rgb(148, 163, 184); margin-top: 15px;">Copyright © 2026 PT BENTONIT REKAYASA SIPIL. All rights reserved.</p>
+
+
+      <h2 style="color: rgb(203, 213, 225);">
+        Engineering • Geotechnical • Soil Testing • Surveying
+      </h2>
+
+
+      <p style="color: rgb(148, 163, 184); margin-top: 15px;">
+        Copyright © 2026 PT BENTONIT REKAYASA SIPIL.
+        All rights reserved.
+      </p>
+
     </div>
+
   </section>
 
+
+
+  <!-- =======================================================
+       08. JAVASCRIPT
+       app.js harus tetap berada di root repository.
+       ======================================================= -->
+
   <script src="./app.js"></script>
+
 </body>
 
 </html>
+```
