@@ -318,7 +318,7 @@ p {
 #hero h1:nth-child(3) span { animation-delay: 2.5s; }
 
 /* ==========================================================================
-   7. SERVICES SECTION (KARTU LAYANAN / SONDIR / BORING)
+   7. SERVICES / MENGAPA MEMILIH KAMI SECTION (INTERACTIVE ACCORDION CARD)
    ========================================================================== */
 #services {
   background-color: var(--bg-light);
@@ -341,45 +341,101 @@ p {
   margin-top: 40px;
 }
 
-/* Kartu Layanan */
+/* Kartu Utuh Mengapa Memilih Kami */
 .service-item {
   width: 100%;
   max-width: 850px;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
   flex-direction: column;
-  padding: 35px;
+  padding: 24px 30px;
   border-radius: 8px;
   background-color: var(--bg-surface);
-  border-left: 6px solid var(--accent-orange); /* Aksen pita tegak berwarna Orange */
+  /* Aksen Pita Tegak Orange RGB(248, 131, 0) di sebelah kiri */
+  border-left: 6px solid var(--accent-orange); 
   box-shadow: var(--shadow-soft);
-  margin: 15px 0;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 12px 0;
+  cursor: pointer; /* Memberikan indikasi bahwa elemen dapat diinteraksi secara intuitif */
+  overflow: hidden; /* Menjaga animasi teks terserap sempurna tanpa keluar dari bingkai */
+  /* Hilangkan translateY agar tidak terangkat melayang saat hover */
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .service-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 15px 35px rgba(3, 57, 132, 0.12);
+  /* Hanya memberikan bayangan sedikit lebih tegas tanpa mengubah posisi fisik kotak */
+  box-shadow: 0 12px 28px rgba(3, 57, 132, 0.12);
 }
 
-.service-bottom .icon {
-  height: 60px;
-  width: 60px;
-  margin-bottom: 20px;
+/* Header Kartu (Area Judul & Aksen Interaktif) */
+.service-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .service-item h2 {
   font-size: 2.2rem;
   color: var(--primary-navy);
-  margin-bottom: 12px;
+  margin-bottom: 0; /* Dinetralkan agar sejajar presisi saat teks tertutup */
   text-transform: uppercase;
   font-weight: 700;
+  text-align: left;
+  transition: color 0.3s ease;
+}
+
+/* Efek warna judul menyala saat dihover atau dibuka */
+.service-item:hover h2,
+.service-item.is-open h2 {
+  color: var(--accent-orange);
+}
+
+/* Indikator Aksen Panah/Tanda Buka-Tutup di Sisi Kanan Judul */
+.service-item .accordion-icon {
+  font-size: 1.8rem;
+  color: var(--primary-navy);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
+  user-select: none;
+}
+
+.service-item:hover .accordion-icon,
+.service-item.is-open .accordion-icon {
+  color: var(--accent-orange);
+}
+
+/* Memutar ikon indikator saat status terbuka/diklik */
+.service-item.is-open .accordion-icon {
+  transform: rotate(180deg);
+}
+
+/* Wadah Konten Deskripsi dengan Animasi Terseret ke Bawah (Sliding Mechanism) */
+.service-item-content {
+  max-height: 0; /* Tinggi awal disembunyikan total */
+  opacity: 0;
+  transform: translateY(-10px); /* Efek awal terdorong dari atas */
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.4s ease,
+              transform 0.4s ease,
+              margin-top 0.3s ease;
+  will-change: max-height, opacity, transform;
+}
+
+/* Trigger Animasi Mengalir ke Bawah: Berlaku saat Hover ATAU Kelas .is-open Aktif */
+.service-item:hover .service-item-content,
+.service-item.is-open .service-item-content {
+  max-height: 200px; /* Batas tinggi aman agar teks tersingkap sempurna */
+  opacity: 1;
+  transform: translateY(0); /* Meluncur turun mengikuti alur garis pita orange */
+  margin-top: 16px; /* Jarak antara judul dan deskripsi setelah tersingkap */
 }
 
 .service-item p {
   color: var(--text-dark);
   text-align: left;
+  font-size: 1.5rem;
+  line-height: 2.6rem;
+  padding-top: 4px;
+  /* Mencegah pemotongan garis border bawah */
+  border-top: 1px solid rgba(226, 232, 240, 0.6); 
 }
 
 /* ==========================================================================
