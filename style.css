@@ -9,7 +9,7 @@
   /* Variabel Warna Utama */
   --primary-navy: rgb(3, 57, 132);      /* Biru Navy: Digunakan untuk teks utama, tombol, dan header */
   --accent-orange: rgb(248, 131, 0);    /* Oranye Terang: Warna aksen untuk highlight, hover, dan border */
- 
+  
   /* Variabel Derivasi & Netral (Untuk Kedalaman Visual / UI) */
   --navy-dark: #022352;                 /* Navy Pekat: Background footer & overlay hero */
   --orange-hover: #d67100;              /* Oranye Gelap: Efek saat tombol di-hover */
@@ -24,31 +24,23 @@
   /* Variabel Efek Bayangan (Shadow) */
   --shadow-soft: 0 10px 30px rgba(3, 57, 132, 0.08);  /* Bayangan lembut untuk card (keadaan diam) */
   --shadow-hover: 0 16px 35px rgba(3, 57, 132, 0.14); /* Bayangan lebih tegas saat card di-hover */
+
+  /* Variabel Padding Global Otomatis untuk Jarak Antar Section */
+  --section-padding: clamp(40px, 8vh, 90px); /* Pengatur jarak vertikal dinamis */
 }
 
-/* Definisikan variabel padding global yang fleksibel */
-:root {
-  --section-padding: clamp(40px, 8vh, 90px);
-}
+
+/* ==========================================================================
+   PENYESUAIAN JARAK ANTAR SECTION (OTOMATIS)
+   ========================================================================== */
 
 /* Terapkan secara seragam ke semua kontainer section utama */
 #why-us .container,
 #services .services,
 #about .about,
 #contact .contact {
-  padding-top: var(--section-padding);
-  padding-bottom: var(--section-padding);
-}
-
-/* ==========================================================================
-   PENYESUAIAN JARAK ANTAR SECTION (OTOMATIS)
-   ========================================================================== */
-#why-us .container,
-#services .services,
-#about .about,
-#contact .contact {
-  padding-top: var(--section-padding);
-  padding-bottom: var(--section-padding);
+  padding-top: var(--section-padding);    /* Mengatur jarak vertikal bagian atas secara otomatis */
+  padding-bottom: var(--section-padding); /* Mengatur jarak vertikal bagian bawah secara otomatis */
 }
 
 
