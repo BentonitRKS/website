@@ -318,7 +318,7 @@ p {
 #hero h1:nth-child(3) span { animation-delay: 2.5s; }
 
 /* ==========================================================================
-   7. SERVICES / MENGAPA MEMILIH KAMI SECTION (INTERACTIVE ACCORDION CARD)
+   7. SERVICES / LAYANAN UTAMA SECTION (GRID 2 KOLOM, KECIL, MERGE CENTER)
    ========================================================================== */
 #services {
   background-color: var(--bg-light);
@@ -332,7 +332,7 @@ p {
   padding: 100px 20px;
 }
 
-/* Mengubah container layanan menjadi Grid 2 Kolom yang responsif dan otomatis merenggang ke tengah */
+/* Mengubah container layanan utama menjadi Grid 2 Kolom dengan perataan tengah */
 .service-bottom {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 480px)); /* Ukuran kotak diperkecil dengan batas maksimal 480px per kolom */
@@ -349,7 +349,7 @@ p {
   justify-self: center;
 }
 
-/* Kartu Utuh Mengapa Memilih Kami */
+/* Kartu Layanan Utama */
 .service-item {
   width: 100%;
   display: flex;
@@ -357,16 +357,14 @@ p {
   padding: 20px 24px; /* Padding dikurangi agar ukuran kotak lebih proporsional/tidak terlalu besar */
   border-radius: 8px;
   background-color: var(--bg-surface);
-  /* Aksen Pita Tegak Orange RGB(248, 131, 0) di sebelah kiri */
   border-left: 6px solid var(--accent-orange); 
   box-shadow: var(--shadow-soft);
-  cursor: pointer; /* Memberikan indikasi bahwa elemen dapat diinteraksi secara intuitif */
-  overflow: hidden; /* Menjaga animasi teks terserap sempurna tanpa keluar dari bingkai */
+  cursor: pointer;
+  overflow: hidden;
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .service-item:hover {
-  /* Hanya memberikan bayangan sedikit lebih tegas tanpa mengubah posisi fisik kotak */
   box-shadow: 0 12px 28px rgba(3, 57, 132, 0.12);
 }
 
@@ -379,23 +377,21 @@ p {
 }
 
 .service-item h2 {
-  font-size: 1.8rem; /* Ukuran font disesuaikan agar proporsional dengan kotak yang lebih kecil */
+  font-size: 1.8rem;
   color: var(--primary-navy);
-  margin-bottom: 0; /* Dinetralkan agar sejajar presisi saat teks tertutup */
+  margin-bottom: 0;
   text-transform: uppercase;
   font-weight: 700;
   text-align: left;
   transition: color 0.3s ease;
 }
 
-/* Efek warna judul menyala saat dihover, dihover sementara, atau dibuka permanen */
 .service-item:hover h2,
 .service-item.is-hovered h2,
 .service-item.is-open h2 {
   color: var(--accent-orange);
 }
 
-/* Indikator Aksen Panah/Tanda Buka-Tutup di Sisi Kanan Judul */
 .service-item .accordion-icon {
   font-size: 1.6rem;
   color: var(--primary-navy);
@@ -409,16 +405,14 @@ p {
   color: var(--accent-orange);
 }
 
-/* Memutar ikon indikator saat status terbuka/diklik */
 .service-item.is-open .accordion-icon {
   transform: rotate(180deg);
 }
 
-/* Wadah Konten Deskripsi dengan Animasi Terseret ke Bawah (Sliding Mechanism) */
 .service-item-content {
-  max-height: 0; /* Tinggi awal disembunyikan total */
+  max-height: 0;
   opacity: 0;
-  transform: translateY(-10px); /* Efek awal terdorong dari atas */
+  transform: translateY(-10px);
   transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
               opacity 0.4s ease,
               transform 0.4s ease,
@@ -426,17 +420,15 @@ p {
   will-change: max-height, opacity, transform;
 }
 
-/* Trigger Animasi Mengalir ke Bawah: Berlaku saat Hover ATAU Kelas .is-open Aktif */
 .service-item:hover .service-item-content,
 .service-item.is-hovered .service-item-content,
 .service-item.is-open .service-item-content {
-  max-height: 250px; /* Batas tinggi aman agar teks tersingkap sempurna */
+  max-height: 250px;
   opacity: 1;
-  transform: translateY(0); /* Meluncur turun mengikuti alur garis pita orange */
+  transform: translateY(0);
   margin-top: 14px; 
 }
 
-/* Rotasi Panah saat Terbuka */
 .service-item:hover .accordion-icon,
 .service-item.is-hovered .accordion-icon,
 .service-item.is-open .accordion-icon {
@@ -450,7 +442,6 @@ p {
   font-size: 1.4rem;
   line-height: 2.4rem;
   padding-top: 10px;
-  /* Mencegah pemotongan garis border bawah */
   border-top: 1px solid rgba(226, 232, 240, 0.6); 
 }
 
@@ -493,7 +484,6 @@ p {
   color: var(--text-dark);
 }
 
-/* Bingkai Gambar Tentang Perusahaan */
 #about .col-left .about-img {
   height: 100%;
   width: 100%;
@@ -539,7 +529,7 @@ p {
 /* Kartu Informasi Kontak */
 #contact .contact-item {
   width: 100%;
-  max-width: 650px; /* Lebar kartu kontak dirampingkan agar lebih rapi */
+  max-width: 650px;
   padding: 25px 30px;
   text-align: center;
   background-color: var(--bg-surface);
@@ -547,7 +537,7 @@ p {
   border: 1px solid var(--border-color);
   margin: 12px 0;
   display: flex;
-  justify-content: center; /* Meratakan posisi konten secara horizontal di dalam kotak */
+  justify-content: center;
   align-items: center;
   flex-direction: column;
   box-shadow: var(--shadow-soft);
@@ -564,7 +554,7 @@ p {
 }
 
 #contact .contact-info {
-  text-align: center; /* Mengatur teks agar simetris di tengah */
+  text-align: center;
 }
 
 #contact .contact-info h1 {
@@ -642,7 +632,7 @@ p {
     font-size: 5.5rem;
   }
 
-  /* Penyesuaian layout desktop untuk kartu kontak agar ikon di kiri dan teks rata kiri secara rapi di tengah */
+  /* Penyesuaian layout desktop untuk kartu kontak */
   #contact .contact-item {
     flex-direction: row;
     text-align: left;
@@ -662,7 +652,7 @@ p {
 }
 
 @media only screen and (max-width: 767px) {
-  /* Penyesuaian tampilan layar HP agar grid layanan otomatis menjadi 1 kolom penuh */
+  /* Tampilan layar HP: Grid layanan utama kembali otomatis menjadi 1 kolom penuh */
   .service-bottom {
     grid-template-columns: 1fr;
   }
