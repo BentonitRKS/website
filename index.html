@@ -6,7 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <title>PT BENTONIT REKAYASA SIPIL - Soil Investigation & Geotechnical Services</title>
+  
+  <!-- ==========================================================================
+       1. STYLESHEET KHUSUS HALAMAN (OVERRIDE / EMBEDDED UTILITIES)
+       ========================================================================== -->
   <style>
+    /* Variabel Lokal untuk Komponen Bertingkat */
     :root {
       --primary-rgb: rgb(3, 57, 132);
       --secondary-rgb: rgb(248, 131, 0);
@@ -15,23 +20,30 @@
       --surface-rgb: rgb(248, 250, 252);
       --white-rgb: rgb(255, 255, 255);
     }
-    .brand-accent { color: var(--primary-rgb) !important; }
 
+    /* Utilitas Warna Aksesibilitas Brand */
+    .brand-accent { 
+      color: var(--secondary-rgb) !important; 
+    }
+
+    /* Interaksi Link & Kartu Layanan Luar */
     .interactive-card {
       cursor: pointer;
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
     .interactive-card:hover {
-      transform: translateY(-6px);
       box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
     }
+
     .interactive-link {
       transition: color 0.2s ease, letter-spacing 0.2s ease;
     }
     .interactive-link:hover {
-      color: var(--primary-rgb) !important;
+      color: var(--white-rgb) !important;
       letter-spacing: 0.2px;
     }
+
+    /* Link Pembungkus Kartu Layanan Utama */
     .service-link {
       display: block;
       text-decoration: none;
@@ -39,7 +51,9 @@
       height: 100%;
       width: 100%;
     }
-    .service-link .service-item { height: 100%; }
+    .service-link .service-item { 
+      height: 100%; 
+    }
     .service-link .icon img {
       transition: transform 0.25s ease, filter 0.25s ease;
     }
@@ -47,7 +61,10 @@
       transform: scale(1.08);
       filter: drop-shadow(0 6px 10px rgba(15, 23, 42, 0.15));
     }
-    .service-link:hover h2 { color: var(--primary-rgb); }
+    .service-link:hover h2 { 
+      color: var(--secondary-rgb); 
+    }
+
     .service-detail {
       display: inline-block;
       margin-top: 10px;
@@ -59,6 +76,8 @@
       transform: translateX(4px);
       letter-spacing: 0.2px;
     }
+
+    /* Efek Hover Gambar About */
     .about-img img {
       transition: transform 0.35s ease, box-shadow 0.35s ease;
     }
@@ -66,36 +85,43 @@
       transform: scale(1.02);
       box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
     }
+
+    /* Kartu Kontak */
     .contact-item {
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
     .contact-item:hover {
-      transform: translateY(-4px);
       box-shadow: 0 10px 25px rgba(15, 23, 42, 0.10);
     }
-    a:focus-visible {
-      outline: 2px solid var(--primary-rgb);
+
+    /* Aksesibilitas Fokus Keyboard */
+    a:focus-visible,
+    .service-item:focus-visible {
+      outline: 2px solid var(--secondary-rgb);
       outline-offset: 4px;
     }
   </style>
 </head>
 
 <body>
-  <!-- HEADER -->
+
+  <!-- ==========================================================================
+       2. HEADER & NAVIGASI UTAMA
+       ========================================================================== -->
   <section id="header">
     <div class="header container">
       <div class="nav-bar">
         <div class="brand">
           <a href="#hero" aria-label="Kembali ke halaman utama">
             <h1>
-              <span style="color: rgb(212, 143, 24);">B</span>ENTONIT
-              <span style="color: rgb(212, 143, 24);">R</span>EKAYASA
-              <span style="color: rgb(212, 143, 24);">S</span>IPIL
+              <span>B</span>ENTONIT
+              <span>R</span>EKAYASA
+              <span>S</span>IPIL
             </h1>
           </a>
         </div>
         <div class="nav-list">
-          <div class="hamburger">
+          <div class="hamburger" aria-label="Buka Menu Navigasi" role="button" tabindex="0">
             <div class="bar"></div>
           </div>
           <ul>
@@ -110,14 +136,16 @@
     </div>
   </section>
 
-  <!-- HERO -->
+  <!-- ==========================================================================
+       3. HERO SECTION (BANNER UTAMA)
+       ========================================================================== -->
   <section id="hero">
     <div class="hero container reveal">
       <div>
-        <h1 style="color: rgb(255, 255, 255);">Penyelidikan Tanah &<span></span></h1>
-        <h1 style="color: rgb(255, 255, 255);">Geoteknik Terukur,<span></span></h1>
+        <h1>Penyelidikan Tanah &<span></span></h1>
+        <h1>Geoteknik Terukur,<span></span></h1>
         <h1>Presisi & Akurat<span></span></h1>
-        <p style="color: rgb(226, 232, 240); margin-bottom: 20px;">
+        <p style="color: var(--border-color); margin-bottom: 20px;">
           Solusi terintegrasi Soil Investigation, CPT Sondir, Pengeboran Inti, Uji Laboratorium, hingga Topographic Survey untuk mendukung kebutuhan data teknis proyek infrastruktur dan konstruksi.
         </p>
         <a href="#contact" class="cta interactive-link">Hubungi Kami</a>
@@ -126,43 +154,81 @@
     </div>
   </section>
 
-  <!-- MENGAPA MEMILIH KAMI -->
-  <section id="why-us" style="padding: 100px 0; background-color: rgb(248, 250, 252);">
+  <!-- ==========================================================================
+       4. MENGAPA MEMILIH KAMI (INTERACTIVE ACCORDION CARDS)
+       ========================================================================== -->
+  <section id="why-us" style="padding: 100px 0; background-color: var(--bg-light);">
     <div class="container">
+      
+      <!-- Judul Seksi -->
       <div class="service-top reveal">
-        <h1 class="section-title">Mengapa <span style="color: rgb(212, 143, 24);">Memilih Kami</span></h1>
-        <p style="color: rgb(71, 85, 105);">
+        <h1 class="section-title">Mengapa <span>Memilih Kami</span></h1>
+        <p style="color: var(--text-muted);">
           Komitmen teknis untuk menghasilkan data lapangan dan informasi geoteknik yang jelas, terukur, serta dapat dipertanggungjawabkan.
         </p>
       </div>
+
+      <!-- Daftar Kartu Interaktif (Accordion) -->
       <div class="service-bottom">
-        <div class="service-item interactive-card reveal">
-          <h2>Data Terukur & Berkualitas</h2>
-          <p>Pelaksanaan investigasi dilakukan dengan prosedur kerja yang terstruktur dan mengacu pada standar teknis yang relevan untuk menghasilkan data yang dapat digunakan dalam evaluasi kondisi tanah.</p>
+        
+        <!-- Kartu 1: Data Terukur & Berkualitas -->
+        <div class="service-item reveal" tabindex="0" aria-expanded="false" role="region">
+          <div class="service-item-header">
+            <h2>Data Terukur & Berkualitas</h2>
+            <span class="accordion-icon" aria-hidden="true">&#x25BC;</span>
+          </div>
+          <div class="service-item-content">
+            <p>
+              Pelaksanaan investigasi dilakukan dengan prosedur kerja yang terstruktur dan mengacu pada standar teknis yang relevan untuk menghasilkan data yang dapat digunakan dalam evaluasi kondisi tanah.
+            </p>
+          </div>
         </div>
-        <div class="service-item interactive-card reveal">
-          <h2>Pendekatan Teknis Terintegrasi</h2>
-          <p>Data lapangan, hasil pengujian, dan informasi pendukung dapat dikombinasikan untuk memberikan gambaran kondisi bawah permukaan secara lebih menyeluruh sesuai kebutuhan pekerjaan.</p>
+
+        <!-- Kartu 2: Pendekatan Teknis Terintegrasi -->
+        <div class="service-item reveal" tabindex="0" aria-expanded="false" role="region">
+          <div class="service-item-header">
+            <h2>Pendekatan Teknis Terintegrasi</h2>
+            <span class="accordion-icon" aria-hidden="true">&#x25BC;</span>
+          </div>
+          <div class="service-item-content">
+            <p>
+              Data lapangan, hasil pengujian, dan informasi pendukung dapat dikombinasikan untuk memberikan gambaran kondisi bawah permukaan secara lebih menyeluruh sesuai kebutuhan pekerjaan.
+            </p>
+          </div>
         </div>
-        <div class="service-item interactive-card reveal">
-          <h2>Responsif & Terkoordinasi</h2>
-          <p>Koordinasi pekerjaan dilakukan secara langsung dengan memperhatikan kebutuhan lokasi, lingkup pekerjaan, jadwal pelaksanaan, serta kebutuhan output teknis proyek.</p>
+
+        <!-- Kartu 3: Responsif & Terkoordinasi -->
+        <div class="service-item reveal" tabindex="0" aria-expanded="false" role="region">
+          <div class="service-item-header">
+            <h2>Responsif & Terkoordinasi</h2>
+            <span class="accordion-icon" aria-hidden="true">&#x25BC;</span>
+          </div>
+          <div class="service-item-content">
+            <p>
+              Koordinasi pekerjaan dilakukan secara langsung dengan memperhatikan kebutuhan lokasi, lingkup pekerjaan, jadwal pelaksanaan, serta kebutuhan output teknis proyek.
+            </p>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- LAYANAN UTAMA -->
+  <!-- ==========================================================================
+       5. LAYANAN UTAMA SECTION
+       ========================================================================== -->
   <section id="services">
     <div class="services container">
       <div class="service-top reveal">
-        <h1 class="section-title">Layanan <span style="color: rgb(212, 143, 24);">Utama</span></h1>
-        <p style="color: rgb(71, 85, 105);">
+        <h1 class="section-title">Layanan <span>Utama</span></h1>
+        <p style="color: var(--text-muted);">
           Jelajahi layanan kami untuk melihat lingkup pekerjaan, spesifikasi peralatan, metodologi, tahapan pelaksanaan, serta output pekerjaan secara lebih rinci.
         </p>
       </div>
+
       <div class="service-bottom">
         
+        <!-- Service Link 1 -->
         <div class="reveal" style="width: 100%; display: flex; justify-content: center;">
           <a href="sondir-cpt.html" class="service-link" aria-label="Lihat detail Uji Sondir CPT">
             <div class="service-item interactive-card">
@@ -174,6 +240,7 @@
           </a>
         </div>
 
+        <!-- Service Link 2 -->
         <div class="reveal" style="width: 100%; display: flex; justify-content: center;">
           <a href="bor-spt.html" class="service-link" aria-label="Lihat detail Bor Mesin dan SPT">
             <div class="service-item interactive-card">
@@ -185,6 +252,7 @@
           </a>
         </div>
 
+        <!-- Service Link 3 -->
         <div class="reveal" style="width: 100%; display: flex; justify-content: center;">
           <a href="laboratorium.html" class="service-link" aria-label="Lihat detail Uji Laboratorium Tanah">
             <div class="service-item interactive-card">
@@ -196,6 +264,7 @@
           </a>
         </div>
 
+        <!-- Service Link 4 -->
         <div class="reveal" style="width: 100%; display: flex; justify-content: center;">
           <a href="survey.html" class="service-link" aria-label="Lihat detail Topographic dan Survey">
             <div class="service-item interactive-card">
@@ -211,7 +280,9 @@
     </div>
   </section>
 
-  <!-- TENTANG KAMI -->
+  <!-- ==========================================================================
+       6. ABOUT SECTION (TENTANG KAMI)
+       ========================================================================== -->
   <section id="about">
     <div class="about container">
       <div class="col-left reveal">
@@ -220,7 +291,7 @@
         </div>
       </div>
       <div class="col-right reveal">
-        <h1 class="section-title">Tentang <span style="color: rgb(212, 143, 24);">Kami</span></h1>
+        <h1 class="section-title">Tentang <span>Kami</span></h1>
         <h2>PT BENTONIT REKAYASA SIPIL</h2>
         <p>
           Kami merupakan perusahaan penyedia jasa penyelidikan tanah, pekerjaan geoteknik, pengujian laboratorium tanah, serta pemetaan dan pengukuran. Dengan dukungan peralatan operasional dan tim pelaksana teknis, kami berupaya memberikan data dan output pekerjaan yang informatif sebagai bagian dari kebutuhan perencanaan dan pelaksanaan proyek.
@@ -230,11 +301,13 @@
     </div>
   </section>
 
-  <!-- KONTAK -->
+  <!-- ==========================================================================
+       7. CONTACT SECTION (KONTAK & LOKASI)
+       ========================================================================== -->
   <section id="contact">
     <div class="contact container">
       <div class="reveal">
-        <h1 class="section-title">Informasi <span style="color: rgb(212, 143, 24);">Kontak</span></h1>
+        <h1 class="section-title">Informasi <span>Kontak</span></h1>
       </div>
       <div class="contact-items">
         
@@ -266,23 +339,26 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ==========================================================================
+       8. FOOTER SECTION
+       ========================================================================== -->
   <section id="footer">
     <div class="footer container reveal">
       <div class="brand">
         <h1>
-          <span style="color: rgb(212, 143, 24);">B</span>ENTONIT
-          <span style="color: rgb(212, 143, 24);">R</span>EKAYASA
-          <span style="color: rgb(212, 143, 24);">S</span>IPIL
+          <span>B</span>ENTONIT
+          <span>R</span>EKAYASA
+          <span>S</span>IPIL
         </h1>
       </div>
-      <h2 style="color: rgb(203, 213, 225);">Engineering • Geotechnical • Soil Testing • Surveying</h2>
-      <p style="color: rgb(148, 163, 184); margin-top: 15px;">
+      <h2>Engineering • Geotechnical • Soil Testing • Surveying</h2>
+      <p>
         Copyright © 2026 PT BENTONIT REKAYASA SIPIL. All rights reserved.
       </p>
     </div>
   </section>
 
+  <!-- Bintang Eksekusi JavaScript Interaktif -->
   <script src="./app.js"></script>
 </body>
 </html>
