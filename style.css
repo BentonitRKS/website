@@ -383,8 +383,9 @@ p {
   transition: color 0.3s ease;
 }
 
-/* Efek warna judul menyala saat dihover atau dibuka */
+/* Efek warna judul menyala saat dihover, dihover sementara, atau dibuka permanen */
 .service-item:hover h2,
+.service-item.is-hovered h2,
 .service-item.is-open h2 {
   color: var(--accent-orange);
 }
@@ -398,6 +399,7 @@ p {
 }
 
 .service-item:hover .accordion-icon,
+.service-item.is-hovered .accordion-icon,
 .service-item.is-open .accordion-icon {
   color: var(--accent-orange);
 }
@@ -420,12 +422,21 @@ p {
 }
 
 /* Trigger Animasi Mengalir ke Bawah: Berlaku saat Hover ATAU Kelas .is-open Aktif */
-.service-item:hover .service-item-content,
-.service-item.is-open .service-item-content {
+#why-us .service-item:hover .service-item-content,
+#why-us .service-item.is-hovered .service-item-content,
+#why-us .service-item.is-open .service-item-content {
   max-height: 200px; /* Batas tinggi aman agar teks tersingkap sempurna */
   opacity: 1;
   transform: translateY(0); /* Meluncur turun mengikuti alur garis pita orange */
-  margin-top: 16px; /* Jarak antara judul dan deskripsi setelah tersingkap */
+  margin-top: 16px; 
+}
+
+/* Rotasi Panah saat Terbuka */
+#why-us .service-item:hover .accordion-icon,
+#why-us .service-item.is-hovered .accordion-icon,
+#why-us .service-item.is-open .accordion-icon {
+  transform: rotate(180deg);
+  color: var(--accent-orange);
 }
 
 .service-item p {
