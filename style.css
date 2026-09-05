@@ -421,32 +421,32 @@ p {
   will-change: max-height, opacity, transform;
 }
 
-/* Trigger Animasi Mengalir ke Bawah: Berlaku saat Hover ATAU Kelas .is-open Aktif */
-#services .service-item:hover .service-item-content,
-#services .service-item.is-hovered .service-item-content,
-#services .service-item.is-open .service-item-content {
+/* ==========================================================================
+   PERBAIKAN ANIMASI ACCORDION & KLIK KUNCI PERMANEN
+   ========================================================================== */
+
+/* 1. Membuka konten saat Kursor Mendekat (Hover) ATAU saat Kartu Diklik (is-open) */
+.service-item:hover .service-item-content,
+.service-item.is-hovered .service-item-content,
+.service-item.is-open .service-item-content {
   max-height: 200px; /* Batas tinggi aman agar teks tersingkap sempurna */
   opacity: 1;
   transform: translateY(0); /* Meluncur turun mengikuti alur garis pita orange */
   margin-top: 16px; 
 }
 
-/* Rotasi Panah saat Terbuka */
-#services .service-item:hover .accordion-icon,
-#services .service-item.is-hovered .accordion-icon,
-#services .service-item.is-open .accordion-icon {
-  transform: rotate(180deg);
+/* 2. Memutar ikon panah & mengubah warna judul saat di-hover atau dibuka */
+.service-item:hover h2,
+.service-item.is-hovered h2,
+.service-item.is-open h2 {
   color: var(--accent-orange);
 }
 
-.service-item p {
-  color: var(--text-dark);
-  text-align: left;
-  font-size: 1.5rem;
-  line-height: 2.6rem;
-  padding-top: 4px;
-  /* Mencegah pemotongan garis border bawah */
-  border-top: 1px solid rgba(226, 232, 240, 0.6); 
+.service-item:hover .accordion-icon,
+.service-item.is-hovered .accordion-icon,
+.service-item.is-open .accordion-icon {
+  transform: rotate(180deg);
+  color: var(--accent-orange);
 }
 
 /* ==========================================================================
