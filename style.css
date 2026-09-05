@@ -96,13 +96,12 @@ img {
 
 /* Wadah fleksibel untuk memusatkan konten secara vertikal dan horizontal */
 .container {
-  height: 100vh;                         /* <--- Ubah dari 100vh menjadi auto agar menyesuaikan isi */
-  min-height: auto;                     /* <--- Pastikan tidak memaksa satu layar penuh */
+  min-height: 100vh;                    
   width: 100%;                          
   display: flex;                        
   flex-direction: column;               
   align-items: center;                  
-  justify-content: flex-start;          /* <--- Ubah dari center ke flex-start agar tidak melayang di tengah */
+  justify-content: center;              
 }
 
 /* Gaya default untuk teks paragraf */
