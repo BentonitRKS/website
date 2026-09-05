@@ -1,522 +1,598 @@
-@import 'https://fonts.googleapis.com/css?family=Montserrat:300, 400, 700&display=swap';
+/* ==========================================================================
+   1. IMPORT FONT & VARIABEL WARNA (DESIGN SYSTEM)
+   ========================================================================== */
+@import 'https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700&display=swap';
 
+/* Root Variables: Pusat kendali warna seluruh website. 
+   Ubah kode di sini untuk mengubah tema di seluruh halaman. */
+:root {
+  /* Warna Identitas Perusahaan */
+  --primary-navy: rgb(3, 57, 132);      /* Warna Utama: Elemen Struktur, Header, Headings */
+  --accent-orange: rgb(248, 131, 0);    /* Warna Aksen: Tombol Aksi (CTA), Border, Highlight */
+  
+  /* Variabel Derivasi & Netral (Untuk Kedalaman UI) */
+  --navy-dark: #022352;                 /* Navy lebih gelap untuk efek Hover/Shadow */
+  --orange-hover: #d67100;              /* Orange lebih gelap untuk efek Hover */
+  --bg-light: #f8fafc;                  /* Latar Belakang Utama: Bersih & Menjaga Kontras */
+  --bg-surface: #ffffff;                /* Latar Kartu/Kontainer Elemen */
+  --text-dark: #1e293b;                 /* Warna Teks Utama: Dark Charcoal (Lebih nyaman dibaca daripada Hitam Polos) */
+  --text-muted: #64748b;                /* Warna Teks Sekunder: Abu-abu deskripsi */
+  --border-color: #e2e8f0;              /* Garis Pembatas Halus */
+  --shadow-soft: 0 10px 30px rgba(3, 57, 132, 0.08); /* Bayangan Halus Berbasis Navy */
+}
+
+/* ==========================================================================
+   2. RESET DASAR & SETUP GLOBAL
+   ========================================================================== */
 * {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box; /* Memastikan padding tidak merusak ukuran total elemen */
 }
+
 html {
-	font-size: 10px;
-	font-family: 'Montserrat', sans-serif;
-	scroll-behavior: smooth;
+  font-size: 10px; /* Base Rem: 1rem = 10px (Memudahkan kalkulasi responsive) */
+  font-family: 'Montserrat', sans-serif;
+  scroll-behavior: smooth; /* Efek scroll halus saat navigasi diklik */
+  background-color: var(--bg-light); /* Latar belakang global website */
+  color: var(--text-dark);
 }
+
 a {
-	text-decoration: none;
+  text-decoration: none; /* Menghilangkan garis bawah standar hyperlink */
 }
-.container {
-	min-height: 100vh;
-	width: 100%;
-	display: flex;
-    flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
+
 img {
-	height: 100%;
-	width: 100%;
-	object-fit: cover;
+  height: 100%;
+  width: 100%;
+  object-fit: cover; /* Memastikan gambar tidak terdistorsi saat di-resize */
 }
+
+/* ==========================================================================
+   3. ELEMEN TIPOGRAFI & KOMPONEN GLOBAL
+   ========================================================================== */
+.container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Format Paragraf Umum */
 p {
-	color: black;
-	font-size: 1.4rem;
-	margin-top: 5px;
-	line-height: 2.5rem;
-	font-weight: 300;
-	letter-spacing: 0.05rem;
+  color: var(--text-dark);
+  font-size: 1.5rem;
+  margin-top: 5px;
+  line-height: 2.6rem; /* Jarak antar baris teks agar nyaman dibaca */
+  font-weight: 400;
+  letter-spacing: 0.03rem;
 }
+
+/* Judul Sektor/Halaman */
 .section-title {
-	font-size: 4rem;
-	font-weight: 300;
-	color: black;
-	margin-bottom: 10px;
-	text-transform: uppercase;
-	letter-spacing: 0.2rem;
-	text-align: center;
+  font-size: 3.6rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  text-align: center;
 }
+
+/* Teks Penegas pada Judul (Ganti dari Crimson ke Accent Orange) */
 .section-title span {
-	color: crimson;
+  color: var(--accent-orange);
 }
 
+/* Tombol Aksi Utama / Call To Action (CTA) */
 .cta {
-	display: inline-block;
-	padding: 10px 30px;
-	color: white;
-	background-color: transparent;
-	border: 2px solid crimson;
-	font-size: 2rem;
-	text-transform: uppercase;
-	letter-spacing: 0.1rem;
-	margin-top: 30px;
-	transition: 0.3s ease;
-	transition-property: background-color, color;
+  display: inline-block;
+  padding: 12px 35px;
+  color: var(--primary-navy);
+  background-color: transparent;
+  border: 2px solid var(--accent-orange); /* Garis tepi warna orange logo */
+  border-radius: 4px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  margin-top: 30px;
+  transition: all 0.3s ease; /* Transisi animasi perubahan warna */
 }
+
+/* Efek Hover Tombol CTA */
 .cta:hover {
-	color: white;
-	background-color: crimson;
+  color: white;
+  background-color: var(--accent-orange);
+  box-shadow: 0 4px 15px rgba(248, 131, 0, 0.4); /* Efek berpendar saat dikursor */
 }
+
+/* Identitas Brand pada Header */
 .brand h1 {
-	font-size: 3rem;
-	text-transform: uppercase;
-	color: white;
+  font-size: 2.8rem;
+  text-transform: uppercase;
+  color: white;
+  font-weight: 700;
 }
+
 .brand h1 span {
-	color: crimson;
+  color: var(--accent-orange);
 }
 
-/* =========================================
-   ANIMASI SCROLL (MUNCUL SEKALI & TETAP ADA)
-   ========================================= */
+/* ==========================================================================
+   4. ANIMASI SCROLL (REVEAL ON SCROLL)
+   ========================================================================== */
 .reveal {
-    opacity: 0;
-    transform: translateY(60px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-/* Header section */
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   5. HEADER & NAVIGASI
+   ========================================================================== */
 #header {
-	position: fixed;
-	z-index: 1000;
-	left: 0;
-	top: 0;
-	width: 100vw;
-	height: auto;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: auto;
 }
+
 #header .header {
-	min-height: 8vh;
-	background-color: rgba(31, 30, 30, 0.24);
-	transition: 0.3s ease background-color;
-    flex-direction: row;
+  min-height: 8vh;
+  background-color: var(--primary-navy); /* Menggunakan Navy Logo sebagai identitas header */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  transition: 0.3s ease background-color;
+  display: flex;
+  justify-content: center;
 }
+
 #header .nav-bar {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 100%;
-	height: 100%;
-	max-width: 1300px;
-	padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  max-width: 1300px;
+  padding: 0 20px;
 }
+
+/* Menu Navigasi (Mobile Overlay) */
 #header .nav-list ul {
-	list-style: none;
-	position: absolute;
-	background-color: rgb(31, 30, 30);
-	width: 100vw;
-	height: 100vh;
-	left: 100%;
-	top: 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	z-index: 1;
-	overflow-x: hidden;
-	transition: 0.5s ease left;
+  list-style: none;
+  position: absolute;
+  background-color: var(--navy-dark);
+  width: 100vw;
+  height: 100vh;
+  left: 100%;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  overflow-x: hidden;
+  transition: 0.5s ease left;
 }
+
 #header .nav-list ul.active {
-	left: 0%;
+  left: 0%;
 }
+
 #header .nav-list ul a {
-	font-size: 2.5rem;
-	font-weight: 500;
-	letter-spacing: 0.2rem;
-	text-decoration: none;
-	color: white;
-	text-transform: uppercase;
-	padding: 20px;
-	display: block;
+  font-size: 2.2rem;
+  font-weight: 500;
+  letter-spacing: 0.15rem;
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  padding: 15px;
+  display: block;
+  transition: color 0.3s ease;
 }
-#header .nav-list ul a::after {
-	content: attr(data-after);
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%) scale(0);
-	color: rgba(240, 248, 255, 0.021);
-	font-size: 13rem;
-	letter-spacing: 50px;
-	z-index: -1;
-	transition: 0.3s ease letter-spacing;
-}
-#header .nav-list ul li:hover a::after {
-	transform: translate(-50%, -50%) scale(1);
-	letter-spacing: initial;
-}
+
 #header .nav-list ul li:hover a {
-	color: crimson;
+  color: var(--accent-orange); /* Perubahan warna teks saat kursor menempel */
 }
+
+/* Hamburger Icon (Mobile Menu Toggle) */
 #header .hamburger {
-	height: 60px;
-	width: 60px;
-	display: inline-block;
-	border: 3px solid white;
-	border-radius: 50%;
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	z-index: 100;
-	cursor: pointer;
-	transform: scale(0.8);
-	margin-right: 20px;
+  height: 50px;
+  width: 50px;
+  border: 2px solid var(--accent-orange);
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  cursor: pointer;
+  transform: scale(0.8);
 }
-#header .hamburger:after {
-	position: absolute;
-	content: '';
-	height: 100%;
-	width: 100%;
-	border-radius: 50%;
-	border: 3px solid white;
-	animation: hamburger_puls 1s ease infinite;
-}
+
 #header .hamburger .bar {
-	height: 2px;
-	width: 30px;
-	position: relative;
-	background-color: white;
-	z-index: -1;
+  height: 2px;
+  width: 25px;
+  position: relative;
+  background-color: white;
 }
+
 #header .hamburger .bar::after,
 #header .hamburger .bar::before {
-	content: '';
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	left: 0;
-	background-color: white;
-	transition: 0.3s ease;
-	transition-property: top, bottom;
-}
-#header .hamburger .bar::after {
-	top: 8px;
-}
-#header .hamburger .bar::before {
-	bottom: 8px;
-}
-#header .hamburger.active .bar::before {
-	bottom: 0;
-}
-#header .hamburger.active .bar::after {
-	top: 0;
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  background-color: white;
+  transition: 0.3s ease;
+  transition-property: top, bottom;
 }
 
-/* Hero Section */
+#header .hamburger .bar::after { top: 8px; }
+#header .hamburger .bar::before { bottom: 8px; }
+
+#header .hamburger.active .bar::before { bottom: 0; }
+#header .hamburger.active .bar::after { top: 0; }
+
+/* ==========================================================================
+   6. HERO SECTION (BANNER UTAMA)
+   ========================================================================== */
 #hero {
-	background-image: url(./img/hero-bg.png);
-	background-size: cover;
-	background-position: top center;
-	position: relative;
-	z-index: 1;
+  background-image: url(./img/hero-bg.png);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 1;
 }
+
+/* Layer Gelap Overlay agar Teks Tetap Contras di atas Gambar */
 #hero::after {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
-	background-color: black;
-	opacity: 0.7;
-	z-index: -1;
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  /* Gradien Navy ke Hitam transparan agar senada dengan warna logo */
+  background: linear-gradient(135deg, rgba(3, 57, 132, 0.85) 0%, rgba(2, 35, 82, 0.95) 100%);
+  z-index: -1;
 }
+
 #hero .hero {
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 0 50px;
-    align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+  align-items: flex-start;
 }
+
 #hero h1 {
-	display: block;
-	width: fit-content;
-	font-size: 4rem;
-	position: relative;
-	color: transparent;
-	animation: text_reveal 0.5s ease forwards;
-	animation-delay: 1s;
+  display: block;
+  width: fit-content;
+  font-size: 4rem;
+  position: relative;
+  color: transparent;
+  animation: text_reveal 0.5s ease forwards;
+  animation-delay: 1s;
 }
+
 #hero h1:nth-child(1) { animation-delay: 1s; }
 #hero h1:nth-child(2) { animation-delay: 2s; }
 #hero h1:nth-child(3) {
-	animation: text_reveal_name 0.5s ease forwards;
-	animation-delay: 3s;
+  animation: text_reveal_name 0.5s ease forwards;
+  animation-delay: 3s;
 }
+
+/* Kotak Animasi Teks Muncul (Text Reveal Box) */
 #hero h1 span {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 0;
-	background-color: crimson;
-	animation: text_reveal_box 1s ease;
-	animation-delay: 0.5s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background-color: var(--accent-orange); /* Menggunakan Orange Logo */
+  animation: text_reveal_box 1s ease;
+  animation-delay: 0.5s;
 }
+
 #hero h1:nth-child(1) span { animation-delay: 0.5s; }
 #hero h1:nth-child(2) span { animation-delay: 1.5s; }
 #hero h1:nth-child(3) span { animation-delay: 2.5s; }
 
-/* Services Section / Why Us / Contact (Format Atas-Bawah / Vertikal) */
+/* ==========================================================================
+   7. SERVICES SECTION (KARTU LAYANAN / SONDIR / BORING)
+   ========================================================================== */
+#services {
+  background-color: var(--bg-light); /* Latar belakang abu-abu sangat terang */
+}
+
 #services .services {
-	flex-direction: column;
-	text-align: center;
-	max-width: 1000px;
-	margin: 0 auto;
-	padding: 100px 0;
+  flex-direction: column;
+  text-align: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 100px 20px;
 }
-#services .service-top {
-	max-width: 500px;
-	margin: 0 auto;
-}
+
 .service-bottom {
-	display: flex;
-	flex-direction: column; /* Memastikan susunan lurus ke bawah */
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	margin-top: 50px;
+  display: flex;
+  flex-direction: column; /* Format vertikal sesuai kebutuhan struktur */
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 40px;
 }
+
+/* Desain Kartu Layanan Profesional (Clean Corporate Style) */
 .service-item {
-	width: 90%;
-    max-width: 800px; /* Maksimal lebar kartu */
-	display: flex;
-	align-items: flex-start;
-	justify-content: center;
-	flex-direction: column;
-	padding: 40px;
-	border-radius: 10px;
-	background-image: url(./img/img-1.png);
-	background-size: cover;
-	margin: 15px 0;
-	position: relative;
-	z-index: 1;
-	overflow: hidden;
+  width: 100%;
+  max-width: 850px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  padding: 35px;
+  border-radius: 8px;
+  background-color: var(--bg-surface); /* Kartu berwarna putih bersih */
+  border-left: 5px solid var(--accent-orange); /* Aksen garis vertikal orange di sebelah kiri */
+  box-shadow: var(--shadow-soft); /* Bayangan halus */
+  margin: 15px 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.service-item::after {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
-	background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
-	opacity: 0.9;
-	z-index: -1;
+
+/* Efek Hover Kartu Layanan */
+.service-item:hover {
+  transform: translateY(-5px); /* Kartu terangkat sedikit saat kursor mengarah */
+  box-shadow: 0 15px 35px rgba(3, 57, 132, 0.12);
 }
+
 .service-bottom .icon {
-	height: 80px;
-	width: 80px;
-	margin-bottom: 20px;
+  height: 60px;
+  width: 60px;
+  margin-bottom: 20px;
 }
+
 .service-item h2 {
-	font-size: 2.5rem;
-	color: white;
-	margin-bottom: 10px;
-	text-transform: uppercase;
+  font-size: 2.2rem;
+  color: var(--primary-navy);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  font-weight: 700;
 }
+
 .service-item p {
-	color: white;
-	text-align: left;
+  color: var(--text-dark);
+  text-align: left;
 }
 
-/* About Section */
+/* ==========================================================================
+   8. ABOUT SECTION (TENTANG PERUSAHAAN)
+   ========================================================================== */
+#about {
+  background-color: var(--bg-surface); /* Transisi warna ke putih bersih */
+}
+
 #about .about {
-	flex-direction: column; /* Teks di atas gambar, atau sebaliknya, susunan vertikal */
-	text-align: center;
-	max-width: 900px;
-	margin: 0 auto;
-	padding: 100px 20px;
+  flex-direction: column;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 100px 20px;
 }
+
 #about .col-left {
-	width: 100%;
-    max-width: 400px;
-	height: 360px;
-    margin-bottom: 50px;
+  width: 100%;
+  max-width: 400px;
+  height: 360px;
+  margin-bottom: 50px;
 }
+
 #about .col-right {
-	width: 100%;
+  width: 100%;
 }
+
 #about .col-right h2 {
-	font-size: 1.8rem;
-	font-weight: 500;
-	letter-spacing: 0.2rem;
-	margin-bottom: 10px;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--primary-navy);
+  letter-spacing: 0.1rem;
+  margin-bottom: 15px;
 }
+
 #about .col-right p {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
+  color: var(--text-dark);
 }
-#about .col-right .cta {
-	color: black;
-	margin-bottom: 50px;
-	padding: 10px 20px;
-	font-size: 2rem;
-}
+
+/* Bingkai Foto Profil/Perusahaan */
 #about .col-left .about-img {
-	height: 100%;
-	width: 100%;
-	position: relative;
-	border: 10px solid white;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  border: 6px solid var(--primary-navy);
+  border-radius: 4px;
 }
+
+/* Aksen Garis Belakang Foto (Ganti Crimson ke Orange Logo) */
 #about .col-left .about-img::after {
-	content: '';
-	position: absolute;
-	left: -20px;
-	top: 20px;
-	height: 98%;
-	width: 98%;
-	border: 7px solid crimson;
-	z-index: -1;
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 15px;
+  height: 100%;
+  width: 100%;
+  border: 4px solid var(--accent-orange);
+  border-radius: 4px;
+  z-index: -1;
 }
 
-/* Contact Section */
+/* ==========================================================================
+   9. CONTACT SECTION (KONTAK & LOKASI)
+   ========================================================================== */
+#contact {
+  background-color: var(--bg-light);
+}
+
 #contact .contact {
-	flex-direction: column;
-	max-width: 1200px;
-	margin: 0 auto;
-	width: 90%;
-    padding: 100px 0;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 100px 20px;
 }
+
 #contact .contact-items {
-	width: 100%;
-    display: flex;
-    flex-direction: column; /* Lurus atas ke bawah */
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+/* Kartu Kontak */
 #contact .contact-item {
-	width: 90%;
-    max-width: 700px;
-	padding: 30px;
-	text-align: center;
-	border-radius: 10px;
-	margin: 15px 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	box-shadow: 0px 0px 18px 0 #0000002c;
-	transition: 0.3s ease box-shadow;
+  width: 100%;
+  max-width: 750px;
+  padding: 30px;
+  text-align: center;
+  background-color: var(--bg-surface);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  margin: 12px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: var(--shadow-soft);
+  transition: 0.3s ease border-color;
 }
+
 #contact .contact-item:hover {
-	box-shadow: 0px 0px 5px 0 #0000002c;
+  border-color: var(--accent-orange); /* Border menyala orange saat hover */
 }
+
 #contact .icon {
-	width: 70px;
-	margin: 0 auto;
-	margin-bottom: 10px;
+  width: 50px;
+  margin: 0 auto 15px auto;
 }
+
 #contact .contact-info h1 {
-	font-size: 2.5rem;
-	font-weight: 500;
-	margin-bottom: 5px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  margin-bottom: 5px;
 }
+
 #contact .contact-info h2 {
-	font-size: 1.5rem;
-	line-height: 2rem;
-	font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 2.2rem;
+  font-weight: 400;
+  color: var(--text-muted);
 }
 
-/* Footer */
+/* ==========================================================================
+   10. FOOTER SECTION
+   ========================================================================== */
 #footer {
-	background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  background-color: var(--navy-dark); /* Menggunakan Navy Gelap untuk Footer */
+  border-top: 3px solid var(--accent-orange); /* Garis tegas pembatas warna orange */
 }
+
 #footer .footer {
-	min-height: 200px;
-	flex-direction: column;
-	padding-top: 50px;
-	padding-bottom: 20px;
-    text-align: center;
+  min-height: 180px;
+  flex-direction: column;
+  padding: 40px 20px 20px 20px;
+  text-align: center;
 }
+
 #footer h2 {
-	color: white;
-	font-weight: 500;
-	font-size: 1.8rem;
-	letter-spacing: 0.1rem;
-	margin-top: 10px;
-	margin-bottom: 10px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.8rem;
+  letter-spacing: 0.1rem;
+  margin-bottom: 10px;
 }
+
 #footer p {
-	color: white;
-	font-size: 1.3rem;
+  color: #94a3b8; /* Abu-abu terang agar kontras di latar gelap */
+  font-size: 1.3rem;
 }
 
-/* Keyframes */
-@keyframes hamburger_puls {
-	0% { opacity: 1; transform: scale(1); }
-	100% { opacity: 0; transform: scale(1.4); }
-}
+/* ==========================================================================
+   11. KEYFRAMES ANIMASI
+   ========================================================================== */
 @keyframes text_reveal_box {
-	50% { width: 100%; left: 0; }
-	100% { width: 0; left: 100%; }
+  50% { width: 100%; left: 0; }
+  100% { width: 0; left: 100%; }
 }
+
 @keyframes text_reveal {
-	100% { color: white; }
+  100% { color: white; }
 }
+
 @keyframes text_reveal_name {
-	100% { color: crimson; font-weight: 500; }
+  100% { color: var(--accent-orange); font-weight: 700; }
 }
 
-/* Media Query For Tablet & Desktop (Dimodifikasi untuk tetap vertikal) */
+/* ==========================================================================
+   12. RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
+/* Tablet & Monitor Medium */
 @media only screen and (min-width: 768px) {
-	.cta {
-		font-size: 2.5rem;
-		padding: 20px 60px;
-	}
-	h1.section-title {
-		font-size: 5rem;
-	}
+  .cta {
+    font-size: 1.8rem;
+    padding: 15px 45px;
+  }
+  
+  h1.section-title {
+    font-size: 4.2rem;
+  }
 
-	#hero h1 {
-		font-size: 6rem;
-	}
+  #hero h1 {
+    font-size: 5.5rem;
+  }
 
-    /* Penyesuaian agar Contact lebih lebar namun tetap lurus ke bawah */
-    #contact .contact-item {
-        flex-direction: row;
-        text-align: left;
-    }
-    #contact .contact-item .icon {
-        margin-bottom: 0;
-        margin-right: 30px;
-    }
+  #contact .contact-item {
+    flex-direction: row;
+    text-align: left;
+  }
+  
+  #contact .contact-item .icon {
+    margin-bottom: 0;
+    margin-right: 25px;
+  }
 }
 
+/* Desktop & Laptop Layar Lebar */
 @media only screen and (min-width: 1200px) {
-	/* Header styling for desktop */
-	#header .hamburger {
-		display: none;
-	}
-	#header .nav-list ul {
-		position: initial;
-		display: flex;
-        flex-direction: row;
-		height: auto;
-		width: auto;
-		background-color: transparent;
-	}
-	#header .nav-list ul a {
-		font-size: 1.5rem;
-		padding: 0 15px;
-	}
-	#header .nav-list ul a::after {
-		display: none;
-	}
-    /* Memastikan layout About Image and Text tetap rapi vertikal di desktop, atau letak disesuaikan */
-    #about .about {
-        flex-direction: column;
-    }
-    #about .col-left .about-img::after {
-        left: -30px;
-        top: 30px;
-    }
+  /* Tampilan Navigasi Desktop Stasioner */
+  #header .hamburger {
+    display: none; /* Sembunyikan tombol hamburger di layar besar */
+  }
+
+  #header .nav-list ul {
+    position: initial;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    width: auto;
+    background-color: transparent;
+  }
+
+  #header .nav-list ul a {
+    font-size: 1.4rem;
+    padding: 10px 20px;
+  }
+
+  #about .about {
+    flex-direction: column;
+  }
 }
