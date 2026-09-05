@@ -318,7 +318,7 @@ p {
 #hero h1:nth-child(3) span { animation-delay: 2.5s; }
 
 /* ==========================================================================
-   7. SERVICES / LAYANAN UTAMA SECTION (GRID 2 KOLOM, KECIL, MERGE CENTER)
+   7. SERVICES / LAYANAN UTAMA SECTION (VERTIKAL 1 KOLOM KEMBALI KE SEMULA)
    ========================================================================== */
 #services {
   background-color: var(--bg-light);
@@ -332,21 +332,15 @@ p {
   padding: 100px 20px;
 }
 
-/* Mengubah container layanan utama menjadi Grid 2 Kolom dengan perataan tengah */
+/* Mengembalikan kontainer layanan utama menjadi susunan vertikal 1 kolom ke bawah */
 .service-bottom {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 480px)); /* Ukuran kotak diperkecil dengan batas maksimal 480px per kolom */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 20px;
-  justify-content: center; /* Membuat susunan grid rata tengah secara horizontal */
   width: 100%;
-  margin-top: 40px;
-}
-
-/* Jika jumlah kartu ganjil, item terakhir otomatis melebar penuh dan berada di tengah (Merge Center) */
-.service-bottom .service-item:last-child:nth-child(odd) {
-  grid-column: 1 / -1;
-  max-width: 480px;
-  justify-self: center;
+  max-width: 800px; /* Lebar maksimal dibatasi agar tampil rapi di layar lebar */
+  margin: 40px auto 0 auto;
 }
 
 /* Kartu Layanan Utama */
@@ -354,7 +348,7 @@ p {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 20px 24px; /* Padding dikurangi agar ukuran kotak lebih proporsional/tidak terlalu besar */
+  padding: 25px 30px;
   border-radius: 8px;
   background-color: var(--bg-surface);
   border-left: 6px solid var(--accent-orange); 
@@ -652,10 +646,7 @@ p {
 }
 
 @media only screen and (max-width: 767px) {
-  /* Tampilan layar HP: Grid layanan utama kembali otomatis menjadi 1 kolom penuh */
-  .service-bottom {
-    grid-template-columns: 1fr;
-  }
+  /* Tampilan layar HP: Layanan utama tetap 1 kolom vertikal */
 }
 
 @media only screen and (min-width: 1200px) {
