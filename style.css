@@ -41,6 +41,18 @@
 }
 
 /* ==========================================================================
+   PENYESUAIAN JARAK ANTAR SECTION (OTOMATIS)
+   ========================================================================== */
+#why-us .container,
+#services .services,
+#about .about,
+#contact .contact {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
+
+
+/* ==========================================================================
    2. RESET DASAR & SETUP GLOBAL
    ========================================================================== */
 
