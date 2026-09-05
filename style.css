@@ -422,9 +422,9 @@ p {
 }
 
 /* Trigger Animasi Mengalir ke Bawah: Berlaku saat Hover ATAU Kelas .is-open Aktif */
-#why-us .service-item:hover .service-item-content,
-#why-us .service-item.is-hovered .service-item-content,
-#why-us .service-item.is-open .service-item-content {
+#services .service-item:hover .service-item-content,
+#services .service-item.is-hovered .service-item-content,
+#services .service-item.is-open .service-item-content {
   max-height: 200px; /* Batas tinggi aman agar teks tersingkap sempurna */
   opacity: 1;
   transform: translateY(0); /* Meluncur turun mengikuti alur garis pita orange */
@@ -432,9 +432,9 @@ p {
 }
 
 /* Rotasi Panah saat Terbuka */
-#why-us .service-item:hover .accordion-icon,
-#why-us .service-item.is-hovered .accordion-icon,
-#why-us .service-item.is-open .accordion-icon {
+#services .service-item:hover .accordion-icon,
+#services .service-item.is-hovered .accordion-icon,
+#services .service-item.is-open .accordion-icon {
   transform: rotate(180deg);
   color: var(--accent-orange);
 }
