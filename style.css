@@ -725,7 +725,7 @@ p {
   align-items: stretch;
   gap: 20px;
   width: 100%;
-  margin: 35px auto 0 auto;              /* Sedikit dirapatkan */
+  margin: 35px auto 0 auto;
 }
 
 
@@ -738,114 +738,311 @@ p {
 }
 
 
-/* Gaya kotak (card) layanan */
+/* ==========================================================================
+   12.1. SERVICE CARD — BLUE PREMIUM WITH ORANGE ACCENT
+   ========================================================================== */
+
+/* 
+   Card layanan dengan warna utama biru,
+   gradasi navy, aksen orange, serta ornamen
+   lingkaran halus sebagai elemen dekoratif.
+*/
 #services .service-item {
   width: 100%;
   height: 100%;
   min-height: 380px;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+
+  position: relative;
+  isolation: isolate;
+
   padding: 18px 22px;
-  border-radius: 8px;
-  background-color: var(--bg-surface);
+
+  border-radius: 10px;
+
+  /* Warna dasar biru utama */
+  background-color: var(--primary-navy);
+
+  /* 
+     Lapisan dekoratif:
+     - Lingkaran kecil orange
+     - Lingkaran kecil putih
+     - Gradasi biru ke navy
+  */
+  background-image:
+    radial-gradient(
+      circle at 92% 8%,
+      rgba(248, 131, 0, 0.18) 0 3px,
+      transparent 4px
+    ),
+    radial-gradient(
+      circle at 86% 15%,
+      rgba(255, 255, 255, 0.10) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 78% 25%,
+      rgba(248, 131, 0, 0.12) 0 5px,
+      transparent 6px
+    ),
+    radial-gradient(
+      circle at 94% 32%,
+      rgba(255, 255, 255, 0.08) 0 2px,
+      transparent 3px
+    ),
+    radial-gradient(
+      circle at 72% 10%,
+      rgba(248, 131, 0, 0.08) 0 8px,
+      transparent 9px
+    ),
+    radial-gradient(
+      circle at 15% 92%,
+      rgba(255, 255, 255, 0.06) 0 3px,
+      transparent 4px
+    ),
+    radial-gradient(
+      circle at 8% 82%,
+      rgba(248, 131, 0, 0.08) 0 6px,
+      transparent 7px
+    ),
+    linear-gradient(
+      135deg,
+      rgb(3, 57, 132) 0%,
+      rgb(3, 57, 132) 48%,
+      rgb(2, 35, 82) 78%,
+      rgb(1, 28, 65) 100%
+    );
+
+  /* Garis identitas orange di sisi kiri */
   border-left: 4px solid var(--accent-orange);
-  box-shadow: var(--shadow-soft);
+
+  /* Bayangan normal */
+  box-shadow:
+    0 10px 30px rgba(3, 57, 132, 0.20),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+
   cursor: pointer;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
 }
 
 
-/* Efek angkat ke atas saat card disorot */
+/* ==========================================================================
+   12.2. SERVICE CARD — DECORATIVE ORANGE GLOW
+   ========================================================================== */
+
+/* 
+   Cahaya orange lembut di sudut kanan atas.
+   Dibuat sangat transparan agar tetap terlihat profesional.
+*/
+#services .service-item::before {
+  content: '';
+  position: absolute;
+
+  top: -80px;
+  right: -80px;
+
+  width: 220px;
+  height: 220px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(248, 131, 0, 0.20) 0%,
+      rgba(248, 131, 0, 0.08) 35%,
+      transparent 70%
+    );
+
+  border-radius: 50%;
+
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+/* ==========================================================================
+   12.3. SERVICE CARD — DECORATIVE CIRCLES
+   ========================================================================== */
+
+/* 
+   Lingkaran besar transparan di bagian kiri bawah.
+   Lingkaran tambahan dibuat menggunakan box-shadow
+   sehingga tidak membutuhkan elemen HTML tambahan.
+*/
+#services .service-item::after {
+  content: '';
+  position: absolute;
+
+  bottom: -90px;
+  left: -90px;
+
+  width: 220px;
+  height: 220px;
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 25px rgba(255, 255, 255, 0.025),
+    0 0 0 50px rgba(248, 131, 0, 0.025),
+    0 0 0 75px rgba(255, 255, 255, 0.015);
+
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+/* ==========================================================================
+   12.4. SERVICE CARD — HOVER EFFECT
+   ========================================================================== */
+
+/* 
+   Card sedikit terangkat ketika kursor masuk.
+   Shadow dibuat lebih dalam dengan sedikit
+   pantulan orange.
+*/
 #services .service-link:hover .service-item {
   transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
+
+  border-left-color: var(--accent-orange);
+
+  box-shadow:
+    0 18px 40px rgba(3, 57, 132, 0.28),
+    0 8px 20px rgba(248, 131, 0, 0.12);
 }
 
 
-/* Wrapper judul dan icon aksi */
-#services .service-item-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
+/* ==========================================================================
+   12.5. SERVICE CARD — IMAGE / ICON
+   ========================================================================== */
 
-
-/* Gambar / Ikon yang mewakili tiap layanan */
+/* Area gambar layanan */
 #services .service-bottom .icon {
   height: 210px;
   width: 100%;
+
   margin-bottom: 18px;
+
   overflow: hidden;
   border-radius: 5px;
 }
 
 
-/* Animasi membesar tipis pada gambar layanan */
+/* Gambar layanan */
 #services .service-bottom .icon img {
   width: 100%;
   height: 100%;
+
   object-fit: contain;
-  transition: transform 0.4s ease, filter 0.4s ease;
+
+  transition:
+    transform 0.4s ease,
+    filter 0.4s ease;
 }
 
 
+/* Efek gambar ketika card di-hover */
 #services .service-link:hover .icon img {
   transform: scale(1.04);
-  filter: drop-shadow(0 8px 12px rgba(3, 57, 132, 0.15));
+
+  filter:
+    drop-shadow(0 8px 12px rgba(0, 0, 0, 0.20));
 }
 
 
+/* ==========================================================================
+   12.6. SERVICE CARD — TYPOGRAPHY
+   ========================================================================== */
+
+/* Judul layanan */
 #services .service-item h2 {
   width: 100%;
+
   font-size: 1.5rem;
-  color: var(--primary-navy);
+
+  /* Tulisan putih di atas background biru */
+  color: #ffffff;
+
   margin-bottom: 0;
+
   text-transform: uppercase;
   font-weight: 700;
   text-align: left;
-  transition: color 0.3s ease;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
 }
 
 
+/* Judul berubah menjadi orange ketika card di-hover */
 #services .service-link:hover .service-item h2 {
   color: var(--accent-orange);
 }
 
 
+/* ==========================================================================
+   12.7. SERVICE CARD — DESCRIPTION
+   ========================================================================== */
+
+/* Deskripsi layanan */
 #services .service-item p {
   width: 100%;
-  color: var(--text-muted);
+
+  /* Putih transparan agar tidak terlalu kontras */
+  color: rgba(255, 255, 255, 0.78);
+
   text-align: left;
+
   font-size: 1.3rem;
   line-height: 2.2rem;
+
   padding-top: 8px;
   margin-top: 8px;
-  border-top: 1px solid rgba(226, 232, 240, 0.8);
+
+  /* Garis pemisah dibuat putih transparan */
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 
-/* Teks baca selengkapnya/detail pada layanan */
-.service-detail {
+/* ==========================================================================
+   12.8. SERVICE CARD — DETAIL LINK
+   ========================================================================== */
+
+/* Teks baca selengkapnya / detail */
+#services .service-detail {
   display: inline-block;
+
+  /* Mendorong detail ke bagian bawah card */
   margin-top: auto;
+
   padding-top: 10px;
-  color: var(--primary-navy);
+
+  color: #ffffff;
+
   font-size: 1.1rem;
   font-weight: 700;
-  transition: color 0.3s ease, transform 0.3s ease;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
 }
 
 
-/* Geser teks detail sedikit saat dihover */
+/* Detail berubah orange ketika card di-hover */
 #services .service-link:hover .service-detail {
   color: var(--accent-orange);
   transform: translateX(4px);
 }
-
 
 /* ==========================================================================
    13. ABOUT SECTION (TENTANG PERUSAHAAN)
