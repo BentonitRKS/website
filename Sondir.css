@@ -10,7 +10,24 @@
    - Identitas visual mengikuti website utama:
        Navy  = rgb(3, 57, 132)
        Orange = rgb(248, 131, 0)
-   - Animasi reveal menggunakan class .reveal dari app.js.
+
+   KOMPONEN KHUSUS:
+   - Technical section
+   - Technical card
+   - Parameter + foto alat
+   - Workflow
+   - Data & deliverables
+   - Interactive interpretation panel
+   - Interactive geotechnical evaluation panel
+   - Sample report
+   - CTA
+   - Footer
+   - Scroll reveal
+
+   ANIMASI:
+   - .reveal dikendalikan oleh app.js
+   - .technical-hover-panel dikendalikan murni oleh CSS :hover
+   - Tidak membutuhkan JavaScript tambahan untuk hover panel
    ========================================================================== */
 
 
@@ -21,36 +38,68 @@
 :root {
 
   /* ------------------------------------------------------------------------
-     Warna navy transparan
+     Warna utama halaman
      ------------------------------------------------------------------------ */
-  --sondir-navy-soft: rgba(3, 57, 132, 0.08);
-  --sondir-navy-faint: rgba(3, 57, 132, 0.045);
+
+  --sondir-navy: rgb(3, 57, 132);
+  --sondir-navy-dark: rgb(2, 43, 100);
+  --sondir-navy-deep: rgb(2, 43, 97);
+
+  --sondir-orange: rgb(248, 131, 0);
+  --sondir-orange-hover: rgb(255, 148, 29);
 
 
   /* ------------------------------------------------------------------------
-     Warna orange transparan
+     Warna transparan
      ------------------------------------------------------------------------ */
+
+  --sondir-navy-soft: rgba(3, 57, 132, 0.08);
+  --sondir-navy-faint: rgba(3, 57, 132, 0.045);
+
   --sondir-orange-soft: rgba(248, 131, 0, 0.10);
   --sondir-orange-faint: rgba(248, 131, 0, 0.055);
 
 
   /* ------------------------------------------------------------------------
-     Background section alternatif
+     Warna background
      ------------------------------------------------------------------------ */
+
   --sondir-section-alt: #f7f9fc;
+  --sondir-surface: #ffffff;
+  --sondir-surface-soft: #f8fafc;
 
 
   /* ------------------------------------------------------------------------
-     Lebar maksimum konten halaman Sondir
+     Warna teks
      ------------------------------------------------------------------------ */
+
+  --sondir-text-dark: #0f172a;
+  --sondir-text-muted: #475569;
+  --sondir-text-light: #64748b;
+
+
+  /* ------------------------------------------------------------------------
+     Warna border
+     ------------------------------------------------------------------------ */
+
+  --sondir-border: #e2e8f0;
+  --sondir-border-light: #eef2f6;
+
+
+  /* ------------------------------------------------------------------------
+     Lebar maksimum
+     ------------------------------------------------------------------------ */
+
   --sondir-max-width: 1120px;
 
 
   /* ------------------------------------------------------------------------
      Radius komponen
      ------------------------------------------------------------------------ */
+
   --sondir-radius: 10px;
   --sondir-radius-small: 6px;
+  --sondir-radius-large: 12px;
 
 }
 
@@ -62,21 +111,22 @@
 /*
    style.css global memiliki .container dengan min-height: 100vh.
 
-   Pada halaman detail Sondir, setiap section harus mengikuti tinggi
-   kontennya sendiri agar halaman teknis tidak memiliki ruang kosong
-   yang berlebihan.
+   Pada halaman detail Sondir, container harus mengikuti tinggi konten
+   sebenarnya agar tidak menghasilkan ruang kosong yang berlebihan.
 */
 
 .sondir-page .container {
+
   min-height: auto;
   height: auto;
+
 }
 
 
 /*
-   Container khusus halaman Sondir.
+   Lebar container utama halaman Sondir.
 
-   Tidak mengubah .container global pada halaman lain.
+   Tidak mengubah .container pada halaman lain.
 */
 
 .sondir-page .service-hero .container,
@@ -84,12 +134,18 @@
 .sondir-page .service-cta .container {
 
   width: 100%;
-  max-width: var(--sondir-max-width);
 
-  margin: 0 auto;
+  max-width:
+    var(--sondir-max-width);
 
-  padding-left: 24px;
-  padding-right: 24px;
+  margin:
+    0 auto;
+
+  padding-left:
+    24px;
+
+  padding-right:
+    24px;
 
 }
 
@@ -104,9 +160,12 @@
   height: auto;
 
   width: 100%;
-  max-width: var(--sondir-max-width);
 
-  margin: 0 auto;
+  max-width:
+    var(--sondir-max-width);
+
+  margin:
+    0 auto;
 
 }
 
@@ -117,21 +176,23 @@
 
 /*
    .reveal digunakan oleh HTML sebagai penanda elemen yang akan muncul
-   ketika masuk viewport.
+   ketika elemen masuk ke viewport.
 
-   app.js bertugas menambahkan class .active.
+   app.js:
+   - mendeteksi elemen
+   - menambahkan class .active
 
-   Dengan demikian:
-   HTML  = menentukan elemen yang direveal
-   CSS   = menentukan animasinya
-   JS    = mendeteksi posisi elemen
+   CSS:
+   - mengatur tampilan awal
+   - mengatur animasi masuk
 */
 
 .sondir-page .reveal {
 
   opacity: 0;
 
-  transform: translateY(30px);
+  transform:
+    translateY(30px);
 
   transition:
     opacity 0.7s ease,
@@ -148,28 +209,8 @@
 
   opacity: 1;
 
-  transform: translateY(0);
-
-}
-
-
-/*
-   Accessibility:
-   pengguna yang memilih reduced motion tidak mendapatkan
-   animasi pergerakan.
-*/
-
-@media (prefers-reduced-motion: reduce) {
-
-  .sondir-page .reveal {
-
-    opacity: 1;
-
-    transform: none;
-
-    transition: none;
-
-  }
+  transform:
+    translateY(0);
 
 }
 
@@ -181,11 +222,11 @@
 /*
    Hero menjadi pembuka utama halaman Sondir.
 
-   Konsep:
-   - Navy sebagai warna dominan.
-   - Orange sebagai aksen identitas.
-   - Tidak menggunakan foto pada hero agar halaman tetap clean.
-   - Radial gradient memberikan nuansa engineering secara halus.
+   Konsep visual:
+   - Navy dominan
+   - Orange sebagai aksen
+   - Gradient engineering yang halus
+   - Tidak menggunakan foto pada hero
 */
 
 .service-hero {
@@ -198,7 +239,6 @@
 
   background:
 
-    /* Cahaya orange kanan atas */
     radial-gradient(
       circle at 88% 20%,
       rgba(248, 131, 0, 0.16) 0%,
@@ -206,7 +246,6 @@
       transparent 40%
     ),
 
-    /* Cahaya navy kiri bawah */
     radial-gradient(
       ellipse at 8% 90%,
       rgba(40, 105, 190, 0.25) 0%,
@@ -214,7 +253,6 @@
       transparent 65%
     ),
 
-    /* Background utama */
     linear-gradient(
       135deg,
       #033984 0%,
@@ -223,7 +261,7 @@
     );
 
   border-bottom:
-    3px solid var(--accent-orange);
+    3px solid var(--sondir-orange);
 
 }
 
@@ -247,14 +285,16 @@
   border:
     1px solid rgba(255, 255, 255, 0.07);
 
-  border-radius: 50%;
+  border-radius:
+    50%;
 
   box-shadow:
     0 0 0 45px rgba(255, 255, 255, 0.015),
     0 0 0 90px rgba(255, 255, 255, 0.012),
     0 0 0 135px rgba(255, 255, 255, 0.008);
 
-  pointer-events: none;
+  pointer-events:
+    none;
 
 }
 
@@ -280,6 +320,7 @@
   min-height: 620px;
 
   padding-top: 110px;
+
   padding-bottom: 75px;
 
 }
@@ -293,7 +334,8 @@
 
   width: 100%;
 
-  max-width: 900px;
+  max-width:
+    900px;
 
 }
 
@@ -301,15 +343,6 @@
 /* ==========================================================================
    5. SERVICE EYEBROW
    ========================================================================== */
-
-/*
-   Label kecil seperti:
-   01 / Overview
-   02 / Scope
-   03 / Technical Parameters
-
-   Dibuat konsisten untuk seluruh halaman.
-*/
 
 .service-eyebrow {
 
@@ -321,19 +354,26 @@
 
   position: relative;
 
-  color: var(--accent-orange);
+  color:
+    var(--sondir-orange);
 
-  font-size: 1.1rem;
+  font-size:
+    1.1rem;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 
-  letter-spacing: 0.16rem;
+  letter-spacing:
+    0.16rem;
 
-  line-height: 1.5;
+  line-height:
+    1.5;
 
-  margin-bottom: 13px;
+  margin-bottom:
+    13px;
 
 }
 
@@ -350,9 +390,10 @@
   height: 2px;
 
   background-color:
-    var(--accent-orange);
+    var(--sondir-orange);
 
-  flex-shrink: 0;
+  flex-shrink:
+    0;
 
 }
 
@@ -369,14 +410,10 @@
 }
 
 
-/*
-   Garis eyebrow hero tetap orange.
-*/
-
 .service-hero .service-eyebrow::before {
 
   background-color:
-    var(--accent-orange);
+    var(--sondir-orange);
 
 }
 
@@ -387,55 +424,57 @@
 
 .service-hero h1 {
 
-  max-width: 900px;
+  max-width:
+    900px;
 
-  color: #ffffff;
+  color:
+    #ffffff;
 
   font-size:
     clamp(3.6rem, 5vw, 6.2rem);
 
-  line-height: 1.08;
+  line-height:
+    1.08;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  letter-spacing: -0.08rem;
+  letter-spacing:
+    -0.08rem;
 
-  margin-bottom: 24px;
+  margin-bottom:
+    24px;
 
 }
 
-
-/*
-   Accent pada judul:
-   " / Sondir"
-*/
 
 .service-hero h1 .brand-accent {
 
   color:
-    var(--accent-orange);
+    var(--sondir-orange);
 
 }
 
 
-/*
-   Deskripsi hero.
-*/
-
 .service-hero-description {
 
-  max-width: 760px;
+  max-width:
+    760px;
 
   color:
     rgba(255, 255, 255, 0.80);
 
-  font-size: 1.6rem;
+  font-size:
+    1.6rem;
 
-  line-height: 2.7rem;
+  line-height:
+    2.7rem;
 
-  font-weight: 400;
+  font-weight:
+    400;
 
-  margin-top: 0;
+  margin-top:
+    0;
 
 }
 
@@ -443,10 +482,6 @@
 /* ==========================================================================
    7. HERO ACTIONS
    ========================================================================== */
-
-/*
-   Tombol hero.
-*/
 
 .service-hero-actions {
 
@@ -458,21 +493,136 @@
 
   gap: 12px;
 
-  margin-top: 30px;
+  margin-top:
+    30px;
 
 }
 
 
 /* ==========================================================================
-   8. TECHNICAL SUMMARY
+   8. BUTTON SYSTEM
    ========================================================================== */
 
 /*
-   Ringkasan teknis di bawah hero.
+   Button khusus halaman Sondir.
 
-   Dibuat seperti specification strip,
-   bukan card besar.
+   Dibuat di sini agar .btn tidak bergantung pada selector
+   dari halaman lain.
 */
+
+.sondir-page .btn {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height:
+    46px;
+
+  padding:
+    12px 22px;
+
+  border:
+    1px solid transparent;
+
+  border-radius:
+    6px;
+
+  font-size:
+    1.25rem;
+
+  line-height:
+    1.5;
+
+  font-weight:
+    700;
+
+  text-decoration:
+    none;
+
+  cursor:
+    pointer;
+
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+}
+
+
+.sondir-page .btn-primary {
+
+  color:
+    #ffffff;
+
+  background:
+    var(--sondir-orange);
+
+  border-color:
+    var(--sondir-orange);
+
+}
+
+
+.sondir-page .btn-primary:hover {
+
+  color:
+    #ffffff;
+
+  background:
+    var(--sondir-orange-hover);
+
+  border-color:
+    var(--sondir-orange-hover);
+
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 8px 22px rgba(248, 131, 0, 0.25);
+
+}
+
+
+.sondir-page .btn-secondary {
+
+  color:
+    var(--sondir-navy);
+
+  background:
+    #ffffff;
+
+  border-color:
+    rgba(3, 57, 132, 0.20);
+
+}
+
+
+.sondir-page .btn-secondary:hover {
+
+  color:
+    #ffffff;
+
+  background:
+    var(--sondir-navy);
+
+  border-color:
+    var(--sondir-navy);
+
+  transform:
+    translateY(-2px);
+
+}
+
+
+/* ==========================================================================
+   9. TECHNICAL SUMMARY
+   ========================================================================== */
 
 .technical-summary {
 
@@ -483,7 +633,8 @@
   grid-template-columns:
     repeat(4, minmax(0, 1fr));
 
-  margin-top: 48px;
+  margin-top:
+    48px;
 
   border-top:
     1px solid rgba(255, 255, 255, 0.16);
@@ -494,15 +645,12 @@
 }
 
 
-/*
-   Item summary.
-*/
-
 .technical-summary-item {
 
   position: relative;
 
-  min-height: 92px;
+  min-height:
+    92px;
 
   display: flex;
 
@@ -510,14 +658,11 @@
 
   justify-content: center;
 
-  padding: 18px 24px;
+  padding:
+    18px 24px;
 
 }
 
-
-/*
-   Garis vertikal antar summary.
-*/
 
 .technical-summary-item:not(:last-child)::after {
 
@@ -525,10 +670,14 @@
 
   position: absolute;
 
-  top: 22px;
-  right: 0;
+  top:
+    22px;
 
-  width: 1px;
+  right:
+    0;
+
+  width:
+    1px;
 
   height:
     calc(100% - 44px);
@@ -539,47 +688,48 @@
 }
 
 
-/*
-   Label summary.
-*/
-
 .technical-summary-item span {
 
   color:
     rgba(255, 255, 255, 0.55);
 
-  font-size: 1rem;
+  font-size:
+    1rem;
 
-  font-weight: 600;
+  font-weight:
+    600;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 
-  letter-spacing: 0.12rem;
+  letter-spacing:
+    0.12rem;
 
-  margin-bottom: 7px;
+  margin-bottom:
+    7px;
 
 }
 
 
-/*
-   Nilai summary.
-*/
-
 .technical-summary-item strong {
 
-  color: #ffffff;
+  color:
+    #ffffff;
 
-  font-size: 1.3rem;
+  font-size:
+    1.3rem;
 
-  line-height: 1.8rem;
+  line-height:
+    1.8rem;
 
-  font-weight: 600;
+  font-weight:
+    600;
 
 }
 
 
 /* ==========================================================================
-   9. GENERAL TECHNICAL SECTION
+   10. GENERAL TECHNICAL SECTION
    ========================================================================== */
 
 .technical-section {
@@ -588,14 +738,16 @@
 
   width: 100%;
 
-  padding-top: 80px;
+  padding-top:
+    80px;
 
-  padding-bottom: 80px;
+  padding-bottom:
+    80px;
 
   background-color:
     #ffffff;
 
-  overflow: hidden;
+  overflow: visible;
 
 }
 
@@ -623,23 +775,23 @@
 }
 
 
-/*
-   Garis dekoratif halus.
-*/
-
 .technical-section.alt::after {
 
   content: '';
 
   position: absolute;
 
-  bottom: 0;
-  left: 50%;
+  bottom:
+    0;
+
+  left:
+    50%;
 
   width:
     min(420px, 60%);
 
-  height: 1px;
+  height:
+    1px;
 
   transform:
     translateX(-50%);
@@ -656,68 +808,70 @@
 
 
 /* ==========================================================================
-   10. SECTION INTRO
+   11. SECTION INTRO
    ========================================================================== */
 
 .section-intro {
 
   width: 100%;
 
-  max-width: 850px;
+  max-width:
+    850px;
 
   margin:
     0 auto 42px auto;
 
-  text-align: center;
+  text-align:
+    center;
 
 }
 
-
-/*
-   Judul section.
-*/
 
 .section-intro h2 {
 
   color:
-    var(--primary-navy);
+    var(--sondir-navy);
 
   font-size:
     clamp(2.6rem, 4vw, 3.8rem);
 
-  line-height: 1.2;
+  line-height:
+    1.2;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  letter-spacing: -0.04rem;
+  letter-spacing:
+    -0.04rem;
 
-  margin-bottom: 14px;
+  margin-bottom:
+    14px;
 
 }
 
 
-/*
-   Paragraf section.
-*/
-
 .section-intro p {
 
-  max-width: 760px;
+  max-width:
+    760px;
 
-  margin: 0 auto;
+  margin:
+    0 auto;
 
   color:
-    var(--text-muted);
+    var(--sondir-text-muted);
 
-  font-size: 1.45rem;
+  font-size:
+    1.45rem;
 
-  line-height: 2.5rem;
+  line-height:
+    2.5rem;
 
 }
 
 
 /* ==========================================================================
-   11. TECHNICAL GRID
+   12. TECHNICAL GRID
    ========================================================================== */
 
 .technical-grid {
@@ -729,20 +883,25 @@
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
-  gap: 18px;
+  gap:
+    18px;
 
 }
 
 
 /*
-   Technical card.
+   Technical card dasar.
 */
 
 .technical-card {
 
   position: relative;
 
-  padding: 28px 30px;
+  min-width:
+    0;
+
+  padding:
+    28px 30px;
 
   background:
 
@@ -753,10 +912,10 @@
     );
 
   border:
-    1px solid var(--border-color);
+    1px solid var(--sondir-border);
 
   border-left:
-    3px solid var(--accent-orange);
+    3px solid var(--sondir-orange);
 
   border-radius:
     var(--sondir-radius);
@@ -772,17 +931,10 @@
 }
 
 
-/*
-   Hover technical card.
-*/
-
 .technical-card:hover {
 
   transform:
     translateY(-4px);
-
-  border-left-color:
-    var(--accent-orange);
 
   box-shadow:
     0 16px 32px rgba(3, 57, 132, 0.10);
@@ -791,76 +943,88 @@
 
 
 /*
-   Judul card.
+   Judul h3.
 */
 
 .technical-card h3 {
 
   color:
-    var(--primary-navy);
+    var(--sondir-navy);
 
-  font-size: 1.55rem;
+  font-size:
+    1.55rem;
 
-  line-height: 2.2rem;
+  line-height:
+    2.2rem;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  margin-bottom: 8px;
+  margin-bottom:
+    8px;
 
 }
 
 
 /*
-   Card yang menggunakan h2.
+   Judul h2.
 */
 
 .technical-card h2 {
 
   color:
-    var(--primary-navy);
+    var(--sondir-navy);
 
-  font-size: 2.3rem;
+  font-size:
+    2.3rem;
 
-  line-height: 1.3;
+  line-height:
+    1.3;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  margin-bottom: 12px;
+  margin-bottom:
+    12px;
 
 }
 
 
 /*
-   Paragraf card.
+   Paragraf.
 */
 
 .technical-card p {
 
   color:
-    var(--text-muted);
+    var(--sondir-text-muted);
 
-  font-size: 1.35rem;
+  font-size:
+    1.35rem;
 
-  line-height: 2.25rem;
+  line-height:
+    2.25rem;
 
-  margin-top: 0;
+  margin-top:
+    0;
 
 }
 
 
 /*
-   List pada technical card.
-
-   Dibuat clean tanpa bullet browser default.
+   List umum.
 */
 
 .technical-card ul {
 
-  list-style: none;
+  list-style:
+    none;
 
-  margin: 12px 0 0 0;
+  margin:
+    12px 0 0 0;
 
-  padding: 0;
+  padding:
+    0;
 
 }
 
@@ -873,11 +1037,13 @@
     8px 0 8px 19px;
 
   color:
-    var(--text-muted);
+    var(--sondir-text-muted);
 
-  font-size: 1.3rem;
+  font-size:
+    1.3rem;
 
-  line-height: 2rem;
+  line-height:
+    2rem;
 
 }
 
@@ -888,24 +1054,29 @@
 
   position: absolute;
 
-  left: 0;
+  left:
+    0;
 
-  top: 17px;
+  top:
+    17px;
 
-  width: 6px;
+  width:
+    6px;
 
-  height: 6px;
+  height:
+    6px;
 
-  border-radius: 50%;
+  border-radius:
+    50%;
 
   background-color:
-    var(--accent-orange);
+    var(--sondir-orange);
 
 }
 
 
 /* ==========================================================================
-   12. SCOPE LIST
+   13. SCOPE LIST
    ========================================================================== */
 
 .scope-list {
@@ -917,10 +1088,11 @@
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
-  gap: 0 45px;
+  gap:
+    0 45px;
 
   border-top:
-    1px solid var(--border-color);
+    1px solid var(--sondir-border);
 
 }
 
@@ -934,12 +1106,14 @@
   grid-template-columns:
     52px minmax(0, 1fr);
 
-  gap: 18px;
+  gap:
+    18px;
 
-  padding: 25px 0;
+  padding:
+    25px 0;
 
   border-bottom:
-    1px solid var(--border-color);
+    1px solid var(--sondir-border);
 
 }
 
@@ -948,20 +1122,26 @@
 
   display: flex;
 
-  align-items: flex-start;
+  align-items:
+    flex-start;
 
-  justify-content: flex-start;
+  justify-content:
+    flex-start;
 
   color:
-    var(--accent-orange);
+    var(--sondir-orange);
 
-  font-size: 1.25rem;
+  font-size:
+    1.25rem;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  letter-spacing: 0.08rem;
+  letter-spacing:
+    0.08rem;
 
-  padding-top: 3px;
+  padding-top:
+    3px;
 
 }
 
@@ -969,15 +1149,19 @@
 .scope-item h3 {
 
   color:
-    var(--primary-navy);
+    var(--sondir-navy);
 
-  font-size: 1.5rem;
+  font-size:
+    1.5rem;
 
-  line-height: 2.1rem;
+  line-height:
+    2.1rem;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  margin-bottom: 6px;
+  margin-bottom:
+    6px;
 
 }
 
@@ -985,31 +1169,35 @@
 .scope-item p {
 
   color:
-    var(--text-muted);
+    var(--sondir-text-muted);
 
-  font-size: 1.3rem;
+  font-size:
+    1.3rem;
 
-  line-height: 2.15rem;
+  line-height:
+    2.15rem;
 
-  margin-top: 0;
+  margin-top:
+    0;
 
 }
 
 
 /* ==========================================================================
-   13. PARAMETER LAYOUT
+   14. PARAMETER LAYOUT
    ========================================================================== */
 
 /*
-   BAGIAN BARU UNTUK FOTO ALAT.
+   Layout parameter:
 
-   Layout:
-   kiri  = tabel spesifikasi
-   kanan = foto peralatan
+   KIRI:
+   Tabel spesifikasi teknis
 
-   Tujuan:
-   Foto tidak berdiri sebagai katalog,
-   tetapi menjadi bagian dari penjelasan teknis.
+   KANAN:
+   Foto alat Sondir
+
+   Pada desktop keduanya berada dalam satu bidang visual.
+   Pada mobile otomatis menjadi satu kolom.
 */
 
 .parameter-layout {
@@ -1022,25 +1210,28 @@
     minmax(0, 1.35fr)
     minmax(320px, 0.75fr);
 
-  gap: 24px;
+  gap:
+    24px;
 
-  align-items: stretch;
+  align-items:
+    stretch;
 
 }
 
 
 /* ==========================================================================
-   14. SPECIFICATION TABLE
+   15. SPECIFICATION TABLE
    ========================================================================== */
 
 .spec-table-wrapper {
 
   width: 100%;
 
-  overflow-x: auto;
+  overflow-x:
+    auto;
 
   border:
-    1px solid var(--border-color);
+    1px solid var(--sondir-border);
 
   border-radius:
     var(--sondir-radius);
@@ -1058,9 +1249,11 @@
 
   width: 100%;
 
-  min-width: 680px;
+  min-width:
+    680px;
 
-  border-collapse: collapse;
+  border-collapse:
+    collapse;
 
   background-color:
     #ffffff;
@@ -1071,33 +1264,40 @@
 .spec-table th,
 .spec-table td {
 
-  padding: 17px 22px;
+  padding:
+    17px 22px;
 
   border-bottom:
-    1px solid var(--border-color);
+    1px solid var(--sondir-border);
 
-  font-size: 1.3rem;
+  font-size:
+    1.3rem;
 
-  line-height: 2rem;
+  line-height:
+    2rem;
 
-  vertical-align: middle;
+  vertical-align:
+    middle;
 
 }
 
 
 .spec-table th {
 
-  width: 36%;
+  width:
+    36%;
 
   color:
-    var(--primary-navy);
+    var(--sondir-navy);
 
   background-color:
     #f8fafc;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  text-align: left;
+  text-align:
+    left;
 
 }
 
@@ -1105,9 +1305,10 @@
 .spec-table td {
 
   color:
-    var(--text-dark);
+    var(--sondir-text-dark);
 
-  font-weight: 400;
+  font-weight:
+    400;
 
   background-color:
     #ffffff;
@@ -1118,7 +1319,8 @@
 .spec-table tr:last-child th,
 .spec-table tr:last-child td {
 
-  border-bottom: none;
+  border-bottom:
+    none;
 
 }
 
@@ -1140,17 +1342,18 @@
 
 
 /* ==========================================================================
-   15. EQUIPMENT SHOWCASE
+   16. EQUIPMENT SHOWCASE
    ========================================================================== */
 
 /*
    Foto alat Sondir.
 
-   Foto dibuat seperti technical showcase:
-   - tidak terlalu besar
-   - tidak seperti gallery
-   - tetap memiliki caption
-   - visualnya menjadi pendukung spesifikasi
+   Tujuan visual:
+   - bukan gallery
+   - bukan katalog produk
+   - menjadi dokumentasi teknis
+   - ukuran cukup besar untuk dikenali
+   - tetap sederhana dan premium
 */
 
 .equipment-showcase {
@@ -1159,17 +1362,23 @@
 
   display: flex;
 
-  flex-direction: column;
+  flex-direction:
+    column;
 
-  justify-content: center;
+  justify-content:
+    center;
 
-  min-width: 0;
+  min-width:
+    0;
 
-  margin: 0;
+  margin:
+    0;
 
-  padding: 18px;
+  padding:
+    18px;
 
   background:
+
     linear-gradient(
       145deg,
       #ffffff 0%,
@@ -1177,7 +1386,7 @@
     );
 
   border:
-    1px solid var(--border-color);
+    1px solid var(--sondir-border);
 
   border-radius:
     var(--sondir-radius);
@@ -1185,14 +1394,11 @@
   box-shadow:
     0 10px 28px rgba(3, 57, 132, 0.055);
 
-  overflow: hidden;
+  overflow:
+    hidden;
 
 }
 
-
-/*
-   Garis orange tipis di bagian atas.
-*/
 
 .equipment-showcase::before {
 
@@ -1200,38 +1406,40 @@
 
   position: absolute;
 
-  top: 0;
-  left: 0;
+  top:
+    0;
 
-  width: 100%;
-  height: 3px;
+  left:
+    0;
+
+  width:
+    100%;
+
+  height:
+    3px;
 
   background:
     linear-gradient(
       90deg,
-      var(--accent-orange),
+      var(--sondir-orange),
       rgba(248, 131, 0, 0.18)
     );
 
 }
 
 
-/*
-   Wrapper foto.
-
-   Rasio dibuat landscape agar foto alat terlihat
-   seperti dokumentasi teknis profesional.
-*/
-
 .equipment-image {
 
   position: relative;
 
-  width: 100%;
+  width:
+    100%;
 
-  aspect-ratio: 4 / 3;
+  aspect-ratio:
+    4 / 3;
 
-  overflow: hidden;
+  overflow:
+    hidden;
 
   border-radius:
     var(--sondir-radius-small);
@@ -1242,33 +1450,28 @@
 }
 
 
-/*
-   Foto alat.
-
-   object-fit memastikan gambar tidak gepeng.
-*/
-
 .equipment-image img {
 
-  display: block;
+  display:
+    block;
 
-  width: 100%;
+  width:
+    100%;
 
-  height: 100%;
+  height:
+    100%;
 
-  object-fit: cover;
+  object-fit:
+    cover;
 
-  object-position: center;
+  object-position:
+    center;
 
   transition:
     transform 0.5s ease;
 
 }
 
-
-/*
-   Hover foto sangat ringan.
-*/
 
 .equipment-showcase:hover .equipment-image img {
 
@@ -1278,17 +1481,16 @@
 }
 
 
-/*
-   Caption foto.
-*/
-
 .equipment-showcase figcaption {
 
-  display: flex;
+  display:
+    flex;
 
-  flex-direction: column;
+  flex-direction:
+    column;
 
-  gap: 3px;
+  gap:
+    3px;
 
   padding:
     15px 3px 3px 3px;
@@ -1299,13 +1501,16 @@
 .equipment-showcase figcaption strong {
 
   color:
-    var(--primary-navy);
+    var(--sondir-navy);
 
-  font-size: 1.3rem;
+  font-size:
+    1.3rem;
 
-  line-height: 1.8rem;
+  line-height:
+    1.8rem;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
 }
 
@@ -1313,38 +1518,748 @@
 .equipment-showcase figcaption span {
 
   color:
-    var(--text-muted);
+    var(--sondir-text-light);
 
-  font-size: 1.15rem;
+  font-size:
+    1.15rem;
 
-  line-height: 1.8rem;
+  line-height:
+    1.8rem;
 
 }
 
 
 /* ==========================================================================
-   16. WORKFLOW / FIELD PROCEDURE
+   17. INTERACTIVE INTERPRETATION / GEOTECHNICAL CARD
    ========================================================================== */
 
-.workflow-grid {
+/*
+   CARD INTERAKTIF:
 
-  width: 100%;
+   Pengguna tidak perlu klik.
 
-  display: grid;
+   Saat cursor diarahkan ke card:
+       .technical-card-interactive:hover
+       -> panel muncul
+
+   Saat cursor menjauh:
+       -> panel menghilang secara smooth
+
+   Panel menggunakan position:absolute agar:
+       - card utama tidak terdorong saat hover
+       - lebar tetap
+       - konten boleh memanjang ke bawah
+       - halaman tetap natural
+
+   Catatan penting:
+   .technical-section harus overflow: visible
+   agar panel tidak terpotong.
+*/
+
+.technical-card-interactive {
+
+  position:
+    relative;
+
+  cursor:
+    default;
+
+}
+
+
+/*
+   Konten utama card interaktif.
+*/
+
+.technical-card-main {
+
+  position:
+    relative;
+
+  z-index:
+    2;
+
+}
+
+
+/*
+   Indikator kecil untuk memberi tahu user bahwa card dapat diarahkan.
+*/
+
+.hover-indicator {
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  gap:
+    7px;
+
+  margin-top:
+    18px;
+
+  color:
+    var(--sondir-orange);
+
+  font-size:
+    1.05rem;
+
+  line-height:
+    1.6rem;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    0.02rem;
+
+  opacity:
+    0.85;
+
+}
+
+
+.hover-indicator::after {
+
+  content:
+    '→';
+
+  font-size:
+    1.25rem;
+
+  transition:
+    transform 0.3s ease;
+
+}
+
+
+.technical-card-interactive:hover .hover-indicator::after {
+
+  transform:
+    translateX(4px);
+
+}
+
+
+/* ==========================================================================
+   18. TECHNICAL HOVER PANEL
+   ========================================================================== */
+
+/*
+   Panel penjelasan muncul di bawah card.
+
+   Ukuran:
+   - lebar mengikuti card
+   - tidak berubah menjadi full-screen
+   - tinggi mengikuti isi
+   - dapat memanjang ke bawah
+
+   Animasi:
+   - opacity
+   - transform
+   - visibility
+
+   visibility penting agar panel tidak bisa di-hover ketika tersembunyi.
+*/
+
+.technical-hover-panel {
+
+  position:
+    absolute;
+
+  top:
+    calc(100% + 12px);
+
+  left:
+    0;
+
+  width:
+    100%;
+
+  min-width:
+    0;
+
+  height:
+    auto;
+
+  padding:
+    20px;
+
+  background:
+    rgba(255, 255, 255, 0.98);
+
+  border:
+    1px solid rgba(3, 57, 132, 0.14);
+
+  border-top:
+    3px solid var(--sondir-orange);
+
+  border-radius:
+    var(--sondir-radius);
+
+  box-shadow:
+    0 22px 45px rgba(3, 57, 132, 0.16);
+
+  opacity:
+    0;
+
+  visibility:
+    hidden;
+
+  pointer-events:
+    none;
+
+  transform:
+    translateY(-8px);
+
+  transform-origin:
+    top center;
+
+  z-index:
+    100;
+
+  transition:
+    opacity 0.32s ease,
+    transform 0.32s ease,
+    visibility 0.32s ease;
+
+}
+
+
+/*
+   Saat card di-hover, panel muncul.
+*/
+
+.technical-card-interactive:hover .technical-hover-panel {
+
+  opacity:
+    1;
+
+  visibility:
+    visible;
+
+  pointer-events:
+    auto;
+
+  transform:
+    translateY(0);
+
+}
+
+
+/*
+   Header panel.
+*/
+
+.hover-panel-header {
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    4px;
+
+  margin-bottom:
+    14px;
+
+  padding-bottom:
+    12px;
+
+  border-bottom:
+    1px solid var(--sondir-border);
+
+}
+
+
+.hover-panel-header span {
+
+  color:
+    var(--sondir-orange);
+
+  font-size:
+    0.95rem;
+
+  line-height:
+    1.5rem;
+
+  font-weight:
+    700;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    0.11rem;
+
+}
+
+
+.hover-panel-header strong {
+
+  color:
+    var(--sondir-navy);
+
+  font-size:
+    1.35rem;
+
+  line-height:
+    1.9rem;
+
+  font-weight:
+    700;
+
+}
+
+
+/* ==========================================================================
+   19. HOVER PANEL IMAGE
+   ========================================================================== */
+
+/*
+   Gambar dibuat relatif kecil agar panel tetap elegan.
+
+   Untuk grafik SBT:
+   ukuran 100% dari area panel, tetapi dibatasi tinggi.
+*/
+
+.hover-panel-image {
+
+  width:
+    100%;
+
+  display:
+    flex;
+
+  justify-content:
+    center;
+
+  align-items:
+    center;
+
+  padding:
+    8px 0 15px 0;
+
+  background:
+    #ffffff;
+
+}
+
+
+.hover-panel-image img {
+
+  display:
+    block;
+
+  width:
+    100%;
+
+  max-width:
+    460px;
+
+  height:
+    auto;
+
+  max-height:
+    310px;
+
+  object-fit:
+    contain;
+
+  border:
+    1px solid var(--sondir-border-light);
+
+  border-radius:
+    var(--sondir-radius-small);
+
+  background:
+    #ffffff;
+
+}
+
+
+/*
+   Pada grafik yang memang membutuhkan lebar,
+   tetap diberikan batas agar tidak terlalu besar.
+*/
+
+.technical-card-interactive:nth-child(2) .hover-panel-image img {
+
+  max-width:
+    500px;
+
+  max-height:
+    280px;
+
+}
+
+
+/* ==========================================================================
+   20. HOVER PANEL CONTENT
+   ========================================================================== */
+
+.hover-panel-content {
+
+  width:
+    100%;
+
+}
+
+
+.hover-panel-content > p {
+
+  color:
+    var(--sondir-text-muted);
+
+  font-size:
+    1.15rem;
+
+  line-height:
+    1.9rem;
+
+  margin:
+    0 0 13px 0;
+
+}
+
+
+.hover-panel-content strong {
+
+  color:
+    var(--sondir-navy);
+
+  font-weight:
+    700;
+
+}
+
+
+/*
+   Catatan di bagian bawah panel.
+*/
+
+.hover-panel-note {
+
+  margin-top:
+    16px !important;
+
+  padding:
+    13px 15px;
+
+  color:
+    #526174 !important;
+
+  font-size:
+    1.05rem !important;
+
+  line-height:
+    1.75rem !important;
+
+  background:
+    var(--sondir-navy-faint);
+
+  border-left:
+    2px solid var(--sondir-navy);
+
+  border-radius:
+    0 var(--sondir-radius-small) var(--sondir-radius-small) 0;
+
+}
+
+
+/* ==========================================================================
+   21. SBT ROBERTSON LIST
+   ========================================================================== */
+
+/*
+   Daftar zona SBT ditempatkan DI DALAM hover panel.
+
+   Tujuannya:
+   - tidak membutuhkan tabel besar
+   - mudah dibaca
+   - tetap terlihat seperti technical information
+   - nomor zona menjadi visual anchor
+*/
+
+.sbt-list {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr;
+
+  gap:
+    0;
+
+  margin:
+    12px 0 0 0;
+
+  border-top:
+    1px solid var(--sondir-border);
+
+}
+
+
+.sbt-item {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    34px minmax(0, 1fr);
+
+  gap:
+    11px;
+
+  padding:
+    10px 0;
+
+  border-bottom:
+    1px solid var(--sondir-border-light);
+
+}
+
+
+.sbt-item:last-child {
+
+  border-bottom:
+    none;
+
+}
+
+
+/*
+   Nomor zona.
+*/
+
+.sbt-zone {
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  width:
+    28px;
+
+  height:
+    28px;
+
+  margin-top:
+    1px;
+
+  color:
+    #ffffff;
+
+  background:
+    var(--sondir-navy);
+
+  border-radius:
+    50%;
+
+  font-size:
+    0.95rem;
+
+  line-height:
+    1;
+
+  font-weight:
+    700;
+
+}
+
+
+/*
+   Isi zona.
+*/
+
+.sbt-description {
+
+  min-width:
+    0;
+
+}
+
+
+.sbt-description strong {
+
+  display:
+    block;
+
+  color:
+    var(--sondir-text-dark);
+
+  font-size:
+    1.05rem;
+
+  line-height:
+    1.55rem;
+
+  font-weight:
+    700;
+
+}
+
+
+.sbt-description span {
+
+  display:
+    block;
+
+  margin-top:
+    2px;
+
+  color:
+    var(--sondir-text-light);
+
+  font-size:
+    0.95rem;
+
+  line-height:
+    1.5rem;
+
+}
+
+
+/*
+   IC diberi aksen orange agar mudah dicari.
+*/
+
+.sbt-description .sbt-ic {
+
+  display:
+    inline-block;
+
+  margin-top:
+    3px;
+
+  color:
+    var(--sondir-orange);
+
+  font-size:
+    0.9rem;
+
+  line-height:
+    1.4rem;
+
+  font-weight:
+    700;
+
+}
+
+
+/* ==========================================================================
+   22. GEOTECHNICAL ANALYSIS PARAMETER LIST
+   ========================================================================== */
+
+.analysis-parameter-list {
+
+  display:
+    grid;
 
   grid-template-columns:
     repeat(3, minmax(0, 1fr));
 
-  gap: 18px;
+  gap:
+    8px;
+
+  margin:
+    12px 0 0 0;
+
+}
+
+
+.analysis-parameter {
+
+  padding:
+    11px 10px;
+
+  background:
+    var(--sondir-navy-faint);
+
+  border:
+    1px solid rgba(3, 57, 132, 0.08);
+
+  border-radius:
+    var(--sondir-radius-small);
+
+}
+
+
+.analysis-parameter strong {
+
+  display:
+    block;
+
+  color:
+    var(--sondir-orange);
+
+  font-size:
+    1rem;
+
+  line-height:
+    1.4rem;
+
+}
+
+
+.analysis-parameter span {
+
+  display:
+    block;
+
+  margin-top:
+    2px;
+
+  color:
+    var(--sondir-text-muted);
+
+  font-size:
+    0.9rem;
+
+  line-height:
+    1.4rem;
+
+}
+
+
+/* ==========================================================================
+   23. WORKFLOW / FIELD PROCEDURE
+   ========================================================================== */
+
+.workflow-grid {
+
+  width:
+    100%;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap:
+    18px;
 
 }
 
 
 .workflow-item {
 
-  position: relative;
+  position:
+    relative;
 
-  min-height: 190px;
+  min-height:
+    190px;
 
   padding:
     26px 26px 24px 26px;
@@ -1353,7 +2268,7 @@
     #ffffff;
 
   border:
-    1px solid var(--border-color);
+    1px solid var(--sondir-border);
 
   border-radius:
     var(--sondir-radius);
@@ -1361,7 +2276,8 @@
   box-shadow:
     0 8px 24px rgba(3, 57, 132, 0.045);
 
-  overflow: hidden;
+  overflow:
+    hidden;
 
   transition:
     transform 0.3s ease,
@@ -1371,26 +2287,30 @@
 }
 
 
-/*
-   Garis orange bagian atas.
-*/
-
 .workflow-item::before {
 
-  content: '';
+  content:
+    '';
 
-  position: absolute;
+  position:
+    absolute;
 
-  left: 0;
-  top: 0;
+  left:
+    0;
 
-  width: 100%;
-  height: 3px;
+  top:
+    0;
+
+  width:
+    100%;
+
+  height:
+    3px;
 
   background:
     linear-gradient(
       90deg,
-      var(--accent-orange),
+      var(--sondir-orange),
       rgba(248, 131, 0, 0.15)
     );
 
@@ -1413,18 +2333,23 @@
 
 .workflow-number {
 
-  display: block;
+  display:
+    block;
 
   color:
-    var(--accent-orange);
+    var(--sondir-orange);
 
-  font-size: 1.1rem;
+  font-size:
+    1.1rem;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  letter-spacing: 0.12rem;
+  letter-spacing:
+    0.12rem;
 
-  margin-bottom: 18px;
+  margin-bottom:
+    18px;
 
 }
 
@@ -1432,15 +2357,19 @@
 .workflow-item h3 {
 
   color:
-    var(--primary-navy);
+    var(--sondir-navy);
 
-  font-size: 1.5rem;
+  font-size:
+    1.5rem;
 
-  line-height: 2.1rem;
+  line-height:
+    2.1rem;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  margin-bottom: 8px;
+  margin-bottom:
+    8px;
 
 }
 
@@ -1448,67 +2377,83 @@
 .workflow-item p {
 
   color:
-    var(--text-muted);
+    var(--sondir-text-muted);
 
-  font-size: 1.3rem;
+  font-size:
+    1.3rem;
 
-  line-height: 2.15rem;
+  line-height:
+    2.15rem;
 
-  margin-top: 0;
+  margin-top:
+    0;
 
 }
 
 
 /* ==========================================================================
-   17. RESULT / DATA LIST
+   24. RESULT / DATA LIST
    ========================================================================== */
 
 .result-list {
 
-  width: 100%;
+  width:
+    100%;
 
-  display: grid;
+  display:
+    grid;
 
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
-  column-gap: 50px;
+  column-gap:
+    50px;
 
   border-top:
-    1px solid var(--border-color);
+    1px solid var(--sondir-border);
 
 }
 
 
 .result-item {
 
-  display: flex;
+  display:
+    flex;
 
-  align-items: center;
+  align-items:
+    center;
 
-  gap: 15px;
+  gap:
+    15px;
 
-  min-height: 70px;
+  min-height:
+    70px;
 
   border-bottom:
-    1px solid var(--border-color);
+    1px solid var(--sondir-border);
 
 }
 
 
 .result-icon {
 
-  position: relative;
+  position:
+    relative;
 
-  width: 8px;
-  height: 8px;
+  width:
+    8px;
 
-  flex-shrink: 0;
+  height:
+    8px;
 
-  border-radius: 50%;
+  flex-shrink:
+    0;
+
+  border-radius:
+    50%;
 
   background-color:
-    var(--accent-orange);
+    var(--sondir-orange);
 
   box-shadow:
     0 0 0 5px rgba(248, 131, 0, 0.08);
@@ -1519,19 +2464,22 @@
 .result-item p {
 
   color:
-    var(--text-dark);
+    var(--sondir-text-dark);
 
-  font-size: 1.3rem;
+  font-size:
+    1.3rem;
 
-  line-height: 2rem;
+  line-height:
+    2rem;
 
-  margin-top: 0;
+  margin-top:
+    0;
 
 }
 
 
 /* ==========================================================================
-   18. REPORT PREVIEW
+   25. REPORT PREVIEW
    ========================================================================== */
 
 .report-section {
@@ -1557,22 +2505,27 @@
 
 .report-preview {
 
-  width: 100%;
+  width:
+    100%;
 
-  display: grid;
+  display:
+    grid;
 
   grid-template-columns:
     minmax(0, 1.35fr)
     minmax(300px, 0.85fr);
 
-  gap: 0;
+  gap:
+    0;
 
-  overflow: hidden;
+  overflow:
+    hidden;
 
   border:
-    1px solid var(--border-color);
+    1px solid var(--sondir-border);
 
-  border-radius: 12px;
+  border-radius:
+    var(--sondir-radius-large);
 
   background-color:
     #ffffff;
@@ -1593,108 +2546,138 @@
 
 .report-label {
 
-  display: inline-block;
+  display:
+    inline-block;
 
   color:
-    var(--accent-orange);
+    var(--sondir-orange);
 
-  font-size: 1rem;
+  font-size:
+    1rem;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 
-  letter-spacing: 0.14rem;
+  letter-spacing:
+    0.14rem;
 
-  margin-bottom: 13px;
+  margin-bottom:
+    13px;
 
 }
 
 
 .report-preview-content h3 {
 
-  max-width: 620px;
+  max-width:
+    620px;
 
   color:
-    var(--primary-navy);
+    var(--sondir-navy);
 
-  font-size: 2.45rem;
+  font-size:
+    2.45rem;
 
-  line-height: 1.35;
+  line-height:
+    1.35;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  margin-bottom: 15px;
+  margin-bottom:
+    15px;
 
 }
 
 
 .report-preview-content p {
 
-  max-width: 650px;
+  max-width:
+    650px;
 
   color:
-    var(--text-muted);
+    var(--sondir-text-muted);
 
-  font-size: 1.3rem;
+  font-size:
+    1.3rem;
 
-  line-height: 2.2rem;
+  line-height:
+    2.2rem;
 
-  margin-top: 0;
+  margin-top:
+    0;
 
-  margin-bottom: 15px;
+  margin-bottom:
+    15px;
 
 }
 
 
 .report-contents {
 
-  list-style: none;
+  list-style:
+    none;
 
   margin:
     18px 0 20px 0;
 
-  padding: 0;
+  padding:
+    0;
 
 }
 
 
 .report-contents li {
 
-  position: relative;
+  position:
+    relative;
 
   padding:
     9px 0 9px 20px;
 
   color:
-    var(--text-dark);
+    var(--sondir-text-dark);
 
-  font-size: 1.3rem;
+  font-size:
+    1.3rem;
 
-  line-height: 1.9rem;
+  line-height:
+    1.9rem;
 
   border-bottom:
-    1px solid #eef2f6;
+    1px solid var(--sondir-border-light);
 
 }
 
 
 .report-contents li::before {
 
-  content: '';
+  content:
+    '';
 
-  position: absolute;
+  position:
+    absolute;
 
-  left: 0;
-  top: 17px;
+  left:
+    0;
 
-  width: 6px;
-  height: 6px;
+  top:
+    17px;
 
-  border-radius: 50%;
+  width:
+    6px;
+
+  height:
+    6px;
+
+  border-radius:
+    50%;
 
   background-color:
-    var(--accent-orange);
+    var(--sondir-orange);
 
 }
 
@@ -1704,26 +2687,34 @@
   color:
     #7a8798;
 
-  font-size: 1.15rem;
+  font-size:
+    1.15rem;
 
-  line-height: 1.9rem;
+  line-height:
+    1.9rem;
 
-  margin-top: 18px;
+  margin-top:
+    18px;
 
-  margin-bottom: 22px;
+  margin-bottom:
+    22px;
 
 }
 
 
 .report-preview-content .btn {
 
-  display: inline-flex;
+  display:
+    inline-flex;
 
-  align-items: center;
+  align-items:
+    center;
 
-  justify-content: center;
+  justify-content:
+    center;
 
-  min-height: 46px;
+  min-height:
+    46px;
 
   padding:
     12px 22px;
@@ -1732,18 +2723,22 @@
 
 
 /* ==========================================================================
-   19. REPORT STRUCTURE PANEL
+   26. REPORT STRUCTURE PANEL
    ========================================================================== */
 
 .report-preview-structure {
 
-  position: relative;
+  position:
+    relative;
 
-  display: flex;
+  display:
+    flex;
 
-  flex-direction: column;
+  flex-direction:
+    column;
 
-  justify-content: center;
+  justify-content:
+    center;
 
   padding:
     35px 32px;
@@ -1768,44 +2763,59 @@
 
 .report-preview-structure::before {
 
-  content: '';
+  content:
+    '';
 
-  position: absolute;
+  position:
+    absolute;
 
-  top: -90px;
-  right: -90px;
+  top:
+    -90px;
 
-  width: 230px;
-  height: 230px;
+  right:
+    -90px;
+
+  width:
+    230px;
+
+  height:
+    230px;
 
   border:
     1px solid rgba(255, 255, 255, 0.10);
 
-  border-radius: 50%;
+  border-radius:
+    50%;
 
   box-shadow:
     0 0 0 30px rgba(255, 255, 255, 0.015),
     0 0 0 60px rgba(255, 255, 255, 0.01);
 
-  pointer-events: none;
+  pointer-events:
+    none;
 
 }
 
 
 .report-document-line {
 
-  position: relative;
+  position:
+    relative;
 
-  display: grid;
+  display:
+    grid;
 
   grid-template-columns:
     38px minmax(0, 1fr);
 
-  align-items: center;
+  align-items:
+    center;
 
-  gap: 12px;
+  gap:
+    12px;
 
-  min-height: 55px;
+  min-height:
+    55px;
 
   border-bottom:
     1px solid rgba(255, 255, 255, 0.12);
@@ -1816,13 +2826,16 @@
 .report-document-line span {
 
   color:
-    var(--accent-orange);
+    var(--sondir-orange);
 
-  font-size: 1rem;
+  font-size:
+    1rem;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  letter-spacing: 0.08rem;
+  letter-spacing:
+    0.08rem;
 
 }
 
@@ -1832,40 +2845,49 @@
   color:
     rgba(255, 255, 255, 0.90);
 
-  font-size: 1.25rem;
+  font-size:
+    1.25rem;
 
-  line-height: 1.8rem;
+  line-height:
+    1.8rem;
 
-  font-weight: 600;
+  font-weight:
+    600;
 
 }
 
 
 .report-document-line:last-child {
 
-  border-bottom: none;
+  border-bottom:
+    none;
 
 }
 
 
 /* ==========================================================================
-   20. PROJECT EXPERIENCE / PORTFOLIO
+   27. PROJECT EXPERIENCE / PORTFOLIO
    ========================================================================== */
 
 .experience-placeholder {
 
-  position: relative;
+  position:
+    relative;
 
-  width: 100%;
+  width:
+    100%;
 
-  max-width: 900px;
+  max-width:
+    900px;
 
-  margin: 0 auto;
+  margin:
+    0 auto;
 
   padding:
     48px 42px;
 
-  text-align: center;
+  text-align:
+    center;
 
   background:
 
@@ -1876,34 +2898,44 @@
     );
 
   border:
-    1px solid var(--border-color);
+    1px solid var(--sondir-border);
 
-  border-radius: 12px;
+  border-radius:
+    var(--sondir-radius-large);
 
   box-shadow:
     0 12px 32px rgba(3, 57, 132, 0.055);
 
-  overflow: hidden;
+  overflow:
+    hidden;
 
 }
 
 
 .experience-placeholder::before {
 
-  content: '';
+  content:
+    '';
 
-  position: absolute;
+  position:
+    absolute;
 
-  top: 0;
-  left: 0;
+  top:
+    0;
 
-  width: 100%;
-  height: 3px;
+  left:
+    0;
+
+  width:
+    100%;
+
+  height:
+    3px;
 
   background:
     linear-gradient(
       90deg,
-      var(--accent-orange),
+      var(--sondir-orange),
       rgba(248, 131, 0, 0.15)
     );
 
@@ -1912,20 +2944,26 @@
 
 .experience-status {
 
-  display: inline-block;
+  display:
+    inline-block;
 
   color:
-    var(--accent-orange);
+    var(--sondir-orange);
 
-  font-size: 1rem;
+  font-size:
+    1rem;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  text-transform: uppercase;
+  text-transform:
+    uppercase;
 
-  letter-spacing: 0.15rem;
+  letter-spacing:
+    0.15rem;
 
-  margin-bottom: 12px;
+  margin-bottom:
+    12px;
 
 }
 
@@ -1933,67 +2971,80 @@
 .experience-placeholder h3 {
 
   color:
-    var(--primary-navy);
+    var(--sondir-navy);
 
-  font-size: 2.3rem;
+  font-size:
+    2.3rem;
 
-  line-height: 1.3;
+  line-height:
+    1.3;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  margin-bottom: 12px;
+  margin-bottom:
+    12px;
 
 }
 
 
 .experience-placeholder p {
 
-  max-width: 680px;
+  max-width:
+    680px;
 
-  margin: 0 auto;
+  margin:
+    0 auto;
 
   color:
-    var(--text-muted);
+    var(--sondir-text-muted);
 
-  font-size: 1.3rem;
+  font-size:
+    1.3rem;
 
-  line-height: 2.2rem;
+  line-height:
+    2.2rem;
 
 }
 
 
 /* ==========================================================================
-   21. REFERENCES
+   28. REFERENCES
    ========================================================================== */
 
 .reference-list {
 
-  width: 100%;
+  width:
+    100%;
 
   border-top:
-    1px solid var(--border-color);
+    1px solid var(--sondir-border);
 
 }
 
 
 .reference-item {
 
-  display: grid;
+  display:
+    grid;
 
   grid-template-columns:
     190px minmax(0, 1fr);
 
-  gap: 25px;
+  gap:
+    25px;
 
-  align-items: center;
+  align-items:
+    center;
 
-  min-height: 70px;
+  min-height:
+    70px;
 
   padding:
     14px 0;
 
   border-bottom:
-    1px solid var(--border-color);
+    1px solid var(--sondir-border);
 
 }
 
@@ -2001,13 +3052,16 @@
 .reference-item strong {
 
   color:
-    var(--primary-navy);
+    var(--sondir-navy);
 
-  font-size: 1.25rem;
+  font-size:
+    1.25rem;
 
-  line-height: 1.8rem;
+  line-height:
+    1.8rem;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
 }
 
@@ -2015,28 +3069,34 @@
 .reference-item span {
 
   color:
-    var(--text-muted);
+    var(--sondir-text-muted);
 
-  font-size: 1.25rem;
+  font-size:
+    1.25rem;
 
-  line-height: 1.9rem;
+  line-height:
+    1.9rem;
 
 }
 
 
 /* ==========================================================================
-   22. CTA SECTION
+   29. CTA SECTION
    ========================================================================== */
 
 .service-cta {
 
-  position: relative;
+  position:
+    relative;
 
-  width: 100%;
+  width:
+    100%;
 
-  padding-top: 80px;
+  padding-top:
+    80px;
 
-  padding-bottom: 80px;
+  padding-bottom:
+    80px;
 
   background:
 
@@ -2054,25 +3114,31 @@
       #f4f7fb 100%
     );
 
-  overflow: hidden;
+  overflow:
+    hidden;
 
 }
 
 
 .service-cta-box {
 
-  position: relative;
+  position:
+    relative;
 
-  width: 100%;
+  width:
+    100%;
 
   padding:
     52px 55px;
 
-  text-align: center;
+  text-align:
+    center;
 
-  border-radius: 12px;
+  border-radius:
+    var(--sondir-radius-large);
 
-  overflow: hidden;
+  overflow:
+    hidden;
 
   background:
 
@@ -2098,20 +3164,29 @@
 
 .service-cta-box::before {
 
-  content: '';
+  content:
+    '';
 
-  position: absolute;
+  position:
+    absolute;
 
-  width: 300px;
-  height: 300px;
+  width:
+    300px;
 
-  right: -150px;
-  bottom: -150px;
+  height:
+    300px;
+
+  right:
+    -150px;
+
+  bottom:
+    -150px;
 
   border:
     1px solid rgba(255, 255, 255, 0.08);
 
-  border-radius: 50%;
+  border-radius:
+    50%;
 
   box-shadow:
     0 0 0 35px rgba(255, 255, 255, 0.012),
@@ -2130,7 +3205,8 @@
 
 .service-cta-box h2 {
 
-  position: relative;
+  position:
+    relative;
 
   color:
     #ffffff;
@@ -2138,52 +3214,67 @@
   font-size:
     clamp(2.7rem, 4vw, 4rem);
 
-  line-height: 1.2;
+  line-height:
+    1.2;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  margin-bottom: 13px;
+  margin-bottom:
+    13px;
 
 }
 
 
 .service-cta-box > p {
 
-  position: relative;
+  position:
+    relative;
 
-  max-width: 720px;
+  max-width:
+    720px;
 
-  margin: 0 auto;
+  margin:
+    0 auto;
 
   color:
     rgba(255, 255, 255, 0.76);
 
-  font-size: 1.4rem;
+  font-size:
+    1.4rem;
 
-  line-height: 2.4rem;
+  line-height:
+    2.4rem;
 
 }
 
 
 /* ==========================================================================
-   23. CTA BUTTON GROUP
+   30. CTA BUTTON GROUP
    ========================================================================== */
 
 .service-cta-actions {
 
-  position: relative;
+  position:
+    relative;
 
-  display: flex;
+  display:
+    flex;
 
-  justify-content: center;
+  justify-content:
+    center;
 
-  align-items: center;
+  align-items:
+    center;
 
-  flex-wrap: wrap;
+  flex-wrap:
+    wrap;
 
-  gap: 12px;
+  gap:
+    12px;
 
-  margin-top: 28px;
+  margin-top:
+    28px;
 
 }
 
@@ -2196,12 +3287,12 @@
   background:
     linear-gradient(
       180deg,
-      var(--accent-orange) 0%,
-      var(--orange-hover) 100%
+      var(--sondir-orange) 0%,
+      var(--sondir-orange-hover) 100%
     );
 
   border-color:
-    var(--accent-orange);
+    var(--sondir-orange);
 
   box-shadow:
     0 7px 20px rgba(248, 131, 0, 0.28);
@@ -2217,8 +3308,8 @@
   background:
     linear-gradient(
       180deg,
-      #ff941d 0%,
-      var(--accent-orange) 100%
+      var(--sondir-orange-hover) 0%,
+      var(--sondir-orange) 100%
     );
 
   transform:
@@ -2247,7 +3338,7 @@
 .service-cta .btn-secondary:hover {
 
   color:
-    var(--primary-navy);
+    var(--sondir-navy);
 
   background-color:
     #ffffff;
@@ -2262,32 +3353,36 @@
 
 
 /* ==========================================================================
-   24. FOOTER
+   31. FOOTER
    ========================================================================== */
 
 body > footer.footer {
 
-  width: 100%;
+  width:
+    100%;
 
   background-color:
-    var(--navy-dark);
+    var(--sondir-navy-dark);
 
   border-top:
-    3px solid var(--accent-orange);
+    3px solid var(--sondir-orange);
 
 }
 
 
 body > footer.footer .container {
 
-  min-height: auto;
+  min-height:
+    auto;
 
-  width: 100%;
+  width:
+    100%;
 
   max-width:
     var(--sondir-max-width);
 
-  margin: 0 auto;
+  margin:
+    0 auto;
 
   padding:
     38px 24px 25px 24px;
@@ -2297,15 +3392,20 @@ body > footer.footer .container {
 
 .footer-content {
 
-  width: 100%;
+  width:
+    100%;
 
-  display: flex;
+  display:
+    flex;
 
-  justify-content: space-between;
+  justify-content:
+    space-between;
 
-  align-items: center;
+  align-items:
+    center;
 
-  gap: 30px;
+  gap:
+    30px;
 
 }
 
@@ -2315,11 +3415,14 @@ body > footer.footer .container {
   color:
     #ffffff;
 
-  font-size: 1.45rem;
+  font-size:
+    1.45rem;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  letter-spacing: 0.04rem;
+  letter-spacing:
+    0.04rem;
 
 }
 
@@ -2329,22 +3432,26 @@ body > footer.footer .container {
   color:
     #94a3b8;
 
-  font-size: 1.15rem;
+  font-size:
+    1.15rem;
 
-  line-height: 1.8rem;
+  line-height:
+    1.8rem;
 
-  margin-top: 5px;
+  margin-top:
+    5px;
 
 }
 
 
 /* ==========================================================================
-   25. SCROLL OFFSET
+   32. SCROLL OFFSET
    ========================================================================== */
 
 /*
    Header homepage bersifat fixed.
-   Anchor section diberi offset agar judul tidak tertutup header.
+
+   Anchor section diberi offset agar heading tidak tertutup header.
 */
 
 #overview,
@@ -2364,8 +3471,14 @@ body > footer.footer .container {
 
 
 /* ==========================================================================
-   26. HOVER / INTERACTION ACCESSIBILITY
+   33. HOVER / INTERACTION ACCESSIBILITY
    ========================================================================== */
+
+/*
+   Perangkat touchscreen tidak mempunyai hover seperti desktop.
+
+   Karena itu hover panel tidak dipaksakan pada perangkat tanpa hover.
+*/
 
 @media (hover: none) {
 
@@ -2373,7 +3486,21 @@ body > footer.footer .container {
   .workflow-item:hover,
   .equipment-showcase:hover .equipment-image img {
 
-    transform: none;
+    transform:
+      none;
+
+  }
+
+
+  /*
+     Pada touchscreen, panel hover tidak ditampilkan.
+     Informasi utama card tetap dapat dibaca.
+  */
+
+  .technical-card-interactive .technical-hover-panel {
+
+    display:
+      none;
 
   }
 
@@ -2381,7 +3508,7 @@ body > footer.footer .container {
 
 
 /* ==========================================================================
-   27. TABLET
+   34. TABLET
    ========================================================================== */
 
 @media only screen and (max-width: 991px) {
@@ -2393,11 +3520,14 @@ body > footer.footer .container {
 
   .service-hero .container {
 
-    min-height: 560px;
+    min-height:
+      560px;
 
-    padding-top: 105px;
+    padding-top:
+      105px;
 
-    padding-bottom: 65px;
+    padding-bottom:
+      65px;
 
   }
 
@@ -2416,7 +3546,8 @@ body > footer.footer .container {
 
   .technical-summary-item:nth-child(2)::after {
 
-    display: none;
+    display:
+      none;
 
   }
 
@@ -2440,7 +3571,8 @@ body > footer.footer .container {
       minmax(0, 1fr)
       minmax(260px, 0.75fr);
 
-    gap: 18px;
+    gap:
+      18px;
 
   }
 
@@ -2453,6 +3585,53 @@ body > footer.footer .container {
 
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
+
+  }
+
+
+  /* ------------------------------------------------------------------------
+     HOVER PANEL
+     ------------------------------------------------------------------------ */
+
+  .technical-hover-panel {
+
+    padding:
+      18px;
+
+  }
+
+
+  .hover-panel-image img {
+
+    max-width:
+      420px;
+
+    max-height:
+      270px;
+
+  }
+
+
+  .sbt-description strong {
+
+    font-size:
+      1rem;
+
+  }
+
+
+  .sbt-description span {
+
+    font-size:
+      0.9rem;
+
+  }
+
+
+  .analysis-parameter-list {
+
+    grid-template-columns:
+      1fr;
 
   }
 
@@ -2501,7 +3680,7 @@ body > footer.footer .container {
 
 
 /* ==========================================================================
-   28. MOBILE
+   35. MOBILE
    ========================================================================== */
 
 @media only screen and (max-width: 767px) {
@@ -2515,9 +3694,11 @@ body > footer.footer .container {
   .sondir-page .technical-section .container,
   .sondir-page .service-cta .container {
 
-    padding-left: 20px;
+    padding-left:
+      20px;
 
-    padding-right: 20px;
+    padding-right:
+      20px;
 
   }
 
@@ -2528,51 +3709,64 @@ body > footer.footer .container {
 
   .service-hero .container {
 
-    min-height: auto;
+    min-height:
+      auto;
 
-    padding-top: 105px;
+    padding-top:
+      105px;
 
-    padding-bottom: 50px;
+    padding-bottom:
+      50px;
 
   }
 
 
   .service-hero h1 {
 
-    font-size: 3.5rem;
+    font-size:
+      3.5rem;
 
-    line-height: 1.12;
+    line-height:
+      1.12;
 
-    letter-spacing: -0.05rem;
+    letter-spacing:
+      -0.05rem;
 
-    margin-bottom: 20px;
+    margin-bottom:
+      20px;
 
   }
 
 
   .service-hero-description {
 
-    font-size: 1.4rem;
+    font-size:
+      1.4rem;
 
-    line-height: 2.3rem;
+    line-height:
+      2.3rem;
 
   }
 
 
   .service-hero-actions {
 
-    flex-direction: column;
+    flex-direction:
+      column;
 
-    align-items: stretch;
+    align-items:
+      stretch;
 
-    width: 100%;
+    width:
+      100%;
 
   }
 
 
   .service-hero-actions .btn {
 
-    width: 100%;
+    width:
+      100%;
 
   }
 
@@ -2586,21 +3780,24 @@ body > footer.footer .container {
     grid-template-columns:
       1fr;
 
-    margin-top: 35px;
+    margin-top:
+      35px;
 
   }
 
 
   .technical-summary-item::after {
 
-    display: none !important;
+    display:
+      none !important;
 
   }
 
 
   .technical-summary-item {
 
-    min-height: 78px;
+    min-height:
+      78px;
 
     padding:
       15px 0;
@@ -2613,7 +3810,8 @@ body > footer.footer .container {
 
   .technical-summary-item:last-child {
 
-    border-bottom: none;
+    border-bottom:
+      none;
 
   }
 
@@ -2624,34 +3822,41 @@ body > footer.footer .container {
 
   .technical-section {
 
-    padding-top: 58px;
+    padding-top:
+      58px;
 
-    padding-bottom: 58px;
+    padding-bottom:
+      58px;
 
   }
 
 
   .section-intro {
 
-    margin-bottom: 32px;
+    margin-bottom:
+      32px;
 
   }
 
 
   .section-intro h2 {
 
-    font-size: 2.7rem;
+    font-size:
+      2.7rem;
 
-    line-height: 1.25;
+    line-height:
+      1.25;
 
   }
 
 
   .section-intro p {
 
-    font-size: 1.35rem;
+    font-size:
+      1.35rem;
 
-    line-height: 2.25rem;
+    line-height:
+      2.25rem;
 
   }
 
@@ -2665,7 +3870,8 @@ body > footer.footer .container {
     grid-template-columns:
       1fr;
 
-    gap: 13px;
+    gap:
+      13px;
 
   }
 
@@ -2680,32 +3886,123 @@ body > footer.footer .container {
 
   .technical-card h2 {
 
-    font-size: 2.1rem;
+    font-size:
+      2.1rem;
 
   }
 
 
   .technical-card h3 {
 
-    font-size: 1.45rem;
+    font-size:
+      1.45rem;
 
   }
 
 
   .technical-card p {
 
-    font-size: 1.25rem;
+    font-size:
+      1.25rem;
 
-    line-height: 2.1rem;
+    line-height:
+      2.1rem;
 
   }
 
 
   .technical-card li {
 
-    font-size: 1.25rem;
+    font-size:
+      1.25rem;
 
-    line-height: 2rem;
+    line-height:
+      2rem;
+
+  }
+
+
+  /* ------------------------------------------------------------------------
+     INTERACTIVE PANEL MOBILE
+     ------------------------------------------------------------------------ */
+
+  /*
+     Pada mobile tidak ada hover.
+     Namun jika browser tetap mendukung hover secara emulasi,
+     panel tetap dibuat aman secara visual.
+  */
+
+  .technical-hover-panel {
+
+    position:
+      relative;
+
+    top:
+      auto;
+
+    left:
+      auto;
+
+    width:
+      100%;
+
+    margin-top:
+      16px;
+
+  }
+
+
+  .hover-panel-image img {
+
+    max-width:
+      100%;
+
+    max-height:
+      250px;
+
+  }
+
+
+  .sbt-item {
+
+    grid-template-columns:
+      30px minmax(0, 1fr);
+
+    gap:
+      9px;
+
+  }
+
+
+  .sbt-zone {
+
+    width:
+      26px;
+
+    height:
+      26px;
+
+    font-size:
+      0.85rem;
+
+  }
+
+
+  .sbt-description strong {
+
+    font-size:
+      0.98rem;
+
+  }
+
+
+  .sbt-description span {
+
+    font-size:
+      0.88rem;
+
+    line-height:
+      1.4rem;
 
   }
 
@@ -2719,7 +4016,8 @@ body > footer.footer .container {
     grid-template-columns:
       1fr;
 
-    gap: 0;
+    gap:
+      0;
 
   }
 
@@ -2729,7 +4027,8 @@ body > footer.footer .container {
     grid-template-columns:
       42px minmax(0, 1fr);
 
-    gap: 12px;
+    gap:
+      12px;
 
     padding:
       21px 0;
@@ -2739,16 +4038,19 @@ body > footer.footer .container {
 
   .scope-item h3 {
 
-    font-size: 1.4rem;
+    font-size:
+      1.4rem;
 
   }
 
 
   .scope-item p {
 
-    font-size: 1.25rem;
+    font-size:
+      1.25rem;
 
-    line-height: 2rem;
+    line-height:
+      2rem;
 
   }
 
@@ -2762,7 +4064,8 @@ body > footer.footer .container {
     grid-template-columns:
       1fr;
 
-    gap: 18px;
+    gap:
+      18px;
 
   }
 
@@ -2781,24 +4084,22 @@ body > footer.footer .container {
     padding:
       14px 16px;
 
-    font-size: 1.2rem;
+    font-size:
+      1.2rem;
 
-    line-height: 1.8rem;
+    line-height:
+      1.8rem;
 
   }
 
 
   .spec-table th {
 
-    width: 40%;
+    width:
+      40%;
 
   }
 
-
-  /*
-     Foto alat dibuat sedikit lebih besar secara visual
-     setelah tabel pada mobile.
-  */
 
   .equipment-showcase {
 
@@ -2826,14 +4127,16 @@ body > footer.footer .container {
 
   .equipment-showcase figcaption strong {
 
-    font-size: 1.2rem;
+    font-size:
+      1.2rem;
 
   }
 
 
   .equipment-showcase figcaption span {
 
-    font-size: 1.1rem;
+    font-size:
+      1.1rem;
 
   }
 
@@ -2847,14 +4150,16 @@ body > footer.footer .container {
     grid-template-columns:
       1fr;
 
-    gap: 12px;
+    gap:
+      12px;
 
   }
 
 
   .workflow-item {
 
-    min-height: auto;
+    min-height:
+      auto;
 
     padding:
       24px 22px;
@@ -2864,23 +4169,27 @@ body > footer.footer .container {
 
   .workflow-number {
 
-    margin-bottom: 13px;
+    margin-bottom:
+      13px;
 
   }
 
 
   .workflow-item h3 {
 
-    font-size: 1.4rem;
+    font-size:
+      1.4rem;
 
   }
 
 
   .workflow-item p {
 
-    font-size: 1.25rem;
+    font-size:
+      1.25rem;
 
-    line-height: 2rem;
+    line-height:
+      2rem;
 
   }
 
@@ -2894,23 +4203,27 @@ body > footer.footer .container {
     grid-template-columns:
       1fr;
 
-    column-gap: 0;
+    column-gap:
+      0;
 
   }
 
 
   .result-item {
 
-    min-height: 64px;
+    min-height:
+      64px;
 
   }
 
 
   .result-item p {
 
-    font-size: 1.25rem;
+    font-size:
+      1.25rem;
 
-    line-height: 1.95rem;
+    line-height:
+      1.95rem;
 
   }
 
@@ -2937,18 +4250,22 @@ body > footer.footer .container {
 
   .report-preview-content h3 {
 
-    font-size: 2rem;
+    font-size:
+      2rem;
 
-    line-height: 1.35;
+    line-height:
+      1.35;
 
   }
 
 
   .report-preview-content p {
 
-    font-size: 1.25rem;
+    font-size:
+      1.25rem;
 
-    line-height: 2rem;
+    line-height:
+      2rem;
 
   }
 
@@ -2963,21 +4280,24 @@ body > footer.footer .container {
 
   .report-document-line {
 
-    min-height: 51px;
+    min-height:
+      51px;
 
   }
 
 
   .report-document-line strong {
 
-    font-size: 1.2rem;
+    font-size:
+      1.2rem;
 
   }
 
 
   .report-preview-content .btn {
 
-    width: 100%;
+    width:
+      100%;
 
   }
 
@@ -2996,16 +4316,19 @@ body > footer.footer .container {
 
   .experience-placeholder h3 {
 
-    font-size: 2rem;
+    font-size:
+      2rem;
 
   }
 
 
   .experience-placeholder p {
 
-    font-size: 1.25rem;
+    font-size:
+      1.25rem;
 
-    line-height: 2rem;
+    line-height:
+      2rem;
 
   }
 
@@ -3019,7 +4342,8 @@ body > footer.footer .container {
     grid-template-columns:
       1fr;
 
-    gap: 3px;
+    gap:
+      3px;
 
     padding:
       17px 0;
@@ -3029,16 +4353,19 @@ body > footer.footer .container {
 
   .reference-item strong {
 
-    font-size: 1.2rem;
+    font-size:
+      1.2rem;
 
   }
 
 
   .reference-item span {
 
-    font-size: 1.2rem;
+    font-size:
+      1.2rem;
 
-    line-height: 1.9rem;
+    line-height:
+      1.9rem;
 
   }
 
@@ -3049,9 +4376,11 @@ body > footer.footer .container {
 
   .service-cta {
 
-    padding-top: 58px;
+    padding-top:
+      58px;
 
-    padding-bottom: 58px;
+    padding-bottom:
+      58px;
 
   }
 
@@ -3066,32 +4395,38 @@ body > footer.footer .container {
 
   .service-cta-box h2 {
 
-    font-size: 2.6rem;
+    font-size:
+      2.6rem;
 
   }
 
 
   .service-cta-box > p {
 
-    font-size: 1.3rem;
+    font-size:
+      1.3rem;
 
-    line-height: 2.2rem;
+    line-height:
+      2.2rem;
 
   }
 
 
   .service-cta-actions {
 
-    flex-direction: column;
+    flex-direction:
+      column;
 
-    width: 100%;
+    width:
+      100%;
 
   }
 
 
   .service-cta-actions .btn {
 
-    width: 100%;
+    width:
+      100%;
 
   }
 
@@ -3102,11 +4437,14 @@ body > footer.footer .container {
 
   .footer-content {
 
-    flex-direction: column;
+    flex-direction:
+      column;
 
-    text-align: center;
+    text-align:
+      center;
 
-    gap: 15px;
+    gap:
+      15px;
 
   }
 
@@ -3121,14 +4459,16 @@ body > footer.footer .container {
 
   .footer-content strong {
 
-    font-size: 1.3rem;
+    font-size:
+      1.3rem;
 
   }
 
 
   .footer-content p {
 
-    font-size: 1.1rem;
+    font-size:
+      1.1rem;
 
   }
 
@@ -3136,7 +4476,7 @@ body > footer.footer .container {
 
 
 /* ==========================================================================
-   29. VERY SMALL MOBILE
+   36. VERY SMALL MOBILE
    ========================================================================== */
 
 @media only screen and (max-width: 400px) {
@@ -3144,16 +4484,19 @@ body > footer.footer .container {
 
   .service-hero h1 {
 
-    font-size: 3rem;
+    font-size:
+      3rem;
 
   }
 
 
   .service-eyebrow {
 
-    font-size: 0.95rem;
+    font-size:
+      0.95rem;
 
-    letter-spacing: 0.11rem;
+    letter-spacing:
+      0.11rem;
 
   }
 
@@ -3192,7 +4535,43 @@ body > footer.footer .container {
 
   .service-cta-box h2 {
 
-    font-size: 2.35rem;
+    font-size:
+      2.35rem;
+
+  }
+
+
+  .hover-panel-header strong {
+
+    font-size:
+      1.15rem;
+
+  }
+
+
+  .hover-panel-content > p {
+
+    font-size:
+      1.05rem;
+
+    line-height:
+      1.75rem;
+
+  }
+
+
+  .sbt-description strong {
+
+    font-size:
+      0.92rem;
+
+  }
+
+
+  .sbt-description span {
+
+    font-size:
+      0.82rem;
 
   }
 
@@ -3200,23 +4579,38 @@ body > footer.footer .container {
 
 
 /* ==========================================================================
-   30. REDUCED MOTION
+   37. REDUCED MOTION
    ========================================================================== */
 
 /*
-   Selain reveal, hover transition juga dihentikan ketika user
-   mengaktifkan preferensi reduced motion.
+   Pengguna yang mengaktifkan "Reduce Motion" tidak mendapatkan
+   animasi pergerakan yang tidak diperlukan.
 */
 
 @media (prefers-reduced-motion: reduce) {
 
+  .sondir-page .reveal {
+
+    opacity:
+      1;
+
+    transform:
+      none;
+
+    transition:
+      none;
+
+  }
+
+
   .technical-card,
   .workflow-item,
   .equipment-showcase .equipment-image img,
-  .service-cta .btn,
-  .report-preview-content .btn {
+  .sondir-page .btn,
+  .technical-hover-panel {
 
-    transition: none;
+    transition:
+      none;
 
   }
 
