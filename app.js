@@ -1,37 +1,20 @@
 // ==========================================================================
 // PT BENTONIT REKAYASA SIPIL
 // GLOBAL JAVASCRIPT
+// Digunakan oleh seluruh halaman website
 // ==========================================================================
-// File ini digunakan oleh seluruh halaman website.
-//
-// Fungsi utama:
-// 1. Hamburger menu / mobile navigation
-// 2. Header scroll effect
-// 3. Reveal animation
-// 4. Why Us accordion
-//
-// CATATAN:
-// Logika khusus suatu halaman layanan sebaiknya ditempatkan di file JS
-// khusus apabila nantinya benar-benar diperlukan.
-//
-// Untuk halaman Sondir, Bor, Laboratorium, dan Survei Topografi,
-// interaksi visual sederhana seperti hover panel sebaiknya tetap
-// ditangani oleh CSS agar ringan dan mudah dipelihara.
-// ==========================================================================
-
 
 
 // ==========================================================================
 // 1. HAMBURGER MENU / MOBILE NAVIGATION
-// ==========================================================================
-// Menangani menu navigasi mobile pada seluruh halaman yang menggunakan
-// struktur header standar website.
+// Menangani menu mobile pada seluruh halaman yang menggunakan struktur
+// header standar website.
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
 
     // ----------------------------------------------------------------------
-    // Mengambil elemen navigasi utama
+    // Mencari elemen navigasi utama
     // ----------------------------------------------------------------------
 
     const hamburger = document.querySelector(
@@ -53,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ----------------------------------------------------------------------
-    // Toggle hamburger menu
+    // TOGGLE HAMBURGER MENU
     // ----------------------------------------------------------------------
 
     if (hamburger && mobileMenu) {
@@ -63,13 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // Mengubah status hamburger
             const isActive = hamburger.classList.toggle('active');
 
-            // Membuka / menutup menu mobile
+            // Mengubah status menu mobile
             mobileMenu.classList.toggle('active');
 
 
-            // --------------------------------------------------------------
+            // ----------------------------------------------------------------
             // Accessibility
-            // --------------------------------------------------------------
+            // Memberikan informasi kepada screen reader mengenai kondisi
+            // menu saat ini.
+            // ----------------------------------------------------------------
 
             hamburger.setAttribute(
                 'aria-expanded',
@@ -80,9 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         // ------------------------------------------------------------------
-        // Dukungan keyboard untuk hamburger
-        // ------------------------------------------------------------------
-        // Enter atau Space akan menghasilkan perilaku yang sama dengan klik.
+        // KEYBOARD ACCESSIBILITY
+        // Memungkinkan hamburger digunakan dengan Enter atau Space.
         // ------------------------------------------------------------------
 
         hamburger.addEventListener('keydown', (event) => {
@@ -104,14 +88,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ----------------------------------------------------------------------
-    // Menutup menu mobile setelah link navigasi diklik
+    // MENUTUP MENU SETELAH LINK NAVIGASI DIKLIK
     // ----------------------------------------------------------------------
 
     menuItems.forEach((item) => {
 
         item.addEventListener('click', () => {
 
-            // Menutup hamburger
+            // Tutup hamburger
             if (hamburger) {
 
                 hamburger.classList.remove('active');
@@ -124,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
 
-            // Menutup menu
+            // Tutup menu mobile
             if (mobileMenu) {
 
                 mobileMenu.classList.remove('active');
@@ -138,14 +122,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
 // ==========================================================================
 // 2. HEADER SCROLL EFFECT
-// ==========================================================================
 // Mengubah tampilan header ketika pengguna mulai melakukan scroll.
 //
-// Header hanya diproses jika struktur header tersedia pada halaman.
-// Dengan demikian app.js tetap aman digunakan pada seluruh halaman website.
+// Header hanya diproses jika elemen ".header.container" tersedia.
+// Dengan demikian, halaman yang tidak menggunakan header tersebut tetap aman.
 // ==========================================================================
 
 const header = document.querySelector(
@@ -161,14 +143,21 @@ if (header) {
 
 
         // ------------------------------------------------------------------
-        // Kondisi ketika halaman sudah mulai di-scroll
+        // Ketika pengguna sudah melakukan scroll
         // ------------------------------------------------------------------
 
         if (scrollPosition > 250) {
 
             header.style.backgroundColor = '#29323c';
 
-        } else {
+        }
+
+
+        // ------------------------------------------------------------------
+        // Ketika masih berada di bagian atas halaman
+        // ------------------------------------------------------------------
+
+        else {
 
             header.style.backgroundColor = 'transparent';
 
@@ -179,30 +168,22 @@ if (header) {
 }
 
 
-
 // ==========================================================================
 // 3. REVEAL ON SCROLL
-// ==========================================================================
-// Menampilkan elemen secara bertahap ketika elemen memasuki viewport.
+// Menampilkan elemen secara bertahap ketika elemen masuk viewport.
 //
-// Sistem ini dapat digunakan oleh:
+// Sistem ini digunakan secara global oleh:
 // - index.html
 // - sondir-cpt.html
-// - bor-drilling.html
-// - laboratorium.html
-// - survei-topografi.html
 // - halaman layanan lainnya
 //
-// Cukup tambahkan class:
-//
+// Elemen cukup diberikan class:
 //     class="reveal"
-//
-// pada elemen yang ingin dianimasikan.
 // ==========================================================================
 
 
 // --------------------------------------------------------------------------
-// Mengecek dukungan browser terhadap IntersectionObserver
+// Mengecek apakah browser mendukung IntersectionObserver
 // --------------------------------------------------------------------------
 
 if ('IntersectionObserver' in window) {
@@ -214,14 +195,14 @@ if ('IntersectionObserver' in window) {
 
         rootMargin: '0px',
 
-        // Animasi mulai ketika sekitar 15% elemen terlihat
+        // Animasi dimulai ketika sekitar 15% elemen terlihat
         threshold: 0.15
 
     };
 
 
     // ----------------------------------------------------------------------
-    // Membuat observer
+    // Membuat Intersection Observer
     // ----------------------------------------------------------------------
 
     const revealOnScroll = new IntersectionObserver(
@@ -236,7 +217,8 @@ if ('IntersectionObserver' in window) {
 
 
                     // ------------------------------------------------------
-                    // Elemen hanya perlu dianimasikan satu kali.
+                    // Tidak perlu diamati lagi setelah elemen tampil.
+                    // Hal ini mengurangi pekerjaan browser.
                     // ------------------------------------------------------
 
                     observer.unobserve(entry.target);
@@ -254,14 +236,8 @@ if ('IntersectionObserver' in window) {
     // Mencari seluruh elemen dengan class "reveal"
     // ----------------------------------------------------------------------
 
-    const reveals = document.querySelectorAll(
-        '.reveal'
-    );
+    const reveals = document.querySelectorAll('.reveal');
 
-
-    // ----------------------------------------------------------------------
-    // Mendaftarkan setiap elemen ke observer
-    // ----------------------------------------------------------------------
 
     reveals.forEach((reveal) => {
 
@@ -272,28 +248,26 @@ if ('IntersectionObserver' in window) {
 }
 
 
-
 // ==========================================================================
 // 4. WHY US ACCORDION
-// ==========================================================================
-// Accordion hanya aktif apabila section #why-us tersedia.
+// Digunakan hanya pada section #why-us.
 //
-// Perilaku:
-// - Hover  : menampilkan preview
-// - Mouse leave : preview kembali tertutup
-// - Click  : membuka / mengunci accordion
-// - Click kembali : menutup accordion
-// - Enter / Space : mendukung keyboard
+// Sistem ini tidak digunakan pada halaman Sondir.
+// Karena itu, jika #why-us tidak ditemukan, kode otomatis dilewati.
 //
-// Karena selector menggunakan #why-us, bagian ini tidak akan mengganggu
-// halaman layanan seperti Sondir, Bor, Laboratorium, atau Topografi.
+// Interaksi:
+// - Hover        → preview sementara
+// - Mouse leave  → kembali tertutup jika belum dikunci
+// - Click        → membuka / mengunci accordion
+// - Click ulang  → menutup accordion
+// - Enter/Space  → akses melalui keyboard
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
 
 
     // ----------------------------------------------------------------------
-    // Mengambil seluruh item Why Us
+    // Mencari seluruh item pada section Why Us
     // ----------------------------------------------------------------------
 
     const whyUsItems = document.querySelectorAll(
@@ -302,8 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ----------------------------------------------------------------------
-    // Jika halaman tidak memiliki #why-us,
-    // maka fungsi ini tidak perlu dijalankan.
+    // Jika halaman tidak memiliki #why-us, hentikan proses.
     // ----------------------------------------------------------------------
 
     if (!whyUsItems.length) {
@@ -314,23 +287,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ----------------------------------------------------------------------
-    // Menambahkan behavior ke setiap item
+    // Memproses setiap accordion item
     // ----------------------------------------------------------------------
 
     whyUsItems.forEach((item) => {
 
 
         // ==================================================================
-        // A. HOVER ENTER
+        // A. HOVER / MOUSE ENTER
         // ==================================================================
 
         item.addEventListener('mouseenter', () => {
 
-            // Hover hanya bersifat preview apabila accordion belum dikunci
+            // Hanya menggunakan hover preview jika item belum dikunci
             if (!item.classList.contains('is-open')) {
 
                 item.classList.add('is-hovered');
 
+
+                // Accessibility state
                 item.setAttribute(
                     'aria-expanded',
                     'true'
@@ -342,16 +317,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         // ==================================================================
-        // B. HOVER LEAVE
+        // B. MOUSE LEAVE
         // ==================================================================
 
         item.addEventListener('mouseleave', () => {
 
-            // Jangan menutup jika item sedang dikunci melalui klik
+            // Jika item belum dikunci melalui click,
+            // maka hover preview ditutup.
             if (!item.classList.contains('is-open')) {
 
                 item.classList.remove('is-hovered');
 
+
+                // Accessibility state
                 item.setAttribute(
                     'aria-expanded',
                     'false'
@@ -368,13 +346,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         item.addEventListener('click', () => {
 
-            const isOpen = item.classList.contains(
-                'is-open'
-            );
+            const isOpen = item.classList.contains('is-open');
 
 
             // ----------------------------------------------------------------
-            // Jika sudah terbuka
+            // Jika sedang terbuka → tutup
             // ----------------------------------------------------------------
 
             if (isOpen) {
@@ -383,6 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     'is-open',
                     'is-hovered'
                 );
+
 
                 item.setAttribute(
                     'aria-expanded',
@@ -393,18 +370,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
             // ----------------------------------------------------------------
-            // Jika masih tertutup
+            // Jika sedang tertutup → buka dan kunci
             // ----------------------------------------------------------------
 
             else {
 
-                item.classList.add(
-                    'is-open'
-                );
+                item.classList.add('is-open');
 
-                item.classList.remove(
-                    'is-hovered'
-                );
+
+                // Hover state tidak diperlukan ketika sudah dikunci
+                item.classList.remove('is-hovered');
+
 
                 item.setAttribute(
                     'aria-expanded',
@@ -418,8 +394,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // ==================================================================
         // D. KEYBOARD ACCESSIBILITY
-        // ==================================================================
-        // Enter dan Space berfungsi sama seperti klik.
+        // Memungkinkan accordion dibuka menggunakan:
+        // - Enter
+        // - Space
         // ==================================================================
 
         item.addEventListener('keydown', (event) => {
@@ -440,87 +417,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
-
-
-
-// ==========================================================================
-// 5. GLOBAL SERVICE-PAGE COMPATIBILITY
-// ==========================================================================
-// Bagian ini sengaja ringan.
-//
-// Website nantinya akan memiliki beberapa layanan yang saling berhubungan,
-// misalnya:
-//
-//     Sondir / CPT
-//          ↓
-//     Bor + SPT
-//          ↓
-//     Laboratorium
-//          ↓
-//     Survei Topografi
-//          ↓
-//     Integrasi Data / Interpretasi
-//
-// Hubungan antar layanan tersebut sebaiknya dibuat melalui HTML <a href>
-// sehingga tetap dapat diakses walaupun JavaScript dimatikan.
-//
-// JavaScript GLOBAL tidak perlu memaksakan redirect atau navigasi layanan.
-//
-// Contoh HTML yang direkomendasikan nantinya:
-//
-//     <a href="bor-drilling.html">Bor & SPT</a>
-//     <a href="laboratorium.html">Laboratorium</a>
-//     <a href="survei-topografi.html">Survei Topografi</a>
-//
-// Dengan pendekatan ini setiap halaman tetap berdiri sendiri, tetapi
-// seluruh layanan membentuk satu ekosistem penyelidikan dan data geoteknik.
-// ==========================================================================
-
-
-
-// ==========================================================================
-// 6. CATATAN PENGEMBANGAN
-// ==========================================================================
-// Apabila website nantinya membutuhkan interaksi yang lebih kompleks,
-// misalnya:
-//
-// - Filter portofolio
-// - Gallery proyek
-// - Modal foto
-// - Kalkulator estimasi
-// - Form quotation
-// - Dynamic service selector
-// - Integrasi data proyek
-//
-// maka fungsi tersebut sebaiknya dibuat dalam modul / file JS khusus.
-//
-// Jangan memasukkan seluruh logika halaman ke dalam app.js.
-//
-// Prinsip:
-//
-//     app.js
-//         → fungsi website yang bersifat GLOBAL
-//
-//     sondir.js
-//         → fungsi khusus Sondir jika suatu saat diperlukan
-//
-//     drilling.js
-//         → fungsi khusus Bor / SPT
-//
-//     laboratory.js
-//         → fungsi khusus Laboratorium
-//
-//     topography.js
-//         → fungsi khusus Survei Topografi
-//
-// Untuk saat ini, Sondir belum membutuhkan JavaScript khusus karena
-// hover technical panel dapat ditangani sepenuhnya oleh CSS.
-// ==========================================================================
-
-
-
-// ==========================================================================
-// END OF GLOBAL JAVASCRIPT
-// ==========================================================================
-// PT BENTONIT REKAYASA SIPIL
-// ==========================================================================
