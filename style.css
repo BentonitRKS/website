@@ -31,13 +31,16 @@
 
 
 /* ==========================================================================
-   PENYESUAIAN JARAK ANTAR SECTION (AMAN & OTOMATIS)
+   PENYESUAIAN JARAK ANTAR SECTION
    ========================================================================== */
 
-/* 
-   Jarak utama antar section dikontrol dari sini.
-   Sebelumnya nilai ini juga ditambahkan lagi pada container,
-   sehingga jarak menjadi terlalu besar.
+/*
+   Why Us dan Services diperlakukan sebagai satu rangkaian
+   visual yang saling terhubung.
+
+   Background tidak dibuat sebagai dua blok terpisah.
+   Keduanya menggunakan warna dasar yang sama sehingga
+   transisi visual tetap halus ketika user melakukan scroll.
 */
 #why-us,
 #services,
@@ -48,7 +51,7 @@
 }
 
 
-/* 
+/*
    Section di bawah hero tidak boleh memiliki tinggi minimum 100vh.
    Tinggi section mengikuti isi kontennya.
 */
@@ -533,86 +536,72 @@ p {
    ========================================================================== */
 
 /*
-   BACKGROUND SECTION TERINTEGRASI
+   WHY US menjadi bagian awal dari visual background utama.
 
-   Konsep visual:
-   - Putih sebagai area utama untuk menjaga kesan clean dan corporate.
-   - Navy sebagai warna identitas teknis perusahaan.
-   - Orange sebagai aksen energi yang muncul secara halus.
-   - Tidak menggunakan garis pemisah antara Why Us dan Services.
-   - Transisi warna dibuat smooth agar kedua section terasa sebagai
-     satu bidang visual yang berkesinambungan.
+   Konsep warna:
+   - Putih sebagai area dominan
+   - Navy sebagai aliran warna yang sangat halus
+   - Orange hanya sebagai aksen cahaya
+   - Tidak menggunakan blok warna yang kaku
 */
 #why-us {
   position: relative;
   width: 100%;
   overflow: hidden;
 
-  /*
-     Lapisan background:
-     1. Putih dominan sebagai dasar.
-     2. Navy masuk secara diagonal dari area bawah.
-     3. Orange muncul sebagai glow yang sangat halus.
-     4. Cahaya putih menjaga transisi tetap lembut.
-  */
   background:
+    /*
+       Aksen orange sangat halus di area kanan atas.
+       Bukan blok orange, hanya memberikan sedikit warmth.
+    */
     radial-gradient(
-      ellipse 45% 35% at 88% 72%,
-      rgba(248, 131, 0, 0.08) 0%,
-      rgba(248, 131, 0, 0.035) 30%,
-      transparent 70%
+      circle at 88% 8%,
+      rgba(248, 131, 0, 0.055) 0%,
+      rgba(248, 131, 0, 0.025) 18%,
+      transparent 38%
     ),
 
+    /*
+       Aliran navy dari sisi kanan menuju bagian tengah.
+       Dibuat sangat lembut agar background tetap dominan putih.
+    */
     radial-gradient(
-      ellipse 70% 55% at 20% 100%,
-      rgba(3, 57, 132, 0.12) 0%,
-      rgba(3, 57, 132, 0.05) 42%,
-      transparent 75%
+      ellipse at 100% 42%,
+      rgba(3, 57, 132, 0.13) 0%,
+      rgba(3, 57, 132, 0.075) 24%,
+      rgba(3, 57, 132, 0.025) 48%,
+      transparent 72%
     ),
 
+    /*
+       Navy tipis dari kiri bawah.
+       Fungsinya memberikan kedalaman dan menjadi jembatan
+       visual menuju bagian Services.
+    */
+    radial-gradient(
+      ellipse at 0% 100%,
+      rgba(3, 57, 132, 0.075) 0%,
+      rgba(3, 57, 132, 0.035) 32%,
+      transparent 65%
+    ),
+
+    /*
+       Warna dasar putih.
+       Menjaga sekitar 60% visual tetap bersih.
+    */
     linear-gradient(
-      165deg,
+      180deg,
       #ffffff 0%,
-      #ffffff 38%,
-      #f8fafc 50%,
-      rgba(3, 57, 132, 0.10) 64%,
-      rgba(3, 57, 132, 0.22) 82%,
-      rgba(3, 57, 132, 0.34) 100%
+      #ffffff 42%,
+      #f9fbfe 72%,
+      #f5f8fc 100%
     );
 }
 
 
 /*
-   Dekorasi sangat halus pada bagian bawah Why Us.
-
-   Elemen ini berfungsi sebagai "jembatan visual" menuju
-   section Services sehingga tidak terlihat seperti dua
-   section yang berdiri sendiri.
+   Wrapper kontainer Why Us.
 */
-#why-us::after {
-  content: '';
-  position: absolute;
-
-  left: 0;
-  bottom: -1px;
-
-  width: 100%;
-  height: 180px;
-
-  background:
-    radial-gradient(
-      ellipse 60% 100% at 50% 100%,
-      rgba(3, 57, 132, 0.16) 0%,
-      rgba(3, 57, 132, 0.07) 42%,
-      transparent 78%
-    );
-
-  pointer-events: none;
-  z-index: 0;
-}
-
-
-/* Wrapper kontainer */
 #why-us .container {
   position: relative;
   z-index: 1;
@@ -622,12 +611,13 @@ p {
   max-width: 1100px;
   margin: 0 auto;
 
-  /* Padding horizontal saja agar tidak terjadi double spacing */
   padding: 0 20px;
 }
 
 
-/* Bagian atas (Judul & Deskripsi pengantar) */
+/*
+   Bagian atas (Judul & Deskripsi pengantar).
+*/
 #why-us .service-top {
   width: 100%;
   max-width: 950px;
@@ -637,40 +627,35 @@ p {
 
 
 /*
-   Judul Why Us tetap menggunakan warna navy.
-   Ini menjaga keterbacaan pada area putih.
+   Deskripsi pengantar tetap menggunakan warna abu-abu
+   agar background tidak terlalu ramai.
 */
-#why-us .service-top .section-title {
-  color: var(--primary-navy);
-}
-
-
-/* Deskripsi pengantar */
 #why-us .service-top p {
   color: var(--text-muted);
   text-align: center;
 }
 
 
-/* 
+/*
    Susunan grid untuk list poin-poin "Mengapa Memilih Kami".
-   Tetap dibuat sempit dan terpusat agar terlihat seperti
-   technical information panel.
 */
 #why-us .service-bottom {
   display: grid;
   grid-template-columns: minmax(0, 680px);
   justify-content: center;
   align-items: stretch;
-
   gap: 14px;
-
   width: 100%;
   margin: 35px auto 0 auto;
 }
 
 
-/* Styling kotak individual tiap poin */
+/*
+   Styling kotak individual tiap poin.
+
+   Card tetap putih supaya kontras dengan background
+   yang memiliki gradasi navy lembut.
+*/
 #why-us .service-item {
   width: 100%;
   min-height: 72px;
@@ -681,19 +666,20 @@ p {
 
   padding: 20px 24px;
 
-  /*
-     Putih tetap dominan pada accordion agar teks mudah dibaca.
-     Sedikit transparansi membuat background section tetap terasa.
-  */
-  background: rgba(255, 255, 255, 0.92);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.98) 0%,
+      rgba(255, 255, 255, 0.94) 100%
+    );
 
   border-radius: 8px;
 
   border-left: 4px solid var(--accent-orange);
 
   box-shadow:
-    0 10px 30px rgba(3, 57, 132, 0.08),
-    0 3px 10px rgba(3, 57, 132, 0.04);
+    0 8px 25px rgba(3, 57, 132, 0.07),
+    0 2px 8px rgba(3, 57, 132, 0.035);
 
   cursor: pointer;
   overflow: hidden;
@@ -701,27 +687,29 @@ p {
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease,
-    border-color 0.3s ease,
-    background 0.3s ease;
+    border-color 0.3s ease;
 }
 
 
-/* Hover efek: Kotak sedikit melayang */
+/*
+   Hover efek: kotak sedikit melayang.
+*/
 #why-us .service-item:hover {
   transform: translateY(-3px);
 
-  background: rgba(255, 255, 255, 0.98);
+  border-left-color: var(--accent-orange);
 
   box-shadow:
-    0 16px 35px rgba(3, 57, 132, 0.12),
-    0 5px 15px rgba(248, 131, 0, 0.06);
+    0 14px 32px rgba(3, 57, 132, 0.11),
+    0 4px 14px rgba(248, 131, 0, 0.06);
 }
 
 
-/* Styling Judul poin pada item accordion */
+/*
+   Styling judul poin pada item accordion.
+*/
 #why-us .service-item h2 {
   width: 100%;
-
   font-size: 1.5rem;
 
   color: var(--primary-navy);
@@ -732,17 +720,21 @@ p {
   font-weight: 700;
   text-align: left;
 
-  transition:
-    color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 
+/*
+   Judul berubah menjadi orange ketika card di-hover.
+*/
 #why-us .service-item:hover h2 {
   color: var(--accent-orange);
 }
 
 
-/* Styling deskripsi di dalam item */
+/*
+   Styling deskripsi di dalam item.
+*/
 #why-us .service-item p {
   width: 100%;
 
@@ -754,6 +746,57 @@ p {
   line-height: 2.2rem;
 
   margin-top: 10px;
+}
+
+
+/* ==========================================================================
+   11.4. VISUAL TRANSITION — WHY US TO SERVICES
+   ========================================================================== */
+
+/*
+   Lapisan transisi visual antara Why Us dan Services.
+
+   Tidak membuat garis pemisah keras.
+   Warna navy dan orange dibuat sangat transparan
+   agar perpindahan section terasa seperti satu bidang
+   visual yang berkelanjutan.
+*/
+#why-us::after {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  bottom: -1px;
+
+  width: 100%;
+  height: 180px;
+
+  background:
+    /*
+       Aksen orange sangat tipis.
+       Hanya muncul sebagai warmth pada area transisi.
+    */
+    radial-gradient(
+      ellipse at 82% 100%,
+      rgba(248, 131, 0, 0.065) 0%,
+      rgba(248, 131, 0, 0.025) 28%,
+      transparent 58%
+    ),
+
+    /*
+       Navy menjadi lebih terasa mendekati Services.
+    */
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(3, 57, 132, 0.025) 35%,
+      rgba(3, 57, 132, 0.055) 100%
+    );
+
+  pointer-events: none;
+
+  z-index: 0;
 }
 
 
@@ -832,90 +875,106 @@ p {
    ========================================================================== */
 
 /*
-   SERVICES MENJADI LANJUTAN VISUAL DARI WHY US
+   Services meneruskan visual background dari Why Us.
 
-   Tidak diberikan background putih baru.
+   Bagian atas masih relatif terang,
+   kemudian navy mulai semakin dominan menuju
+   area card layanan.
 
-   Section ini melanjutkan bidang visual dari Why Us:
-   putih → navy → orange.
-
-   Dengan demikian tidak ada garis atau blok putih yang
-   memisahkan "Mengapa Memilih Kami" dan "Layanan Utama".
+   Dengan demikian tidak terasa seperti dua section
+   yang dipisahkan oleh garis atau perubahan warna mendadak.
 */
 #services {
   position: relative;
-
   width: 100%;
+  overflow: hidden;
 
-  /*
-     Background melanjutkan warna dari bagian bawah Why Us.
-
-     Navy menjadi lebih dominan di area ini.
-     Orange hanya muncul sebagai aksen cahaya,
-     bukan sebagai blok warna.
-  */
   background:
+    /*
+       Cahaya orange kecil sebagai aksen transisi.
+       Posisi dibuat berbeda dari Services Card
+       agar tidak terlihat repetitif.
+    */
     radial-gradient(
-      ellipse 38% 42% at 82% 18%,
-      rgba(248, 131, 0, 0.15) 0%,
-      rgba(248, 131, 0, 0.075) 25%,
-      rgba(248, 131, 0, 0.025) 45%,
-      transparent 72%
+      ellipse at 18% 8%,
+      rgba(248, 131, 0, 0.055) 0%,
+      rgba(248, 131, 0, 0.025) 20%,
+      transparent 42%
     ),
 
+    /*
+       Aliran navy dari kanan atas.
+       Ini menjadi jembatan dari Why Us.
+    */
     radial-gradient(
-      ellipse 55% 70% at 8% 85%,
-      rgba(255, 255, 255, 0.08) 0%,
-      rgba(255, 255, 255, 0.025) 38%,
-      transparent 72%
+      ellipse at 100% 18%,
+      rgba(3, 57, 132, 0.12) 0%,
+      rgba(3, 57, 132, 0.065) 28%,
+      rgba(3, 57, 132, 0.025) 52%,
+      transparent 76%
     ),
 
+    /*
+       Navy yang sedikit lebih kuat pada bagian bawah.
+       Membuat Services terasa lebih solid dibanding Why Us.
+    */
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(3, 57, 132, 0.10) 0%,
+      rgba(3, 57, 132, 0.045) 38%,
+      transparent 70%
+    ),
+
+    /*
+       Base putih.
+       Tetap mempertahankan karakter clean dan corporate.
+    */
     linear-gradient(
-      165deg,
-      rgba(3, 57, 132, 0.34) 0%,
-      rgb(3, 57, 132) 20%,
-      rgb(3, 57, 132) 48%,
-      rgb(2, 47, 108) 70%,
-      rgb(2, 35, 82) 88%,
-      rgb(1, 28, 65) 100%
+      180deg,
+      #f5f8fc 0%,
+      #f8fafc 20%,
+      #ffffff 55%,
+      #f7f9fc 100%
     );
 }
 
 
 /*
-   Lapisan transisi bagian atas Services.
+   Lapisan dekoratif tambahan pada Services.
 
-   Dibuat sangat halus agar batas antara Why Us dan Services
-   tidak terlihat sebagai pergantian section.
+   Dibuat sebagai aliran diagonal sangat halus,
+   bukan pattern lingkaran seperti pada service card.
 */
 #services::before {
   content: '';
 
   position: absolute;
 
-  top: -100px;
-  left: 0;
-
-  width: 100%;
-  height: 180px;
+  top: 0;
+  right: -15%;
+  
+  width: 65%;
+  height: 100%;
 
   background:
     linear-gradient(
-      180deg,
-      rgba(3, 57, 132, 0) 0%,
-      rgba(3, 57, 132, 0.18) 45%,
-      rgba(3, 57, 132, 0.34) 100%
+      135deg,
+      transparent 0%,
+      rgba(3, 57, 132, 0.025) 35%,
+      rgba(3, 57, 132, 0.055) 58%,
+      transparent 78%
     );
 
+  transform: skewX(-8deg);
+
   pointer-events: none;
+
   z-index: 0;
 }
 
 
-/* 
-   Container layanan.
-   Padding vertikal DIHAPUS karena #services sudah memiliki
-   --section-padding.
+/*
+   Wrapper layanan ditempatkan di atas background dekoratif.
 */
 #services .services {
   position: relative;
@@ -932,7 +991,9 @@ p {
 }
 
 
-/* Header bagian Layanan */
+/*
+   Header bagian Layanan.
+*/
 #services .service-top {
   width: 100%;
   max-width: 900px;
@@ -940,31 +1001,15 @@ p {
 }
 
 
-/*
-   Judul section Services menjadi putih agar tetap kontras
-   setelah background memasuki area navy.
-*/
-#services .service-top .section-title {
-  color: #ffffff;
-}
-
-
-/*
-   Aksen orange pada bagian judul tetap dipertahankan.
-*/
-#services .service-top .section-title span {
-  color: var(--accent-orange);
-}
-
-
-/* Deskripsi pengantar Services */
 #services .service-top p {
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--text-muted);
   text-align: center;
 }
 
 
-/* Grid card layanan - memuat 2 kolom di layar besar */
+/*
+   Grid card layanan.
+*/
 #services .service-bottom {
   display: grid;
 
@@ -982,7 +1027,9 @@ p {
 }
 
 
-/* Pembungkus tautan supaya seluruh area card dapat diklik */
+/*
+   Pembungkus tautan supaya seluruh area card dapat diklik.
+*/
 #services .service-link {
   display: block;
 
