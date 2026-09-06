@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,44 +12,120 @@
         content="Layanan Cone Penetration Test (CPT) / Sondir kapasitas 2.5 ton oleh PT BENTONIT REKAYASA SIPIL untuk penyelidikan tanah dan kebutuhan data geoteknik."
     >
 
-    <!-- Global website stylesheet -->
+    <!-- =========================================================
+         GLOBAL & PAGE-SPECIFIC STYLESHEET
+         ========================================================= -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- Sondir page-specific stylesheet -->
     <link rel="stylesheet" href="Sondir.css">
 </head>
+
 
 <body class="sondir-page">
 
     <!-- =========================================================
-         01 | HEADER
+         01 | HEADER & NAVIGATION
+
+         Struktur dibuat mengikuti index.html agar:
+         - Header konsisten dengan homepage
+         - Hamburger dapat menggunakan app.js yang sama
+         - Navigasi antarhalaman tetap konsisten
          ========================================================= -->
-    <header class="header">
-        <div class="container">
+    <section id="header">
 
-            <a href="index.html" class="logo" aria-label="PT BENTONIT REKAYASA SIPIL">
-                PT BENTONIT REKAYASA SIPIL
-            </a>
+        <div class="header container">
 
-            <nav class="nav" aria-label="Navigasi utama">
-                <a href="index.html#hero">Home</a>
-                <a href="index.html#services">Layanan</a>
-                <a href="index.html#contact">Kontak</a>
-            </nav>
+            <div class="nav-bar">
 
-            <button
-                class="hamburger"
-                type="button"
-                aria-label="Buka menu navigasi"
-                aria-expanded="false"
-            >
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
+                <!-- BRAND -->
+                <div class="brand">
+
+                    <a
+                        href="index.html#hero"
+                        aria-label="Kembali ke halaman utama"
+                    >
+
+                        <h1>
+                            <span>B</span>ENTONIT
+                            <span>R</span>EKAYASA
+                            <span>S</span>IPIL
+                        </h1>
+
+                    </a>
+
+                </div>
+
+
+                <!-- NAVIGATION -->
+                <div class="nav-list">
+
+                    <!-- MOBILE MENU BUTTON -->
+                    <div
+                        class="hamburger"
+                        aria-label="Buka Menu Navigasi"
+                        role="button"
+                        tabindex="0"
+                        aria-expanded="false"
+                    >
+                        <div class="bar"></div>
+                    </div>
+
+
+                    <ul>
+
+                        <li>
+                            <a
+                                href="index.html#hero"
+                                data-after="Home"
+                            >
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                href="index.html#why-us"
+                                data-after="Keunggulan"
+                            >
+                                Keunggulan
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                href="index.html#services"
+                                data-after="Layanan"
+                            >
+                                Layanan
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                href="index.html#about"
+                                data-after="Tentang"
+                            >
+                                Tentang Kami
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                href="index.html#contact"
+                                data-after="Kontak"
+                            >
+                                Kontak
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
 
         </div>
-    </header>
+
+    </section>
 
 
     <!-- =========================================================
@@ -56,54 +133,115 @@
          ========================================================= -->
     <main>
 
+
         <!-- =====================================================
              02 | HERO
              ===================================================== -->
-        <section class="service-hero" id="service-hero">
+        <section
+            class="service-hero"
+            id="service-hero"
+        >
 
             <div class="container">
 
-                <div class="service-hero-content">
+                <div class="service-hero-content reveal">
 
                     <span class="service-eyebrow">
                         Soil Investigation Services
                     </span>
 
+
                     <h1>
                         Cone Penetration Test (CPT)
-                        <span class="brand-accent">/ Sondir</span>
+                        <span class="brand-accent">
+                            / Sondir
+                        </span>
                     </h1>
+
 
                     <p class="service-hero-description">
                         Pengujian penetrasi tanah secara statik untuk memperoleh
-                        data perlawanan tanah terhadap kedalaman sebagai dasar
+                        profil perlawanan tanah terhadap kedalaman sebagai dasar
                         penyelidikan kondisi bawah permukaan dan evaluasi geoteknik.
                     </p>
+
+
+                    <!-- HERO ACTIONS -->
+                    <div class="service-hero-actions">
+
+                        <a
+                            href="index.html#contact"
+                            class="btn btn-primary"
+                        >
+                            Konsultasi Pekerjaan
+                        </a>
+
+                        <a
+                            href="index.html#services"
+                            class="btn btn-secondary"
+                        >
+                            Layanan Lainnya
+                        </a>
+
+                    </div>
 
                 </div>
 
 
-                <!-- Technical summary -->
-                <div class="technical-summary">
+                <!-- =================================================
+                     TECHNICAL SUMMARY
+                     ================================================= -->
+                <div class="technical-summary reveal">
 
                     <div class="technical-summary-item">
-                        <span>Metode</span>
-                        <strong>Mechanical CPT / Sondir</strong>
+
+                        <span>
+                            Metode
+                        </span>
+
+                        <strong>
+                            Mechanical CPT / Sondir
+                        </strong>
+
                     </div>
 
-                    <div class="technical-summary-item">
-                        <span>Kapasitas</span>
-                        <strong>2.5 Ton</strong>
-                    </div>
 
                     <div class="technical-summary-item">
-                        <span>Konus</span>
-                        <strong>10 cm² • 60°</strong>
+
+                        <span>
+                            Kapasitas
+                        </span>
+
+                        <strong>
+                            2.5 Ton
+                        </strong>
+
                     </div>
 
+
                     <div class="technical-summary-item">
-                        <span>Interval</span>
-                        <strong>20 cm</strong>
+
+                        <span>
+                            Konus
+                        </span>
+
+                        <strong>
+                            10 cm² • 60°
+                        </strong>
+
+                    </div>
+
+
+                    <div class="technical-summary-item">
+
+                        <span>
+                            Interval
+                        </span>
+
+                        <strong>
+                            20 cm
+                        </strong>
+
                     </div>
 
                 </div>
@@ -116,24 +254,35 @@
         <!-- =====================================================
              03 | OVERVIEW
              ===================================================== -->
-        <section class="technical-section" id="overview">
+        <section
+            class="technical-section"
+            id="overview"
+        >
 
             <div class="container">
 
-                <div class="section-intro">
+                <div class="section-intro reveal">
 
                     <span class="service-eyebrow">
                         01 / Overview
                     </span>
 
                     <h2>
-                        Data Tanah untuk Kebutuhan Geoteknik
+                        Penyelidikan Tanah Secara Menerus
                     </h2>
 
                     <p>
-                        CPT atau Sondir merupakan metode penyelidikan tanah
-                        lapangan dengan penetrasi konus secara statik untuk
-                        memperoleh profil perlawanan tanah terhadap kedalaman.
+                        Cone Penetration Test (CPT) atau Sondir merupakan metode
+                        penyelidikan tanah lapangan dengan menekan konus secara
+                        statik ke dalam tanah untuk memperoleh profil perlawanan
+                        tanah terhadap kedalaman.
+                    </p>
+
+                    <p>
+                        Data pengujian dapat digunakan untuk membantu memahami
+                        perubahan karakteristik lapisan tanah, mengidentifikasi
+                        lapisan relatif lunak maupun keras, serta menyediakan
+                        parameter pendukung untuk evaluasi geoteknik dan fondasi.
                     </p>
 
                 </div>
@@ -141,49 +290,61 @@
 
                 <div class="technical-grid">
 
-                    <article class="technical-card">
+                    <article class="technical-card reveal">
 
-                        <h3>Cone Resistance (qc)</h3>
+                        <h3>
+                            Cone Resistance (qc)
+                        </h3>
 
                         <p>
-                            Parameter utama yang menggambarkan perlawanan ujung
-                            konus selama penetrasi.
+                            Perlawanan ujung konus yang terbaca selama penetrasi.
+                            Nilai qc disajikan terhadap kedalaman untuk
+                            menggambarkan perubahan perlawanan tanah.
                         </p>
 
                     </article>
 
 
-                    <article class="technical-card">
+                    <article class="technical-card reveal">
 
-                        <h3>Friction Resistance</h3>
+                        <h3>
+                            Friction Resistance
+                        </h3>
 
                         <p>
-                            Parameter hambatan gesek pada friction sleeve yang
-                            mendukung interpretasi kondisi lapisan tanah.
+                            Hambatan gesek yang bekerja pada friction sleeve
+                            dan menjadi salah satu parameter dalam interpretasi
+                            karakteristik lapisan tanah.
                         </p>
 
                     </article>
 
 
-                    <article class="technical-card">
+                    <article class="technical-card reveal">
 
-                        <h3>Profil Lapisan</h3>
+                        <h3>
+                            Profil Tanah
+                        </h3>
 
                         <p>
-                            Data terhadap kedalaman digunakan untuk melihat
-                            perubahan kondisi tanah secara menerus pada titik uji.
+                            Pembacaan secara berkala terhadap kedalaman memberikan
+                            gambaran perubahan kondisi tanah secara relatif
+                            menerus pada titik pengujian.
                         </p>
 
                     </article>
 
 
-                    <article class="technical-card">
+                    <article class="technical-card reveal">
 
-                        <h3>Evaluasi Geoteknik</h3>
+                        <h3>
+                            Evaluasi Geoteknik
+                        </h3>
 
                         <p>
-                            Data dapat menjadi dasar pendukung evaluasi geoteknik
-                            dan fondasi sesuai lingkup pekerjaan.
+                            Data CPT dapat menjadi salah satu dasar evaluasi
+                            geoteknik awal sesuai kebutuhan proyek dan lingkup
+                            analisis yang disepakati.
                         </p>
 
                     </article>
@@ -196,97 +357,119 @@
 
 
         <!-- =====================================================
-             04 | SCOPE
+             04 | PURPOSE
              ===================================================== -->
-        <section class="technical-section alt" id="scope">
+        <section
+            class="technical-section alt"
+            id="purpose"
+        >
 
             <div class="container">
 
-                <div class="section-intro">
+                <div class="section-intro reveal">
 
                     <span class="service-eyebrow">
-                        02 / Scope
+                        02 / Purpose
                     </span>
 
                     <h2>
-                        Lingkup Pengujian
+                        Tujuan Pengujian
                     </h2>
 
                     <p>
-                        Lingkup pekerjaan disesuaikan dengan kebutuhan investigasi
-                        dan persyaratan teknis proyek.
+                        Pengujian Sondir dilaksanakan untuk memperoleh data
+                        perlawanan tanah yang dapat digunakan dalam memahami
+                        kondisi bawah permukaan pada titik investigasi.
                     </p>
 
                 </div>
 
 
-                <div class="scope-list">
+                <div class="result-list">
 
-                    <div class="scope-item">
+                    <div class="result-item reveal">
 
-                        <span class="scope-number">
-                            01
-                        </span>
+                        <span
+                            class="result-icon"
+                            aria-hidden="true"
+                        ></span>
 
-                        <div>
-                            <h3>Investigasi Lapangan</h3>
-
-                            <p>
-                                Pelaksanaan CPT pada titik dan kedalaman yang ditentukan.
-                            </p>
-                        </div>
+                        <p>
+                            Memperoleh profil perlawanan tanah terhadap kedalaman.
+                        </p>
 
                     </div>
 
 
-                    <div class="scope-item">
+                    <div class="result-item reveal">
 
-                        <span class="scope-number">
-                            02
-                        </span>
+                        <span
+                            class="result-icon"
+                            aria-hidden="true"
+                        ></span>
 
-                        <div>
-                            <h3>Data Pengujian</h3>
-
-                            <p>
-                                Pencatatan parameter perlawanan tanah terhadap kedalaman.
-                            </p>
-                        </div>
+                        <p>
+                            Mengidentifikasi perubahan dan karakteristik relatif
+                            lapisan tanah.
+                        </p>
 
                     </div>
 
 
-                    <div class="scope-item">
+                    <div class="result-item reveal">
 
-                        <span class="scope-number">
-                            03
-                        </span>
+                        <span
+                            class="result-icon"
+                            aria-hidden="true"
+                        ></span>
 
-                        <div>
-                            <h3>Pengolahan Data</h3>
-
-                            <p>
-                                Penyusunan tabel dan grafik hasil pengujian.
-                            </p>
-                        </div>
+                        <p>
+                            Mengidentifikasi indikasi lapisan tanah relatif
+                            lunak atau keras.
+                        </p>
 
                     </div>
 
 
-                    <div class="scope-item">
+                    <div class="result-item reveal">
 
-                        <span class="scope-number">
-                            04
-                        </span>
+                        <span
+                            class="result-icon"
+                            aria-hidden="true"
+                        ></span>
 
-                        <div>
-                            <h3>Interpretasi</h3>
+                        <p>
+                            Memperoleh data cone resistance dan friction resistance.
+                        </p>
 
-                            <p>
-                                Interpretasi teknis sesuai kebutuhan dan lingkup
-                                yang disepakati.
-                            </p>
-                        </div>
+                    </div>
+
+
+                    <div class="result-item reveal">
+
+                        <span
+                            class="result-icon"
+                            aria-hidden="true"
+                        ></span>
+
+                        <p>
+                            Menyediakan data pendukung untuk evaluasi awal fondasi.
+                        </p>
+
+                    </div>
+
+
+                    <div class="result-item reveal">
+
+                        <span
+                            class="result-icon"
+                            aria-hidden="true"
+                        ></span>
+
+                        <p>
+                            Menyediakan data teknis sebagai salah satu dasar
+                            pertimbangan perencanaan.
+                        </p>
 
                     </div>
 
@@ -298,101 +481,203 @@
 
 
         <!-- =====================================================
-             05 | TECHNICAL PARAMETERS
+             05 | TECHNICAL PARAMETERS + EQUIPMENT IMAGE
+
+             Layout:
+             LEFT  = Spesifikasi teknis
+             RIGHT = Foto alat Sondir
+
+             Tujuan:
+             Menampilkan spesifikasi dan peralatan dalam satu
+             visual hierarchy yang lebih profesional.
              ===================================================== -->
-        <section class="technical-section" id="parameters">
+        <section
+            class="technical-section"
+            id="parameters"
+        >
 
             <div class="container">
 
-                <div class="section-intro">
+                <div class="section-intro reveal">
 
                     <span class="service-eyebrow">
                         03 / Technical Parameters
                     </span>
 
                     <h2>
-                        Parameter Utama
+                        Spesifikasi Pengujian
                     </h2>
 
                     <p>
-                        Konfigurasi umum pengujian Sondir yang digunakan.
+                        Konfigurasi pengujian berikut merupakan parameter umum
+                        yang digunakan dan dapat disesuaikan dengan kebutuhan
+                        serta kondisi proyek.
                     </p>
 
                 </div>
 
 
-                <div class="spec-table-wrapper">
+                <!-- =================================================
+                     PARAMETER + EQUIPMENT
+                     ================================================= -->
+                <div class="parameter-layout">
 
-                    <table class="spec-table">
 
-                        <tbody>
+                    <!-- SPECIFICATION TABLE -->
+                    <div class="spec-table-wrapper reveal">
 
-                            <tr>
-                                <th>Jenis Pengujian</th>
-                                <td>
-                                    Static Cone Penetration Test (CPT / Sondir)
-                                </td>
-                            </tr>
+                        <table class="spec-table">
 
-                            <tr>
-                                <th>Sistem</th>
-                                <td>
-                                    Mechanical CPT / Dutch Penetrometer
-                                </td>
-                            </tr>
+                            <tbody>
 
-                            <tr>
-                                <th>Kapasitas Alat</th>
-                                <td>
-                                    2.5 ton
-                                </td>
-                            </tr>
+                                <tr>
+                                    <th>
+                                        Jenis Pengujian
+                                    </th>
 
-                            <tr>
-                                <th>Konus</th>
-                                <td>
-                                    Bikonus / Cone with Friction Sleeve
-                                </td>
-                            </tr>
+                                    <td>
+                                        Static Cone Penetration Test
+                                        (CPT / Sondir)
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <th>Luas Ujung Konus</th>
-                                <td>
-                                    10 cm²
-                                </td>
-                            </tr>
 
-                            <tr>
-                                <th>Sudut Konus</th>
-                                <td>
-                                    60°
-                                </td>
-                            </tr>
+                                <tr>
+                                    <th>
+                                        Sistem
+                                    </th>
 
-                            <tr>
-                                <th>Luas Friction Sleeve</th>
-                                <td>
-                                    100 cm²
-                                </td>
-                            </tr>
+                                    <td>
+                                        Mechanical CPT / Dutch Penetrometer
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <th>Interval Pembacaan</th>
-                                <td>
-                                    Setiap 20 cm
-                                </td>
-                            </tr>
 
-                            <tr>
-                                <th>Kedalaman</th>
-                                <td>
-                                    Sesuai kebutuhan proyek dan kondisi tanah
-                                </td>
-                            </tr>
+                                <tr>
+                                    <th>
+                                        Kapasitas Alat
+                                    </th>
 
-                        </tbody>
+                                    <td>
+                                        2.5 ton
+                                    </td>
+                                </tr>
 
-                    </table>
+
+                                <tr>
+                                    <th>
+                                        Jenis Konus
+                                    </th>
+
+                                    <td>
+                                        Bikonus / Cone with Friction Sleeve
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <th>
+                                        Luas Ujung Konus
+                                    </th>
+
+                                    <td>
+                                        10 cm²
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <th>
+                                        Sudut Konus
+                                    </th>
+
+                                    <td>
+                                        60°
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <th>
+                                        Luas Friction Sleeve
+                                    </th>
+
+                                    <td>
+                                        100 cm²
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <th>
+                                        Interval Pembacaan
+                                    </th>
+
+                                    <td>
+                                        Setiap 20 cm
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <th>
+                                        Target Kedalaman
+                                    </th>
+
+                                    <td>
+                                        Berdasarkan kebutuhan proyek dan
+                                        kondisi tanah
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <th>
+                                        Terminasi Pengujian
+                                    </th>
+
+                                    <td>
+                                        Target depth atau refusal sesuai
+                                        ketentuan teknis
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         EQUIPMENT SHOWCASE
+                         ================================================= -->
+                    <figure class="equipment-showcase reveal">
+
+                        <div class="equipment-image">
+
+                            <img
+                                src="./img/alat-sondir.jpg"
+                                alt="Peralatan Mechanical CPT atau Sondir kapasitas 2.5 ton PT BENTONIT REKAYASA SIPIL"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+
+                        <figcaption>
+
+                            <strong>
+                                Mechanical CPT / Sondir
+                            </strong>
+
+                            <span>
+                                Peralatan pengujian kapasitas 2.5 ton
+                            </span>
+
+                        </figcaption>
+
+                    </figure>
 
                 </div>
 
@@ -402,25 +687,91 @@
 
 
         <!-- =====================================================
-             06 | FIELD PROCEDURE
+             06 | INVESTIGATION DEPTH
              ===================================================== -->
-        <section class="technical-section alt" id="procedure">
+        <section
+            class="technical-section alt"
+            id="depth"
+        >
 
             <div class="container">
 
-                <div class="section-intro">
+                <div class="technical-grid">
+
+                    <article class="technical-card reveal">
+
+                        <span class="service-eyebrow">
+                            Investigation Depth
+                        </span>
+
+                        <h2>
+                            Kedalaman Investigasi
+                        </h2>
+
+                        <p>
+                            Kedalaman pengujian ditentukan berdasarkan kebutuhan
+                            proyek, target investigasi, kondisi lapisan tanah,
+                            serta kemampuan alat.
+                        </p>
+
+                        <p>
+                            Sebagai referensi, pengujian dapat direncanakan hingga
+                            sekitar 20–30 m per titik atau sampai tercapai kondisi
+                            terminasi yang disepakati.
+                        </p>
+
+                    </article>
+
+
+                    <article class="technical-card reveal">
+
+                        <span class="service-eyebrow">
+                            Field Condition
+                        </span>
+
+                        <h2>
+                            Kondisi Lapangan
+                        </h2>
+
+                        <p>
+                            Kedalaman aktual dapat berbeda antar titik karena
+                            kondisi tanah tidak selalu seragam. Akses lokasi,
+                            kestabilan alat, kondisi permukaan, dan karakteristik
+                            tanah dapat memengaruhi pelaksanaan.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             07 | FIELD PROCEDURE
+             ===================================================== -->
+        <section
+            class="technical-section"
+            id="procedure"
+        >
+
+            <div class="container">
+
+                <div class="section-intro reveal">
 
                     <span class="service-eyebrow">
                         04 / Field Procedure
                     </span>
 
                     <h2>
-                        Pelaksanaan Pekerjaan
+                        Tahapan Pelaksanaan
                     </h2>
 
                     <p>
-                        Proses dilaksanakan secara sistematis dari persiapan
-                        lokasi hingga pengolahan data hasil pengujian.
+                        Pelaksanaan dilakukan secara berurutan mulai dari
+                        persiapan lokasi hingga pemeriksaan dan pengolahan data.
                     </p>
 
                 </div>
@@ -428,97 +779,109 @@
 
                 <div class="workflow-grid">
 
-                    <article class="workflow-item">
+                    <article class="workflow-item reveal">
 
                         <span class="workflow-number">
                             01
                         </span>
 
-                        <h3>Persiapan</h3>
+                        <h3>
+                            Site Preparation
+                        </h3>
 
                         <p>
-                            Persiapan lokasi, alat, titik pengujian,
-                            dan kebutuhan lapangan.
+                            Persiapan lokasi, peralatan, personel, dan kebutuhan
+                            keselamatan kerja.
                         </p>
 
                     </article>
 
 
-                    <article class="workflow-item">
+                    <article class="workflow-item reveal">
 
                         <span class="workflow-number">
                             02
                         </span>
 
-                        <h3>Setup Alat</h3>
+                        <h3>
+                            Equipment Setup
+                        </h3>
 
                         <p>
-                            Pemasangan dan pengaturan alat agar stabil
-                            selama penetrasi.
+                            Penempatan dan pengaturan alat agar stabil selama
+                            proses penetrasi.
                         </p>
 
                     </article>
 
 
-                    <article class="workflow-item">
+                    <article class="workflow-item reveal">
 
                         <span class="workflow-number">
                             03
                         </span>
 
-                        <h3>Penetrasi</h3>
+                        <h3>
+                            Cone Penetration
+                        </h3>
 
                         <p>
-                            Konus ditekan secara statik dan pembacaan
-                            dilakukan terhadap kedalaman.
+                            Konus ditekan secara statik ke dalam tanah sesuai
+                            metode pengujian.
                         </p>
 
                     </article>
 
 
-                    <article class="workflow-item">
+                    <article class="workflow-item reveal">
 
                         <span class="workflow-number">
                             04
                         </span>
 
-                        <h3>Pencatatan Data</h3>
+                        <h3>
+                            Data Recording
+                        </h3>
 
                         <p>
-                            Parameter hasil pembacaan dicatat dan diperiksa
-                            selama pekerjaan.
+                            Pembacaan dan pencatatan parameter perlawanan
+                            terhadap kedalaman.
                         </p>
 
                     </article>
 
 
-                    <article class="workflow-item">
+                    <article class="workflow-item reveal">
 
                         <span class="workflow-number">
                             05
                         </span>
 
-                        <h3>Quality Check</h3>
+                        <h3>
+                            Data Quality Check
+                        </h3>
 
                         <p>
-                            Pemeriksaan kewajaran dan konsistensi
-                            data lapangan.
+                            Pemeriksaan kewajaran dan konsistensi data lapangan
+                            sebelum pengolahan.
                         </p>
 
                     </article>
 
 
-                    <article class="workflow-item">
+                    <article class="workflow-item reveal">
 
                         <span class="workflow-number">
                             06
                         </span>
 
-                        <h3>Pengolahan</h3>
+                        <h3>
+                            Processing
+                        </h3>
 
                         <p>
                             Data disusun menjadi tabel, grafik, dan output
-                            teknis sesuai scope.
+                            teknis sesuai lingkup pekerjaan.
                         </p>
 
                     </article>
@@ -531,13 +894,16 @@
 
 
         <!-- =====================================================
-             07 | DATA & DELIVERABLES
+             08 | DATA & DELIVERABLES
              ===================================================== -->
-        <section class="technical-section" id="deliverables">
+        <section
+            class="technical-section alt"
+            id="deliverables"
+        >
 
             <div class="container">
 
-                <div class="section-intro">
+                <div class="section-intro reveal">
 
                     <span class="service-eyebrow">
                         05 / Data & Deliverables
@@ -557,7 +923,7 @@
 
                 <div class="result-list">
 
-                    <div class="result-item">
+                    <div class="result-item reveal">
 
                         <span
                             class="result-icon"
@@ -571,7 +937,7 @@
                     </div>
 
 
-                    <div class="result-item">
+                    <div class="result-item reveal">
 
                         <span
                             class="result-icon"
@@ -585,7 +951,7 @@
                     </div>
 
 
-                    <div class="result-item">
+                    <div class="result-item reveal">
 
                         <span
                             class="result-icon"
@@ -599,7 +965,7 @@
                     </div>
 
 
-                    <div class="result-item">
+                    <div class="result-item reveal">
 
                         <span
                             class="result-icon"
@@ -613,7 +979,7 @@
                     </div>
 
 
-                    <div class="result-item">
+                    <div class="result-item reveal">
 
                         <span
                             class="result-icon"
@@ -627,7 +993,7 @@
                     </div>
 
 
-                    <div class="result-item">
+                    <div class="result-item reveal">
 
                         <span
                             class="result-icon"
@@ -648,15 +1014,18 @@
 
 
         <!-- =====================================================
-             08 | INTERPRETATION
+             09 | INTERPRETATION
              ===================================================== -->
-        <section class="technical-section alt" id="interpretation">
+        <section
+            class="technical-section"
+            id="interpretation"
+        >
 
             <div class="container">
 
                 <div class="technical-grid">
 
-                    <article class="technical-card">
+                    <article class="technical-card reveal">
 
                         <span class="service-eyebrow">
                             Interpretation
@@ -675,7 +1044,7 @@
                     </article>
 
 
-                    <article class="technical-card">
+                    <article class="technical-card reveal">
 
                         <span class="service-eyebrow">
                             Foundation
@@ -701,7 +1070,7 @@
 
 
         <!-- =====================================================
-             09 | SAMPLE REPORT
+             10 | SAMPLE REPORT
              ===================================================== -->
         <section
             class="technical-section report-section"
@@ -710,7 +1079,7 @@
 
             <div class="container">
 
-                <div class="section-intro">
+                <div class="section-intro reveal">
 
                     <span class="service-eyebrow">
                         06 / Report Preview
@@ -729,9 +1098,10 @@
                 </div>
 
 
-                <div class="report-preview">
+                <div class="report-preview reveal">
 
-                    <!-- Report introduction -->
+
+                    <!-- REPORT INTRODUCTION -->
                     <div class="report-preview-content">
 
                         <span class="report-label">
@@ -798,7 +1168,7 @@
                     </div>
 
 
-                    <!-- Report structure preview -->
+                    <!-- REPORT STRUCTURE -->
                     <div
                         class="report-preview-structure"
                         aria-label="Struktur contoh laporan"
@@ -806,7 +1176,9 @@
 
                         <div class="report-document-line">
 
-                            <span>01</span>
+                            <span>
+                                01
+                            </span>
 
                             <strong>
                                 Cover
@@ -817,7 +1189,9 @@
 
                         <div class="report-document-line">
 
-                            <span>02</span>
+                            <span>
+                                02
+                            </span>
 
                             <strong>
                                 Kata Pengantar
@@ -828,7 +1202,9 @@
 
                         <div class="report-document-line">
 
-                            <span>03</span>
+                            <span>
+                                03
+                            </span>
 
                             <strong>
                                 Daftar Isi
@@ -839,7 +1215,9 @@
 
                         <div class="report-document-line">
 
-                            <span>04</span>
+                            <span>
+                                04
+                            </span>
 
                             <strong>
                                 Daftar Tabel
@@ -850,7 +1228,9 @@
 
                         <div class="report-document-line">
 
-                            <span>05</span>
+                            <span>
+                                05
+                            </span>
 
                             <strong>
                                 Daftar Gambar
@@ -861,7 +1241,9 @@
 
                         <div class="report-document-line">
 
-                            <span>06</span>
+                            <span>
+                                06
+                            </span>
 
                             <strong>
                                 Isi Teknis
@@ -879,13 +1261,16 @@
 
 
         <!-- =====================================================
-             10 | PROJECT EXPERIENCE
+             11 | PROJECT EXPERIENCE
              ===================================================== -->
-        <section class="technical-section" id="experience">
+        <section
+            class="technical-section alt"
+            id="experience"
+        >
 
             <div class="container">
 
-                <div class="section-intro">
+                <div class="section-intro reveal">
 
                     <span class="service-eyebrow">
                         07 / Project Experience
@@ -920,7 +1305,8 @@
                     → Dokumentasi
                 -->
 
-                <div class="experience-placeholder">
+
+                <div class="experience-placeholder reveal">
 
                     <span class="experience-status">
                         Portfolio
@@ -944,13 +1330,16 @@
 
 
         <!-- =====================================================
-             11 | REFERENCES
+             12 | REFERENCES
              ===================================================== -->
-        <section class="technical-section alt" id="references">
+        <section
+            class="technical-section"
+            id="references"
+        >
 
             <div class="container">
 
-                <div class="section-intro">
+                <div class="section-intro reveal">
 
                     <span class="service-eyebrow">
                         08 / References
@@ -965,7 +1354,7 @@
 
                 <div class="reference-list">
 
-                    <div class="reference-item">
+                    <div class="reference-item reveal">
 
                         <strong>
                             SNI 2827:2008
@@ -978,7 +1367,7 @@
                     </div>
 
 
-                    <div class="reference-item">
+                    <div class="reference-item reveal">
 
                         <strong>
                             ASTM D3441
@@ -991,7 +1380,7 @@
                     </div>
 
 
-                    <div class="reference-item">
+                    <div class="reference-item reveal">
 
                         <strong>
                             CPT Interpretation
@@ -1012,13 +1401,16 @@
 
 
         <!-- =====================================================
-             12 | CTA
+             13 | CTA
              ===================================================== -->
-        <section class="service-cta">
+        <section
+            class="service-cta"
+            id="cta"
+        >
 
             <div class="container">
 
-                <div class="service-cta-box">
+                <div class="service-cta-box reveal">
 
                     <span class="service-eyebrow">
                         Start a Project
@@ -1044,6 +1436,7 @@
                             Hubungi Kami
                         </a>
 
+
                         <a
                             href="index.html#services"
                             class="btn btn-secondary"
@@ -1063,13 +1456,13 @@
 
 
     <!-- =========================================================
-         13 | FOOTER
+         14 | FOOTER
          ========================================================= -->
     <footer class="footer">
 
         <div class="container">
 
-            <div class="footer-content">
+            <div class="footer-content reveal">
 
                 <div>
 
@@ -1099,7 +1492,15 @@
     </footer>
 
 
-    <!-- Global JavaScript -->
+    <!-- =========================================================
+         GLOBAL JAVASCRIPT
+
+         app.js menangani:
+         - hamburger menu
+         - navigasi mobile
+         - header behavior
+         - scroll reveal menggunakan IntersectionObserver
+         ========================================================= -->
     <script src="./app.js"></script>
 
 </body>
