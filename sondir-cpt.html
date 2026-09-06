@@ -25,9 +25,9 @@
     <!-- =========================================================
          01 | HEADER & NAVIGATION
 
-         Struktur dibuat mengikuti index.html agar:
+         Struktur mengikuti index.html agar:
          - Header konsisten dengan homepage
-         - Hamburger dapat menggunakan app.js yang sama
+         - Hamburger menggunakan app.js yang sama
          - Navigasi antarhalaman tetap konsisten
          ========================================================= -->
     <section id="header">
@@ -481,15 +481,7 @@
 
 
         <!-- =====================================================
-             05 | TECHNICAL PARAMETERS + EQUIPMENT IMAGE
-
-             Layout:
-             LEFT  = Spesifikasi teknis
-             RIGHT = Foto alat Sondir
-
-             Tujuan:
-             Menampilkan spesifikasi dan peralatan dalam satu
-             visual hierarchy yang lebih profesional.
+             05 | TECHNICAL PARAMETERS + EQUIPMENT
              ===================================================== -->
         <section
             class="technical-section"
@@ -1014,7 +1006,14 @@
 
 
         <!-- =====================================================
-             09 | INTERPRETATION
+             09 | INTERPRETATION & GEOTECHNICAL EVALUATION
+
+             Hover interaction:
+             - Tidak menggunakan klik
+             - Panel muncul ketika kursor berada di area kartu
+             - Panel dapat memanjang ke bawah
+             - Gambar dibuat relatif kecil agar tidak mengganggu layout
+             - Detail lanjutan dapat diperluas sesuai scope pekerjaan
              ===================================================== -->
         <section
             class="technical-section"
@@ -1023,42 +1022,424 @@
 
             <div class="container">
 
+                <div class="section-intro reveal">
+
+                    <span class="service-eyebrow">
+                        06 / Interpretation & Analysis
+                    </span>
+
+                    <h2>
+                        Interpretasi dan Evaluasi Geoteknik
+                    </h2>
+
+                    <p>
+                        Data CPT dapat dikembangkan dari sekadar penyajian hasil
+                        pengujian menjadi berbagai bentuk interpretasi dan analisis
+                        geoteknik sesuai kebutuhan proyek.
+                    </p>
+
+                </div>
+
+
                 <div class="technical-grid">
 
-                    <article class="technical-card reveal">
 
-                        <span class="service-eyebrow">
-                            Interpretation
-                        </span>
+                    <!-- =================================================
+                         INTERPRETATION CARD
+                         ================================================= -->
+                    <article
+                        class="technical-card technical-card-interactive reveal"
+                    >
 
-                        <h2>
-                            Interpretasi Data
-                        </h2>
+                        <div class="technical-card-main">
 
-                        <p>
-                            Data CPT dapat diinterpretasikan untuk melihat
-                            perubahan lapisan tanah dan karakteristik relatif
-                            berdasarkan parameter hasil pengujian.
-                        </p>
+                            <span class="service-eyebrow">
+                                Interpretation
+                            </span>
+
+                            <h2>
+                                Interpretasi Data CPT
+                            </h2>
+
+                            <p>
+                                Interpretasi digunakan untuk membantu mengenali
+                                perubahan perilaku tanah dan membentuk gambaran
+                                kondisi lapisan bawah permukaan berdasarkan data
+                                CPT.
+                            </p>
+
+                            <span class="hover-indicator">
+                                Arahkan kursor untuk melihat contoh interpretasi
+                            </span>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             HOVER PANEL — SBT ROBERTSON
+                             ================================================= -->
+                        <div
+                            class="technical-hover-panel"
+                            aria-label="Contoh interpretasi Soil Behaviour Type Robertson 1990"
+                        >
+
+                            <div class="hover-panel-header">
+
+                                <span>
+                                    CPT Interpretation
+                                </span>
+
+                                <strong>
+                                    Soil Behaviour Type — Robertson (1990)
+                                </strong>
+
+                            </div>
+
+
+                            <div class="hover-panel-image">
+
+                                <img
+                                    src="./img/sbt-robertson-1990.png"
+                                    alt="Diagram Soil Behaviour Type SBT Robertson 1990"
+                                    loading="lazy"
+                                >
+
+                            </div>
+
+
+                            <div class="hover-panel-content">
+
+                                <p>
+                                    Salah satu pendekatan interpretasi CPT adalah
+                                    klasifikasi <strong>Soil Behaviour Type (SBT)</strong>
+                                    berdasarkan parameter CPT untuk memberikan
+                                    indikasi perilaku tanah secara relatif.
+                                </p>
+
+
+                                <div class="sbt-list">
+
+
+                                    <div class="sbt-item">
+
+                                        <span class="sbt-zone">
+                                            1
+                                        </span>
+
+                                        <div>
+                                            <strong>
+                                                Tanah Berbutir Halus Sensitif
+                                            </strong>
+
+                                            <span>
+                                                Sensitive fine-grained
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="sbt-item">
+
+                                        <span class="sbt-zone">
+                                            2
+                                        </span>
+
+                                        <div>
+                                            <strong>
+                                                Lempung – Tanah Organik
+                                            </strong>
+
+                                            <span>
+                                                Clay – Organic Soil • IC &gt; 3,60
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="sbt-item">
+
+                                        <span class="sbt-zone">
+                                            3
+                                        </span>
+
+                                        <div>
+                                            <strong>
+                                                Lempung hingga Lempung Berlanau
+                                            </strong>
+
+                                            <span>
+                                                Clays: Clay to Silty Clay •
+                                                IC 2,95–3,60
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="sbt-item">
+
+                                        <span class="sbt-zone">
+                                            4
+                                        </span>
+
+                                        <div>
+                                            <strong>
+                                                Campuran Lanau
+                                            </strong>
+
+                                            <span>
+                                                Clayey Silt &amp; Silty Clay •
+                                                IC 2,60–2,95
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="sbt-item">
+
+                                        <span class="sbt-zone">
+                                            5
+                                        </span>
+
+                                        <div>
+                                            <strong>
+                                                Campuran Pasir
+                                            </strong>
+
+                                            <span>
+                                                Silty Sand to Sandy Silt •
+                                                IC 2,05–2,60
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="sbt-item">
+
+                                        <span class="sbt-zone">
+                                            6
+                                        </span>
+
+                                        <div>
+                                            <strong>
+                                                Pasir
+                                            </strong>
+
+                                            <span>
+                                                Clean Sands to Silty Sands •
+                                                IC 1,31–2,05
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="sbt-item">
+
+                                        <span class="sbt-zone">
+                                            7
+                                        </span>
+
+                                        <div>
+                                            <strong>
+                                                Pasir Padat hingga Pasir Berkerikil
+                                            </strong>
+
+                                            <span>
+                                                Dense Sand to Gravelly Sand •
+                                                IC &lt; 1,31
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="sbt-item">
+
+                                        <span class="sbt-zone">
+                                            8
+                                        </span>
+
+                                        <div>
+                                            <strong>
+                                                Pasir Kaku hingga Pasir Berlempung*
+                                            </strong>
+
+                                            <span>
+                                                Stiff Sand to Clayey Sand*
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="sbt-item">
+
+                                        <span class="sbt-zone">
+                                            9
+                                        </span>
+
+                                        <div>
+                                            <strong>
+                                                Tanah Berbutir Halus Kaku*
+                                            </strong>
+
+                                            <span>
+                                                Stiff Fine-Grained*
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <p class="hover-panel-note">
+                                    Klasifikasi SBT merupakan salah satu pendekatan
+                                    interpretasi. Interpretasi CPT tidak terbatas
+                                    pada klasifikasi tersebut dan dapat dikembangkan
+                                    sesuai kebutuhan proyek, kualitas data, kondisi
+                                    tanah, serta lingkup pekerjaan yang disepakati.
+                                </p>
+
+                            </div>
+
+                        </div>
 
                     </article>
 
 
-                    <article class="technical-card reveal">
+                    <!-- =================================================
+                         GEOTECHNICAL EVALUATION CARD
+                         ================================================= -->
+                    <article
+                        class="technical-card technical-card-interactive reveal"
+                    >
 
-                        <span class="service-eyebrow">
-                            Foundation
-                        </span>
+                        <div class="technical-card-main">
 
-                        <h2>
-                            Evaluasi Geoteknik
-                        </h2>
+                            <span class="service-eyebrow">
+                                Geotechnical Evaluation
+                            </span>
 
-                        <p>
-                            Apabila termasuk dalam lingkup pekerjaan, hasil
-                            pengujian dapat digunakan sebagai data pendukung
-                            evaluasi fondasi dan analisis geoteknik.
-                        </p>
+                            <h2>
+                                Evaluasi Geoteknik
+                            </h2>
+
+                            <p>
+                                Data CPT dapat digunakan sebagai salah satu dasar
+                                untuk berbagai evaluasi geoteknik, termasuk analisis
+                                yang berkaitan dengan fondasi apabila termasuk dalam
+                                lingkup pekerjaan.
+                            </p>
+
+                            <span class="hover-indicator">
+                                Arahkan kursor untuk melihat contoh analisis
+                            </span>
+
+                        </div>
+
+
+                        <!-- =================================================
+                             HOVER PANEL — FOUNDATION CAPACITY
+                             ================================================= -->
+                        <div
+                            class="technical-hover-panel"
+                            aria-label="Contoh grafik evaluasi daya dukung fondasi berdasarkan kedalaman"
+                        >
+
+                            <div class="hover-panel-header">
+
+                                <span>
+                                    Geotechnical Analysis
+                                </span>
+
+                                <strong>
+                                    Evaluasi Daya Dukung vs Kedalaman
+                                </strong>
+
+                            </div>
+
+
+                            <div class="hover-panel-image">
+
+                                <img
+                                    src="./img/grafik-daya-dukung-cpt.png"
+                                    alt="Contoh grafik daya dukung izin Qa, daya dukung selimut Qs, dan daya dukung ujung Qp terhadap kedalaman"
+                                    loading="lazy"
+                                >
+
+                            </div>
+
+
+                            <div class="hover-panel-content">
+
+                                <p>
+                                    Sebagai contoh, data CPT dapat digunakan untuk
+                                    membantu mengevaluasi parameter kapasitas fondasi
+                                    terhadap kedalaman.
+                                </p>
+
+
+                                <div class="analysis-parameter-list">
+
+                                    <div class="analysis-parameter">
+
+                                        <strong>
+                                            Qa
+                                        </strong>
+
+                                        <span>
+                                            Daya dukung izin fondasi
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="analysis-parameter">
+
+                                        <strong>
+                                            Qs
+                                        </strong>
+
+                                        <span>
+                                            Kontribusi daya dukung selimut
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="analysis-parameter">
+
+                                        <strong>
+                                            Qp
+                                        </strong>
+
+                                        <span>
+                                            Kontribusi daya dukung ujung
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <p class="hover-panel-note">
+                                    Evaluasi geoteknik tidak terbatas pada daya
+                                    dukung fondasi. Sesuai kebutuhan proyek, scope
+                                    analisis dapat mencakup parameter dan evaluasi
+                                    geoteknik lainnya berdasarkan data tersedia,
+                                    kondisi tanah, jenis fondasi, kebutuhan desain,
+                                    serta lingkup pekerjaan yang disepakati.
+                                </p>
+
+                            </div>
+
+                        </div>
 
                     </article>
 
@@ -1082,7 +1463,7 @@
                 <div class="section-intro reveal">
 
                     <span class="service-eyebrow">
-                        06 / Report Preview
+                        07 / Report Preview
                     </span>
 
                     <h2>
@@ -1273,7 +1654,7 @@
                 <div class="section-intro reveal">
 
                     <span class="service-eyebrow">
-                        07 / Project Experience
+                        08 / Project Experience
                     </span>
 
                     <h2>
@@ -1342,7 +1723,7 @@
                 <div class="section-intro reveal">
 
                     <span class="service-eyebrow">
-                        08 / References
+                        09 / References
                     </span>
 
                     <h2>
@@ -1500,6 +1881,10 @@
          - navigasi mobile
          - header behavior
          - scroll reveal menggunakan IntersectionObserver
+
+         Hover panel interpretasi dan evaluasi geoteknik
+         dirancang berbasis CSS sehingga tidak membutuhkan
+         JavaScript tambahan.
          ========================================================= -->
     <script src="./app.js"></script>
 
