@@ -7,9 +7,10 @@
    - File ini bekerja setelah style.css.
    - style.css tetap menjadi GLOBAL DESIGN SYSTEM.
    - File ini hanya mengatur komponen khusus halaman Sondir.
-   - Warna utama mengikuti identitas website:
+   - Identitas visual mengikuti website utama:
        Navy  = rgb(3, 57, 132)
        Orange = rgb(248, 131, 0)
+   - Animasi reveal menggunakan class .reveal dari app.js.
    ========================================================================== */
 
 
@@ -17,31 +18,40 @@
    1. ROOT / VARIABEL KHUSUS HALAMAN SONDIR
    ========================================================================== */
 
-/*
-   Variabel global sebenarnya sudah tersedia dari style.css.
-
-   Di sini hanya dibuat beberapa variabel tambahan yang khusus
-   digunakan untuk kebutuhan visual halaman Sondir.
-*/
 :root {
 
-  /* Warna teknis tambahan */
+  /* ------------------------------------------------------------------------
+     Warna navy transparan
+     ------------------------------------------------------------------------ */
   --sondir-navy-soft: rgba(3, 57, 132, 0.08);
   --sondir-navy-faint: rgba(3, 57, 132, 0.045);
 
-  /* Aksen orange transparan */
+
+  /* ------------------------------------------------------------------------
+     Warna orange transparan
+     ------------------------------------------------------------------------ */
   --sondir-orange-soft: rgba(248, 131, 0, 0.10);
   --sondir-orange-faint: rgba(248, 131, 0, 0.055);
 
-  /* Background section alternatif */
+
+  /* ------------------------------------------------------------------------
+     Background section alternatif
+     ------------------------------------------------------------------------ */
   --sondir-section-alt: #f7f9fc;
 
-  /* Lebar maksimum konten */
+
+  /* ------------------------------------------------------------------------
+     Lebar maksimum konten halaman Sondir
+     ------------------------------------------------------------------------ */
   --sondir-max-width: 1120px;
 
-  /* Radius khusus komponen */
+
+  /* ------------------------------------------------------------------------
+     Radius komponen
+     ------------------------------------------------------------------------ */
   --sondir-radius: 10px;
   --sondir-radius-small: 6px;
+
 }
 
 
@@ -50,16 +60,14 @@
    ========================================================================== */
 
 /*
-   Halaman Sondir tidak menggunakan tinggi 100vh pada seluruh section.
+   style.css global memiliki .container dengan min-height: 100vh.
 
-   style.css memiliki .container dengan min-height: 100vh.
-   Karena halaman ini terdiri dari banyak section teknis,
-   kita override agar setiap section mengikuti tinggi kontennya.
+   Pada halaman detail Sondir, setiap section harus mengikuti tinggi
+   kontennya sendiri agar halaman teknis tidak memiliki ruang kosong
+   yang berlebihan.
 */
-.service-hero .container,
-.technical-section .container,
-.service-cta .container,
-.footer .container {
+
+.sondir-page .container {
   min-height: auto;
   height: auto;
 }
@@ -68,22 +76,106 @@
 /*
    Container khusus halaman Sondir.
 
-   Kita tidak mengubah .container global secara keseluruhan,
-   hanya mempersempit area konten halaman ini.
+   Tidak mengubah .container global pada halaman lain.
 */
-.service-hero .container,
-.technical-section .container,
-.service-cta .container {
+
+.sondir-page .service-hero .container,
+.sondir-page .technical-section .container,
+.sondir-page .service-cta .container {
+
   width: 100%;
   max-width: var(--sondir-max-width);
+
   margin: 0 auto;
+
   padding-left: 24px;
   padding-right: 24px;
+
+}
+
+
+/*
+   Footer menggunakan container sendiri.
+*/
+
+.sondir-page .footer .container {
+
+  min-height: auto;
+  height: auto;
+
+  width: 100%;
+  max-width: var(--sondir-max-width);
+
+  margin: 0 auto;
+
 }
 
 
 /* ==========================================================================
-   3. HERO SECTION
+   3. SCROLL REVEAL
+   ========================================================================== */
+
+/*
+   .reveal digunakan oleh HTML sebagai penanda elemen yang akan muncul
+   ketika masuk viewport.
+
+   app.js bertugas menambahkan class .active.
+
+   Dengan demikian:
+   HTML  = menentukan elemen yang direveal
+   CSS   = menentukan animasinya
+   JS    = mendeteksi posisi elemen
+*/
+
+.sondir-page .reveal {
+
+  opacity: 0;
+
+  transform: translateY(30px);
+
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+
+}
+
+
+/*
+   Kondisi setelah elemen masuk viewport.
+*/
+
+.sondir-page .reveal.active {
+
+  opacity: 1;
+
+  transform: translateY(0);
+
+}
+
+
+/*
+   Accessibility:
+   pengguna yang memilih reduced motion tidak mendapatkan
+   animasi pergerakan.
+*/
+
+@media (prefers-reduced-motion: reduce) {
+
+  .sondir-page .reveal {
+
+    opacity: 1;
+
+    transform: none;
+
+    transition: none;
+
+  }
+
+}
+
+
+/* ==========================================================================
+   4. HERO SECTION
    ========================================================================== */
 
 /*
@@ -91,20 +183,22 @@
 
    Konsep:
    - Navy sebagai warna dominan.
-   - Orange sebagai aksen.
-   - Tidak menggunakan gambar sehingga tetap cepat dan clean.
-   - Background menggunakan beberapa radial-gradient untuk memberi
-     kesan teknis / engineering tanpa menjadi terlalu dekoratif.
+   - Orange sebagai aksen identitas.
+   - Tidak menggunakan foto pada hero agar halaman tetap clean.
+   - Radial gradient memberikan nuansa engineering secara halus.
 */
+
 .service-hero {
+
   position: relative;
+
   width: 100%;
+
   overflow: hidden;
 
   background:
-    /*
-       Cahaya orange sangat halus di kanan atas.
-    */
+
+    /* Cahaya orange kanan atas */
     radial-gradient(
       circle at 88% 20%,
       rgba(248, 131, 0, 0.16) 0%,
@@ -112,9 +206,7 @@
       transparent 40%
     ),
 
-    /*
-       Cahaya navy yang lebih terang di kiri bawah.
-    */
+    /* Cahaya navy kiri bawah */
     radial-gradient(
       ellipse at 8% 90%,
       rgba(40, 105, 190, 0.25) 0%,
@@ -122,9 +214,7 @@
       transparent 65%
     ),
 
-    /*
-       Background utama navy.
-    */
+    /* Background utama */
     linear-gradient(
       135deg,
       #033984 0%,
@@ -132,29 +222,31 @@
       #022b61 100%
     );
 
-  /*
-     Sedikit border bawah orange sebagai identitas brand.
-  */
-  border-bottom: 3px solid var(--accent-orange);
+  border-bottom:
+    3px solid var(--accent-orange);
+
 }
 
 
 /*
-   Dekorasi garis teknis pada hero.
-
-   Dibuat sangat transparan agar tidak mengganggu teks.
+   Dekorasi lingkaran teknis.
 */
+
 .service-hero::before {
+
   content: '';
 
   position: absolute;
+
   top: 0;
   right: -120px;
 
   width: 480px;
   height: 480px;
 
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+
   border-radius: 50%;
 
   box-shadow:
@@ -163,55 +255,68 @@
     0 0 0 135px rgba(255, 255, 255, 0.008);
 
   pointer-events: none;
+
 }
 
 
 /*
-   Wrapper hero.
-
-   Karena style.css membuat .container flex-column,
-   kita biarkan arah vertikal tetapi mengatur spacing sendiri.
+   Container hero.
 */
+
 .service-hero .container {
+
   position: relative;
+
   z-index: 2;
 
   display: flex;
+
   flex-direction: column;
+
   justify-content: center;
+
   align-items: stretch;
 
   min-height: 620px;
 
   padding-top: 110px;
   padding-bottom: 75px;
+
 }
 
 
 /*
-   Area utama teks hero.
+   Area teks hero.
 */
+
 .service-hero-content {
+
   width: 100%;
+
   max-width: 900px;
+
 }
 
 
 /* ==========================================================================
-   4. EYEBROW / LABEL SECTION
+   5. SERVICE EYEBROW
    ========================================================================== */
 
 /*
    Label kecil seperti:
-   Soil Investigation Services
    01 / Overview
    02 / Scope
+   03 / Technical Parameters
 
-   Dibuat uppercase dan diberi letter spacing agar terasa corporate.
+   Dibuat konsisten untuk seluruh halaman.
 */
+
 .service-eyebrow {
+
   display: inline-flex;
+
   align-items: center;
+
   gap: 9px;
 
   position: relative;
@@ -219,66 +324,76 @@
   color: var(--accent-orange);
 
   font-size: 1.1rem;
+
   font-weight: 700;
 
   text-transform: uppercase;
+
   letter-spacing: 0.16rem;
 
   line-height: 1.5;
 
   margin-bottom: 13px;
+
 }
 
 
 /*
    Garis kecil sebelum eyebrow.
-
-   Memberikan identitas visual yang konsisten pada halaman teknis.
 */
+
 .service-eyebrow::before {
+
   content: '';
 
   width: 22px;
   height: 2px;
 
-  background-color: var(--accent-orange);
+  background-color:
+    var(--accent-orange);
 
   flex-shrink: 0;
+
 }
 
 
 /*
-   Pada hero, eyebrow dibuat sedikit lebih terang.
+   Eyebrow pada hero.
 */
+
 .service-hero .service-eyebrow {
-  color: rgba(255, 255, 255, 0.82);
+
+  color:
+    rgba(255, 255, 255, 0.82);
+
 }
 
 
 /*
    Garis eyebrow hero tetap orange.
 */
+
 .service-hero .service-eyebrow::before {
-  background-color: var(--accent-orange);
+
+  background-color:
+    var(--accent-orange);
+
 }
 
 
 /* ==========================================================================
-   5. HERO TYPOGRAPHY
+   6. HERO TYPOGRAPHY
    ========================================================================== */
 
-/*
-   Judul utama halaman Sondir.
-
-   Dibuat besar tetapi tidak sebesar hero homepage,
-   karena halaman ini lebih bersifat service detail.
-*/
 .service-hero h1 {
+
   max-width: 900px;
 
   color: #ffffff;
 
-  font-size: clamp(3.6rem, 5vw, 6.2rem);
+  font-size:
+    clamp(3.6rem, 5vw, 6.2rem);
+
   line-height: 1.08;
 
   font-weight: 700;
@@ -286,80 +401,126 @@
   letter-spacing: -0.08rem;
 
   margin-bottom: 24px;
+
 }
 
 
 /*
-   Kata "/ Sondir" memakai warna orange.
+   Accent pada judul:
+   " / Sondir"
 */
+
 .service-hero h1 .brand-accent {
-  color: var(--accent-orange);
+
+  color:
+    var(--accent-orange);
+
 }
 
 
 /*
    Deskripsi hero.
 */
+
 .service-hero-description {
+
   max-width: 760px;
 
-  color: rgba(255, 255, 255, 0.80);
+  color:
+    rgba(255, 255, 255, 0.80);
 
   font-size: 1.6rem;
+
   line-height: 2.7rem;
 
   font-weight: 400;
 
   margin-top: 0;
+
 }
 
 
 /* ==========================================================================
-   6. TECHNICAL SUMMARY
+   7. HERO ACTIONS
+   ========================================================================== */
+
+/*
+   Tombol hero.
+*/
+
+.service-hero-actions {
+
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 30px;
+
+}
+
+
+/* ==========================================================================
+   8. TECHNICAL SUMMARY
    ========================================================================== */
 
 /*
    Ringkasan teknis di bawah hero.
 
    Dibuat seperti specification strip,
-   bukan seperti card biasa.
+   bukan card besar.
 */
+
 .technical-summary {
+
   width: 100%;
 
   display: grid;
 
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
 
   margin-top: 48px;
 
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  border-top:
+    1px solid rgba(255, 255, 255, 0.16);
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.16);
+
 }
 
 
 /*
-   Setiap item summary.
+   Item summary.
 */
+
 .technical-summary-item {
+
   position: relative;
 
   min-height: 92px;
 
   display: flex;
+
   flex-direction: column;
+
   justify-content: center;
 
   padding: 18px 24px;
+
 }
 
 
 /*
-   Garis vertikal antar item.
-
-   Item terakhir tidak membutuhkan garis.
+   Garis vertikal antar summary.
 */
+
 .technical-summary-item:not(:last-child)::after {
+
   content: '';
 
   position: absolute;
@@ -368,72 +529,85 @@
   right: 0;
 
   width: 1px;
-  height: calc(100% - 44px);
 
-  background-color: rgba(255, 255, 255, 0.14);
+  height:
+    calc(100% - 44px);
+
+  background:
+    rgba(255, 255, 255, 0.14);
+
 }
 
 
 /*
    Label summary.
 */
+
 .technical-summary-item span {
-  color: rgba(255, 255, 255, 0.55);
+
+  color:
+    rgba(255, 255, 255, 0.55);
 
   font-size: 1rem;
+
   font-weight: 600;
 
   text-transform: uppercase;
+
   letter-spacing: 0.12rem;
 
   margin-bottom: 7px;
+
 }
 
 
 /*
    Nilai summary.
 */
+
 .technical-summary-item strong {
+
   color: #ffffff;
 
   font-size: 1.3rem;
+
   line-height: 1.8rem;
 
   font-weight: 600;
+
 }
 
 
 /* ==========================================================================
-   7. GENERAL TECHNICAL SECTION
+   9. GENERAL TECHNICAL SECTION
    ========================================================================== */
 
-/*
-   Semua section teknis.
-
-   Background putih sebagai default.
-*/
 .technical-section {
+
   position: relative;
 
   width: 100%;
 
   padding-top: 80px;
+
   padding-bottom: 80px;
 
-  background-color: #ffffff;
+  background-color:
+    #ffffff;
 
   overflow: hidden;
+
 }
 
 
 /*
    Section alternatif.
-
-   Warna sangat sedikit berbeda dari putih agar perpindahan
-   antar section terasa jelas tetapi tetap menyatu.
 */
+
 .technical-section.alt {
+
   background:
+
     radial-gradient(
       ellipse at 100% 0%,
       rgba(3, 57, 132, 0.045) 0%,
@@ -445,15 +619,16 @@
       #f8fafc 0%,
       #f7f9fc 100%
     );
+
 }
 
 
 /*
-   Garis dekoratif kecil di bagian bawah beberapa section.
-
-   Sangat halus agar tidak menjadi separator yang kaku.
+   Garis dekoratif halus.
 */
+
 .technical-section.alt::after {
+
   content: '';
 
   position: absolute;
@@ -461,10 +636,13 @@
   bottom: 0;
   left: 50%;
 
-  width: min(420px, 60%);
+  width:
+    min(420px, 60%);
+
   height: 1px;
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 
   background:
     linear-gradient(
@@ -473,35 +651,39 @@
       rgba(3, 57, 132, 0.12),
       transparent
     );
+
 }
 
 
 /* ==========================================================================
-   8. SECTION INTRO
+   10. SECTION INTRO
    ========================================================================== */
 
-/*
-   Pembuka setiap section.
-
-   Lebar dibatasi agar paragraf tidak terlalu panjang.
-*/
 .section-intro {
+
   width: 100%;
+
   max-width: 850px;
 
-  margin: 0 auto 42px auto;
+  margin:
+    0 auto 42px auto;
 
   text-align: center;
+
 }
 
 
 /*
    Judul section.
 */
-.section-intro h2 {
-  color: var(--primary-navy);
 
-  font-size: clamp(2.6rem, 4vw, 3.8rem);
+.section-intro h2 {
+
+  color:
+    var(--primary-navy);
+
+  font-size:
+    clamp(2.6rem, 4vw, 3.8rem);
 
   line-height: 1.2;
 
@@ -510,70 +692,74 @@
   letter-spacing: -0.04rem;
 
   margin-bottom: 14px;
+
 }
 
 
 /*
-   Paragraf pengantar.
+   Paragraf section.
 */
+
 .section-intro p {
+
   max-width: 760px;
 
   margin: 0 auto;
 
-  color: var(--text-muted);
+  color:
+    var(--text-muted);
 
   font-size: 1.45rem;
+
   line-height: 2.5rem;
+
 }
 
 
 /* ==========================================================================
-   9. TECHNICAL GRID
+   11. TECHNICAL GRID
    ========================================================================== */
 
-/*
-   Grid untuk:
-   - Overview
-   - Interpretation
-   - Foundation
-
-   Dua kolom pada desktop.
-*/
 .technical-grid {
+
   width: 100%;
 
   display: grid;
 
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
 
   gap: 18px;
+
 }
 
 
 /*
-   Card teknis.
-
-   Dibuat clean dan flat,
-   tidak menggunakan dekorasi berlebihan.
+   Technical card.
 */
+
 .technical-card {
+
   position: relative;
 
   padding: 28px 30px;
 
   background:
+
     linear-gradient(
       145deg,
       rgba(255, 255, 255, 0.98),
       rgba(248, 250, 252, 0.98)
     );
 
-  border: 1px solid var(--border-color);
+  border:
+    1px solid var(--border-color);
 
-  border-left: 3px solid var(--accent-orange);
+  border-left:
+    3px solid var(--accent-orange);
 
-  border-radius: var(--sondir-radius);
+  border-radius:
+    var(--sondir-radius);
 
   box-shadow:
     0 8px 25px rgba(3, 57, 132, 0.055);
@@ -582,27 +768,36 @@
     transform 0.3s ease,
     box-shadow 0.3s ease,
     border-color 0.3s ease;
+
 }
 
 
 /*
-   Hover card.
+   Hover technical card.
 */
-.technical-card:hover {
-  transform: translateY(-4px);
 
-  border-left-color: var(--accent-orange);
+.technical-card:hover {
+
+  transform:
+    translateY(-4px);
+
+  border-left-color:
+    var(--accent-orange);
 
   box-shadow:
     0 16px 32px rgba(3, 57, 132, 0.10);
+
 }
 
 
 /*
    Judul card.
 */
+
 .technical-card h3 {
-  color: var(--primary-navy);
+
+  color:
+    var(--primary-navy);
 
   font-size: 1.55rem;
 
@@ -611,15 +806,18 @@
   font-weight: 700;
 
   margin-bottom: 8px;
+
 }
 
 
 /*
-   Card yang menggunakan h2,
-   khusus bagian Interpretation / Foundation.
+   Card yang menggunakan h2.
 */
+
 .technical-card h2 {
-  color: var(--primary-navy);
+
+  color:
+    var(--primary-navy);
 
   font-size: 2.3rem;
 
@@ -628,82 +826,134 @@
   font-weight: 700;
 
   margin-bottom: 12px;
+
 }
 
 
 /*
    Paragraf card.
 */
+
 .technical-card p {
-  color: var(--text-muted);
+
+  color:
+    var(--text-muted);
 
   font-size: 1.35rem;
 
   line-height: 2.25rem;
 
   margin-top: 0;
+
 }
 
 
 /*
-   Eyebrow di dalam technical card.
+   List pada technical card.
+
+   Dibuat clean tanpa bullet browser default.
 */
-.technical-card .service-eyebrow {
-  margin-bottom: 10px;
+
+.technical-card ul {
+
+  list-style: none;
+
+  margin: 12px 0 0 0;
+
+  padding: 0;
+
+}
+
+
+.technical-card li {
+
+  position: relative;
+
+  padding:
+    8px 0 8px 19px;
+
+  color:
+    var(--text-muted);
+
+  font-size: 1.3rem;
+
+  line-height: 2rem;
+
+}
+
+
+.technical-card li::before {
+
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+
+  top: 17px;
+
+  width: 6px;
+
+  height: 6px;
+
+  border-radius: 50%;
+
+  background-color:
+    var(--accent-orange);
+
 }
 
 
 /* ==========================================================================
-   10. SCOPE LIST
+   12. SCOPE LIST
    ========================================================================== */
 
-/*
-   Lingkup pekerjaan dibuat sebagai daftar horizontal/vertical
-   dengan nomor besar di kiri.
-
-   Ini lebih profesional daripada empat card biasa.
-*/
 .scope-list {
+
   width: 100%;
 
   display: grid;
 
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
 
   gap: 0 45px;
 
-  border-top: 1px solid var(--border-color);
+  border-top:
+    1px solid var(--border-color);
+
 }
 
 
-/*
-   Item scope.
-*/
 .scope-item {
+
   position: relative;
 
   display: grid;
 
-  grid-template-columns: 52px minmax(0, 1fr);
+  grid-template-columns:
+    52px minmax(0, 1fr);
 
   gap: 18px;
 
   padding: 25px 0;
 
-  border-bottom: 1px solid var(--border-color);
+  border-bottom:
+    1px solid var(--border-color);
+
 }
 
 
-/*
-   Nomor scope.
-*/
 .scope-number {
+
   display: flex;
 
   align-items: flex-start;
+
   justify-content: flex-start;
 
-  color: var(--accent-orange);
+  color:
+    var(--accent-orange);
 
   font-size: 1.25rem;
 
@@ -712,14 +962,14 @@
   letter-spacing: 0.08rem;
 
   padding-top: 3px;
+
 }
 
 
-/*
-   Judul scope.
-*/
 .scope-item h3 {
-  color: var(--primary-navy);
+
+  color:
+    var(--primary-navy);
 
   font-size: 1.5rem;
 
@@ -728,33 +978,63 @@
   font-weight: 700;
 
   margin-bottom: 6px;
+
 }
 
 
-/*
-   Deskripsi scope.
-*/
 .scope-item p {
-  color: var(--text-muted);
+
+  color:
+    var(--text-muted);
 
   font-size: 1.3rem;
 
   line-height: 2.15rem;
 
   margin-top: 0;
+
 }
 
 
 /* ==========================================================================
-   11. SPECIFICATION TABLE
+   13. PARAMETER LAYOUT
    ========================================================================== */
 
 /*
-   Pembungkus tabel.
+   BAGIAN BARU UNTUK FOTO ALAT.
 
-   Overflow-x penting untuk perangkat mobile.
+   Layout:
+   kiri  = tabel spesifikasi
+   kanan = foto peralatan
+
+   Tujuan:
+   Foto tidak berdiri sebagai katalog,
+   tetapi menjadi bagian dari penjelasan teknis.
 */
+
+.parameter-layout {
+
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.35fr)
+    minmax(320px, 0.75fr);
+
+  gap: 24px;
+
+  align-items: stretch;
+
+}
+
+
+/* ==========================================================================
+   14. SPECIFICATION TABLE
+   ========================================================================== */
+
 .spec-table-wrapper {
+
   width: 100%;
 
   overflow-x: auto;
@@ -762,136 +1042,321 @@
   border:
     1px solid var(--border-color);
 
-  border-radius: var(--sondir-radius);
+  border-radius:
+    var(--sondir-radius);
 
   box-shadow:
     0 10px 28px rgba(3, 57, 132, 0.055);
 
-  background-color: #ffffff;
+  background-color:
+    #ffffff;
+
 }
 
 
-/*
-   Tabel utama.
-*/
 .spec-table {
+
   width: 100%;
 
   min-width: 680px;
 
   border-collapse: collapse;
 
-  background-color: #ffffff;
+  background-color:
+    #ffffff;
+
 }
 
 
-/*
-   Semua cell.
-*/
 .spec-table th,
 .spec-table td {
+
   padding: 17px 22px;
 
-  border-bottom: 1px solid var(--border-color);
+  border-bottom:
+    1px solid var(--border-color);
 
   font-size: 1.3rem;
 
   line-height: 2rem;
 
   vertical-align: middle;
+
 }
 
 
-/*
-   Kolom parameter.
-
-   Dibuat sedikit abu agar terlihat seperti technical specification sheet.
-*/
 .spec-table th {
+
   width: 36%;
 
-  color: var(--primary-navy);
+  color:
+    var(--primary-navy);
 
-  background-color: #f8fafc;
+  background-color:
+    #f8fafc;
 
   font-weight: 700;
 
   text-align: left;
+
 }
 
 
-/*
-   Kolom nilai.
-*/
 .spec-table td {
-  color: var(--text-dark);
+
+  color:
+    var(--text-dark);
 
   font-weight: 400;
 
-  background-color: #ffffff;
+  background-color:
+    #ffffff;
+
 }
 
 
-/*
-   Hilangkan border pada baris terakhir.
-*/
 .spec-table tr:last-child th,
 .spec-table tr:last-child td {
+
   border-bottom: none;
+
 }
 
 
-/*
-   Hover baris.
-
-   Sangat halus agar tetap terlihat corporate.
-*/
 .spec-table tr:hover th {
-  background-color: #f3f6fa;
+
+  background-color:
+    #f3f6fa;
+
 }
 
 
 .spec-table tr:hover td {
-  background-color: #fcfdff;
+
+  background-color:
+    #fcfdff;
+
 }
 
 
 /* ==========================================================================
-   12. WORKFLOW / FIELD PROCEDURE
+   15. EQUIPMENT SHOWCASE
    ========================================================================== */
 
 /*
-   Workflow dibuat dalam 3 kolom.
+   Foto alat Sondir.
 
-   Enam langkah menjadi dua baris pada desktop.
+   Foto dibuat seperti technical showcase:
+   - tidak terlalu besar
+   - tidak seperti gallery
+   - tetap memiliki caption
+   - visualnya menjadi pendukung spesifikasi
 */
-.workflow-grid {
-  width: 100%;
 
-  display: grid;
+.equipment-showcase {
 
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-
-  gap: 18px;
-}
-
-
-/*
-   Item workflow.
-*/
-.workflow-item {
   position: relative;
 
-  min-height: 190px;
+  display: flex;
 
-  padding: 26px 26px 24px 26px;
+  flex-direction: column;
 
-  background-color: #ffffff;
+  justify-content: center;
+
+  min-width: 0;
+
+  margin: 0;
+
+  padding: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff 0%,
+      #f8fafc 100%
+    );
 
   border:
     1px solid var(--border-color);
 
-  border-radius: var(--sondir-radius);
+  border-radius:
+    var(--sondir-radius);
+
+  box-shadow:
+    0 10px 28px rgba(3, 57, 132, 0.055);
+
+  overflow: hidden;
+
+}
+
+
+/*
+   Garis orange tipis di bagian atas.
+*/
+
+.equipment-showcase::before {
+
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--accent-orange),
+      rgba(248, 131, 0, 0.18)
+    );
+
+}
+
+
+/*
+   Wrapper foto.
+
+   Rasio dibuat landscape agar foto alat terlihat
+   seperti dokumentasi teknis profesional.
+*/
+
+.equipment-image {
+
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 4 / 3;
+
+  overflow: hidden;
+
+  border-radius:
+    var(--sondir-radius-small);
+
+  background:
+    #e9eef5;
+
+}
+
+
+/*
+   Foto alat.
+
+   object-fit memastikan gambar tidak gepeng.
+*/
+
+.equipment-image img {
+
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  transition:
+    transform 0.5s ease;
+
+}
+
+
+/*
+   Hover foto sangat ringan.
+*/
+
+.equipment-showcase:hover .equipment-image img {
+
+  transform:
+    scale(1.025);
+
+}
+
+
+/*
+   Caption foto.
+*/
+
+.equipment-showcase figcaption {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+  padding:
+    15px 3px 3px 3px;
+
+}
+
+
+.equipment-showcase figcaption strong {
+
+  color:
+    var(--primary-navy);
+
+  font-size: 1.3rem;
+
+  line-height: 1.8rem;
+
+  font-weight: 700;
+
+}
+
+
+.equipment-showcase figcaption span {
+
+  color:
+    var(--text-muted);
+
+  font-size: 1.15rem;
+
+  line-height: 1.8rem;
+
+}
+
+
+/* ==========================================================================
+   16. WORKFLOW / FIELD PROCEDURE
+   ========================================================================== */
+
+.workflow-grid {
+
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+
+}
+
+
+.workflow-item {
+
+  position: relative;
+
+  min-height: 190px;
+
+  padding:
+    26px 26px 24px 26px;
+
+  background-color:
+    #ffffff;
+
+  border:
+    1px solid var(--border-color);
+
+  border-radius:
+    var(--sondir-radius);
 
   box-shadow:
     0 8px 24px rgba(3, 57, 132, 0.045);
@@ -902,13 +1367,16 @@
     transform 0.3s ease,
     box-shadow 0.3s ease,
     border-color 0.3s ease;
+
 }
 
 
 /*
-   Garis orange kecil di bagian atas workflow.
+   Garis orange bagian atas.
 */
+
 .workflow-item::before {
+
   content: '';
 
   position: absolute;
@@ -925,30 +1393,30 @@
       var(--accent-orange),
       rgba(248, 131, 0, 0.15)
     );
+
 }
 
 
-/*
-   Hover workflow.
-*/
 .workflow-item:hover {
-  transform: translateY(-4px);
+
+  transform:
+    translateY(-4px);
 
   border-color:
     rgba(3, 57, 132, 0.16);
 
   box-shadow:
     0 15px 32px rgba(3, 57, 132, 0.09);
+
 }
 
 
-/*
-   Nomor workflow.
-*/
 .workflow-number {
+
   display: block;
 
-  color: var(--accent-orange);
+  color:
+    var(--accent-orange);
 
   font-size: 1.1rem;
 
@@ -957,14 +1425,14 @@
   letter-spacing: 0.12rem;
 
   margin-bottom: 18px;
+
 }
 
 
-/*
-   Judul workflow.
-*/
 .workflow-item h3 {
-  color: var(--primary-navy);
+
+  color:
+    var(--primary-navy);
 
   font-size: 1.5rem;
 
@@ -973,49 +1441,47 @@
   font-weight: 700;
 
   margin-bottom: 8px;
+
 }
 
 
-/*
-   Deskripsi workflow.
-*/
 .workflow-item p {
-  color: var(--text-muted);
+
+  color:
+    var(--text-muted);
 
   font-size: 1.3rem;
 
   line-height: 2.15rem;
 
   margin-top: 0;
+
 }
 
 
 /* ==========================================================================
-   13. RESULT / DATA LIST
+   17. RESULT / DATA LIST
    ========================================================================== */
 
-/*
-   Output pekerjaan.
-
-   Enam item disusun dua kolom agar section tetap ringkas.
-*/
 .result-list {
+
   width: 100%;
 
   display: grid;
 
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
 
   column-gap: 50px;
 
-  border-top: 1px solid var(--border-color);
+  border-top:
+    1px solid var(--border-color);
+
 }
 
 
-/*
-   Item hasil.
-*/
 .result-item {
+
   display: flex;
 
   align-items: center;
@@ -1024,16 +1490,14 @@
 
   min-height: 70px;
 
-  border-bottom: 1px solid var(--border-color);
+  border-bottom:
+    1px solid var(--border-color);
+
 }
 
 
-/*
-   Titik/icon kecil.
-
-   Tidak memakai icon library sehingga HTML tetap sederhana.
-*/
 .result-icon {
+
   position: relative;
 
   width: 8px;
@@ -1043,39 +1507,37 @@
 
   border-radius: 50%;
 
-  background-color: var(--accent-orange);
+  background-color:
+    var(--accent-orange);
 
   box-shadow:
     0 0 0 5px rgba(248, 131, 0, 0.08);
+
 }
 
 
-/*
-   Teks hasil.
-*/
 .result-item p {
-  color: var(--text-dark);
+
+  color:
+    var(--text-dark);
 
   font-size: 1.3rem;
 
   line-height: 2rem;
 
   margin-top: 0;
+
 }
 
 
 /* ==========================================================================
-   14. REPORT PREVIEW
+   18. REPORT PREVIEW
    ========================================================================== */
 
-/*
-   Section contoh laporan dibuat berbeda dari technical card.
-
-   Tujuannya agar user melihat bahwa laporan merupakan
-   deliverable profesional, bukan sekadar daftar output.
-*/
 .report-section {
+
   background:
+
     radial-gradient(
       ellipse at 8% 45%,
       rgba(3, 57, 132, 0.055) 0%,
@@ -1089,21 +1551,19 @@
     ),
 
     #ffffff;
+
 }
 
 
-/*
-   Wrapper utama report preview.
-
-   Kiri = penjelasan.
-   Kanan = struktur dokumen.
-*/
 .report-preview {
+
   width: 100%;
 
   display: grid;
 
-  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.85fr);
+  grid-template-columns:
+    minmax(0, 1.35fr)
+    minmax(300px, 0.85fr);
 
   gap: 0;
 
@@ -1114,28 +1574,29 @@
 
   border-radius: 12px;
 
-  background-color: #ffffff;
+  background-color:
+    #ffffff;
 
   box-shadow:
     0 16px 40px rgba(3, 57, 132, 0.08);
+
 }
 
 
-/*
-   Bagian kiri report.
-*/
 .report-preview-content {
-  padding: 42px 42px 44px 42px;
+
+  padding:
+    42px 42px 44px 42px;
+
 }
 
 
-/*
-   Label kecil pada report.
-*/
 .report-label {
+
   display: inline-block;
 
-  color: var(--accent-orange);
+  color:
+    var(--accent-orange);
 
   font-size: 1rem;
 
@@ -1146,16 +1607,16 @@
   letter-spacing: 0.14rem;
 
   margin-bottom: 13px;
+
 }
 
 
-/*
-   Judul contoh laporan.
-*/
 .report-preview-content h3 {
+
   max-width: 620px;
 
-  color: var(--primary-navy);
+  color:
+    var(--primary-navy);
 
   font-size: 2.45rem;
 
@@ -1164,16 +1625,16 @@
   font-weight: 700;
 
   margin-bottom: 15px;
+
 }
 
 
-/*
-   Paragraf report.
-*/
 .report-preview-content p {
+
   max-width: 650px;
 
-  color: var(--text-muted);
+  color:
+    var(--text-muted);
 
   font-size: 1.3rem;
 
@@ -1182,43 +1643,44 @@
   margin-top: 0;
 
   margin-bottom: 15px;
+
 }
 
 
-/*
-   List isi laporan.
-*/
 .report-contents {
+
   list-style: none;
 
-  margin: 18px 0 20px 0;
+  margin:
+    18px 0 20px 0;
 
   padding: 0;
+
 }
 
 
-/*
-   Item list laporan.
-*/
 .report-contents li {
+
   position: relative;
 
-  padding: 9px 0 9px 20px;
+  padding:
+    9px 0 9px 20px;
 
-  color: var(--text-dark);
+  color:
+    var(--text-dark);
 
   font-size: 1.3rem;
 
   line-height: 1.9rem;
 
-  border-bottom: 1px solid #eef2f6;
+  border-bottom:
+    1px solid #eef2f6;
+
 }
 
 
-/*
-   Titik orange sebelum item.
-*/
 .report-contents li::before {
+
   content: '';
 
   position: absolute;
@@ -1231,18 +1693,16 @@
 
   border-radius: 50%;
 
-  background-color: var(--accent-orange);
+  background-color:
+    var(--accent-orange);
+
 }
 
 
-/*
-   Catatan bawah report.
-
-   Dibuat sedikit lebih kecil agar jelas bahwa
-   bagian ini hanya penjelasan mengenai sample.
-*/
 .report-preview-content .report-note {
-  color: #7a8798;
+
+  color:
+    #7a8798;
 
   font-size: 1.15rem;
 
@@ -1251,38 +1711,32 @@
   margin-top: 18px;
 
   margin-bottom: 22px;
+
 }
 
 
-/*
-   Tombol pada sample report.
-
-   Menggunakan .btn dari design system jika tersedia.
-   Di sini hanya memastikan dimensinya proporsional.
-*/
 .report-preview-content .btn {
+
   display: inline-flex;
 
   align-items: center;
+
   justify-content: center;
 
   min-height: 46px;
 
-  padding: 12px 22px;
+  padding:
+    12px 22px;
+
 }
 
 
 /* ==========================================================================
-   15. REPORT STRUCTURE PANEL
+   19. REPORT STRUCTURE PANEL
    ========================================================================== */
 
-/*
-   Panel kanan.
-
-   Dibuat navy sehingga menjadi visual anchor
-   dari seluruh section.
-*/
 .report-preview-structure {
+
   position: relative;
 
   display: flex;
@@ -1291,9 +1745,11 @@
 
   justify-content: center;
 
-  padding: 35px 32px;
+  padding:
+    35px 32px;
 
   background:
+
     radial-gradient(
       circle at 80% 15%,
       rgba(248, 131, 0, 0.16) 0%,
@@ -1306,13 +1762,12 @@
       #023475 52%,
       #022b61 100%
     );
+
 }
 
 
-/*
-   Garis dekoratif di sisi kanan.
-*/
 .report-preview-structure::before {
+
   content: '';
 
   position: absolute;
@@ -1333,18 +1788,18 @@
     0 0 0 60px rgba(255, 255, 255, 0.01);
 
   pointer-events: none;
+
 }
 
 
-/*
-   Setiap baris struktur dokumen.
-*/
 .report-document-line {
+
   position: relative;
 
   display: grid;
 
-  grid-template-columns: 38px minmax(0, 1fr);
+  grid-template-columns:
+    38px minmax(0, 1fr);
 
   align-items: center;
 
@@ -1354,60 +1809,51 @@
 
   border-bottom:
     1px solid rgba(255, 255, 255, 0.12);
+
 }
 
 
-/*
-   Nomor struktur.
-*/
 .report-document-line span {
-  color: var(--accent-orange);
+
+  color:
+    var(--accent-orange);
 
   font-size: 1rem;
 
   font-weight: 700;
 
   letter-spacing: 0.08rem;
+
 }
 
 
-/*
-   Nama struktur.
-*/
 .report-document-line strong {
-  color: rgba(255, 255, 255, 0.90);
+
+  color:
+    rgba(255, 255, 255, 0.90);
 
   font-size: 1.25rem;
 
   line-height: 1.8rem;
 
   font-weight: 600;
+
 }
 
 
-/*
-   Baris terakhir tidak perlu border.
-*/
 .report-document-line:last-child {
+
   border-bottom: none;
+
 }
 
 
 /* ==========================================================================
-   16. PROJECT EXPERIENCE / PORTFOLIO
+   20. PROJECT EXPERIENCE / PORTFOLIO
    ========================================================================== */
 
-/*
-   Placeholder portfolio sengaja dibuat profesional.
-
-   Jangan dibuat seperti:
-   "Coming Soon!!!"
-   karena akan terlihat seperti website belum selesai.
-
-   Kita tampilkan sebagai area portfolio yang memang
-   belum memiliki proyek publikasi.
-*/
 .experience-placeholder {
+
   position: relative;
 
   width: 100%;
@@ -1416,11 +1862,13 @@
 
   margin: 0 auto;
 
-  padding: 48px 42px;
+  padding:
+    48px 42px;
 
   text-align: center;
 
   background:
+
     linear-gradient(
       145deg,
       #ffffff 0%,
@@ -1436,13 +1884,12 @@
     0 12px 32px rgba(3, 57, 132, 0.055);
 
   overflow: hidden;
+
 }
 
 
-/*
-   Garis orange tipis di bagian atas placeholder.
-*/
 .experience-placeholder::before {
+
   content: '';
 
   position: absolute;
@@ -1459,16 +1906,16 @@
       var(--accent-orange),
       rgba(248, 131, 0, 0.15)
     );
+
 }
 
 
-/*
-   Label Portfolio.
-*/
 .experience-status {
+
   display: inline-block;
 
-  color: var(--accent-orange);
+  color:
+    var(--accent-orange);
 
   font-size: 1rem;
 
@@ -1479,14 +1926,14 @@
   letter-spacing: 0.15rem;
 
   margin-bottom: 12px;
+
 }
 
 
-/*
-   Judul portfolio.
-*/
 .experience-placeholder h3 {
-  color: var(--primary-navy);
+
+  color:
+    var(--primary-navy);
 
   font-size: 2.3rem;
 
@@ -1495,49 +1942,46 @@
   font-weight: 700;
 
   margin-bottom: 12px;
+
 }
 
 
-/*
-   Deskripsi portfolio.
-*/
 .experience-placeholder p {
+
   max-width: 680px;
 
   margin: 0 auto;
 
-  color: var(--text-muted);
+  color:
+    var(--text-muted);
 
   font-size: 1.3rem;
 
   line-height: 2.2rem;
+
 }
 
 
 /* ==========================================================================
-   17. REFERENCES
+   21. REFERENCES
    ========================================================================== */
 
-/*
-   List acuan teknis.
-
-   Dibuat minimalis supaya tidak terasa seperti halaman akademik.
-*/
 .reference-list {
+
   width: 100%;
 
   border-top:
     1px solid var(--border-color);
+
 }
 
 
-/*
-   Setiap referensi.
-*/
 .reference-item {
+
   display: grid;
 
-  grid-template-columns: 190px minmax(0, 1fr);
+  grid-template-columns:
+    190px minmax(0, 1fr);
 
   gap: 25px;
 
@@ -1545,58 +1989,57 @@
 
   min-height: 70px;
 
-  padding: 14px 0;
+  padding:
+    14px 0;
 
   border-bottom:
     1px solid var(--border-color);
+
 }
 
 
-/*
-   Nama standar / referensi.
-*/
 .reference-item strong {
-  color: var(--primary-navy);
+
+  color:
+    var(--primary-navy);
 
   font-size: 1.25rem;
 
   line-height: 1.8rem;
 
   font-weight: 700;
+
 }
 
 
-/*
-   Deskripsi referensi.
-*/
 .reference-item span {
-  color: var(--text-muted);
+
+  color:
+    var(--text-muted);
 
   font-size: 1.25rem;
 
   line-height: 1.9rem;
+
 }
 
 
 /* ==========================================================================
-   18. CTA SECTION
+   22. CTA SECTION
    ========================================================================== */
 
-/*
-   CTA menjadi penutup halaman sebelum footer.
-
-   Dibuat lebih kuat secara visual agar user diarahkan
-   ke tindakan setelah membaca halaman.
-*/
 .service-cta {
+
   position: relative;
 
   width: 100%;
 
   padding-top: 80px;
+
   padding-bottom: 80px;
 
   background:
+
     radial-gradient(
       ellipse at 85% 20%,
       rgba(248, 131, 0, 0.14) 0%,
@@ -1612,18 +2055,18 @@
     );
 
   overflow: hidden;
+
 }
 
 
-/*
-   Box CTA.
-*/
 .service-cta-box {
+
   position: relative;
 
   width: 100%;
 
-  padding: 52px 55px;
+  padding:
+    52px 55px;
 
   text-align: center;
 
@@ -1632,6 +2075,7 @@
   overflow: hidden;
 
   background:
+
     radial-gradient(
       circle at 88% 15%,
       rgba(248, 131, 0, 0.18) 0%,
@@ -1648,13 +2092,12 @@
 
   box-shadow:
     0 20px 45px rgba(3, 57, 132, 0.18);
+
 }
 
 
-/*
-   Dekorasi lingkaran CTA.
-*/
 .service-cta-box::before {
+
   content: '';
 
   position: absolute;
@@ -1673,66 +2116,67 @@
   box-shadow:
     0 0 0 35px rgba(255, 255, 255, 0.012),
     0 0 0 70px rgba(255, 255, 255, 0.008);
+
 }
 
 
-/*
-   Eyebrow CTA.
-*/
 .service-cta-box .service-eyebrow {
-  color: rgba(255, 255, 255, 0.75);
+
+  color:
+    rgba(255, 255, 255, 0.75);
+
 }
 
 
-/*
-   Judul CTA.
-*/
 .service-cta-box h2 {
+
   position: relative;
 
-  color: #ffffff;
+  color:
+    #ffffff;
 
-  font-size: clamp(2.7rem, 4vw, 4rem);
+  font-size:
+    clamp(2.7rem, 4vw, 4rem);
 
   line-height: 1.2;
 
   font-weight: 700;
 
   margin-bottom: 13px;
+
 }
 
 
-/*
-   Deskripsi CTA.
-*/
 .service-cta-box > p {
+
   position: relative;
 
   max-width: 720px;
 
   margin: 0 auto;
 
-  color: rgba(255, 255, 255, 0.76);
+  color:
+    rgba(255, 255, 255, 0.76);
 
   font-size: 1.4rem;
 
   line-height: 2.4rem;
+
 }
 
 
 /* ==========================================================================
-   19. CTA BUTTON GROUP
+   23. CTA BUTTON GROUP
    ========================================================================== */
 
-/*
-   Wrapper dua tombol CTA.
-*/
 .service-cta-actions {
+
   position: relative;
 
   display: flex;
 
   justify-content: center;
+
   align-items: center;
 
   flex-wrap: wrap;
@@ -1740,17 +2184,14 @@
   gap: 12px;
 
   margin-top: 28px;
+
 }
 
 
-/*
-   Tombol primary pada CTA.
-
-   Jika .btn-primary sudah tersedia di style.css,
-   aturan ini hanya memperkuat konsistensi visual.
-*/
 .service-cta .btn-primary {
-  color: #ffffff;
+
+  color:
+    #ffffff;
 
   background:
     linear-gradient(
@@ -1759,18 +2200,19 @@
       var(--orange-hover) 100%
     );
 
-  border-color: var(--accent-orange);
+  border-color:
+    var(--accent-orange);
 
   box-shadow:
     0 7px 20px rgba(248, 131, 0, 0.28);
+
 }
 
 
-/*
-   Hover primary CTA.
-*/
 .service-cta .btn-primary:hover {
-  color: #ffffff;
+
+  color:
+    #ffffff;
 
   background:
     linear-gradient(
@@ -1779,135 +2221,132 @@
       var(--accent-orange) 100%
     );
 
-  transform: translateY(-2px);
+  transform:
+    translateY(-2px);
 
   box-shadow:
     0 10px 25px rgba(248, 131, 0, 0.36);
+
 }
 
 
-/*
-   Tombol secondary pada CTA.
-
-   Karena background CTA navy,
-   secondary menggunakan border putih transparan.
-*/
 .service-cta .btn-secondary {
-  color: #ffffff;
+
+  color:
+    #ffffff;
 
   background:
     rgba(255, 255, 255, 0.05);
 
   border:
     1px solid rgba(255, 255, 255, 0.35);
+
 }
 
 
-/*
-   Hover secondary.
-*/
 .service-cta .btn-secondary:hover {
-  color: var(--primary-navy);
 
-  background-color: #ffffff;
+  color:
+    var(--primary-navy);
 
-  border-color: #ffffff;
+  background-color:
+    #ffffff;
 
-  transform: translateY(-2px);
+  border-color:
+    #ffffff;
+
+  transform:
+    translateY(-2px);
+
 }
 
 
 /* ==========================================================================
-   20. FOOTER KHUSUS HALAMAN
+   24. FOOTER
    ========================================================================== */
 
-/*
-   HTML Sondir menggunakan:
-   <footer class="footer">
-
-   Berbeda dari homepage yang menggunakan #footer.
-
-   Kita hanya memastikan footer mengikuti karakter global.
-*/
 body > footer.footer {
+
   width: 100%;
 
-  background-color: var(--navy-dark);
+  background-color:
+    var(--navy-dark);
 
   border-top:
     3px solid var(--accent-orange);
+
 }
 
 
-/*
-   Container footer pada halaman Sondir.
-*/
 body > footer.footer .container {
+
   min-height: auto;
 
   width: 100%;
-  max-width: var(--sondir-max-width);
+
+  max-width:
+    var(--sondir-max-width);
 
   margin: 0 auto;
 
   padding:
     38px 24px 25px 24px;
+
 }
 
 
-/*
-   Isi footer.
-
-   Dua kolom desktop.
-*/
 .footer-content {
+
   width: 100%;
 
   display: flex;
 
   justify-content: space-between;
+
   align-items: center;
 
   gap: 30px;
+
 }
 
 
-/*
-   Nama perusahaan.
-*/
 .footer-content strong {
-  color: #ffffff;
+
+  color:
+    #ffffff;
 
   font-size: 1.45rem;
 
   font-weight: 700;
 
   letter-spacing: 0.04rem;
+
 }
 
 
-/*
-   Informasi footer.
-*/
 .footer-content p {
-  color: #94a3b8;
+
+  color:
+    #94a3b8;
 
   font-size: 1.15rem;
 
   line-height: 1.8rem;
 
   margin-top: 5px;
+
 }
 
 
 /* ==========================================================================
-   21. SCROLL OFFSET
+   25. SCROLL OFFSET
    ========================================================================== */
 
 /*
-   Karena header website bersifat fixed,
-   anchor section tidak boleh tersembunyi di balik header.
+   Header homepage bersifat fixed.
+   Anchor section diberi offset agar judul tidak tertutup header.
 */
+
 #overview,
 #scope,
 #parameters,
@@ -1917,138 +2356,189 @@ body > footer.footer .container {
 #sample-report,
 #experience,
 #references {
-  scroll-margin-top: 85px;
+
+  scroll-margin-top:
+    85px;
+
 }
 
 
 /* ==========================================================================
-   22. HOVER / INTERACTION ACCESSIBILITY
+   26. HOVER / INTERACTION ACCESSIBILITY
    ========================================================================== */
 
-/*
-   Mengurangi hover effect pada perangkat yang tidak memiliki
-   pointer presisi seperti layar sentuh.
-*/
 @media (hover: none) {
 
   .technical-card:hover,
   .workflow-item:hover,
-  .experience-placeholder:hover {
+  .equipment-showcase:hover .equipment-image img {
+
     transform: none;
+
   }
 
 }
 
 
 /* ==========================================================================
-   23. TABLET
+   27. TABLET
    ========================================================================== */
 
 @media only screen and (max-width: 991px) {
 
-  /*
-     Hero dibuat sedikit lebih pendek.
-  */
+
+  /* ------------------------------------------------------------------------
+     HERO
+     ------------------------------------------------------------------------ */
+
   .service-hero .container {
+
     min-height: 560px;
 
     padding-top: 105px;
+
     padding-bottom: 65px;
+
   }
 
 
-  /*
-     Summary berubah menjadi dua kolom.
-  */
+  /* ------------------------------------------------------------------------
+     TECHNICAL SUMMARY
+     ------------------------------------------------------------------------ */
+
   .technical-summary {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
   }
 
 
-  /*
-     Garis vertikal hanya diterapkan pada posisi tertentu.
-  */
   .technical-summary-item:nth-child(2)::after {
+
     display: none;
+
   }
 
 
   .technical-summary-item:nth-child(1),
   .technical-summary-item:nth-child(2) {
+
     border-bottom:
       1px solid rgba(255, 255, 255, 0.14);
+
   }
 
 
-  /*
-     Workflow tablet menjadi dua kolom.
-  */
+  /* ------------------------------------------------------------------------
+     PARAMETER + FOTO
+     ------------------------------------------------------------------------ */
+
+  .parameter-layout {
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(260px, 0.75fr);
+
+    gap: 18px;
+
+  }
+
+
+  /* ------------------------------------------------------------------------
+     WORKFLOW
+     ------------------------------------------------------------------------ */
+
   .workflow-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
   }
 
 
-  /*
-     Report preview masih dua kolom,
-     tetapi proporsinya dibuat lebih seimbang.
-  */
+  /* ------------------------------------------------------------------------
+     REPORT
+     ------------------------------------------------------------------------ */
+
   .report-preview {
+
     grid-template-columns:
       minmax(0, 1.15fr)
       minmax(260px, 0.85fr);
+
   }
 
 
   .report-preview-content {
-    padding: 35px 32px;
+
+    padding:
+      35px 32px;
+
   }
 
 
   .report-preview-structure {
-    padding: 30px 25px;
+
+    padding:
+      30px 25px;
+
   }
 
 
-  /*
-     CTA sedikit diperkecil.
-  */
+  /* ------------------------------------------------------------------------
+     CTA
+     ------------------------------------------------------------------------ */
+
   .service-cta-box {
-    padding: 45px 35px;
+
+    padding:
+      45px 35px;
+
   }
 
 }
 
 
 /* ==========================================================================
-   24. MOBILE
+   28. MOBILE
    ========================================================================== */
 
 @media only screen and (max-width: 767px) {
 
-  /*
-     Container mobile.
-  */
-  .service-hero .container,
-  .technical-section .container,
-  .service-cta .container {
+
+  /* ------------------------------------------------------------------------
+     CONTAINER
+     ------------------------------------------------------------------------ */
+
+  .sondir-page .service-hero .container,
+  .sondir-page .technical-section .container,
+  .sondir-page .service-cta .container {
+
     padding-left: 20px;
+
     padding-right: 20px;
+
   }
 
 
   /* ------------------------------------------------------------------------
-     HERO MOBILE
+     HERO
      ------------------------------------------------------------------------ */
 
   .service-hero .container {
+
     min-height: auto;
 
     padding-top: 105px;
+
     padding-bottom: 50px;
+
   }
 
 
   .service-hero h1 {
+
     font-size: 3.5rem;
 
     line-height: 1.12;
@@ -2056,38 +2546,60 @@ body > footer.footer .container {
     letter-spacing: -0.05rem;
 
     margin-bottom: 20px;
+
   }
 
 
   .service-hero-description {
+
     font-size: 1.4rem;
 
     line-height: 2.3rem;
+
   }
 
 
-  /*
-     Technical summary menjadi satu kolom.
-  */
+  .service-hero-actions {
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    width: 100%;
+
+  }
+
+
+  .service-hero-actions .btn {
+
+    width: 100%;
+
+  }
+
+
+  /* ------------------------------------------------------------------------
+     TECHNICAL SUMMARY
+     ------------------------------------------------------------------------ */
+
   .technical-summary {
-    grid-template-columns: 1fr;
+
+    grid-template-columns:
+      1fr;
 
     margin-top: 35px;
+
   }
 
 
-  /*
-     Semua garis vertikal dihapus.
-  */
   .technical-summary-item::after {
+
     display: none !important;
+
   }
 
 
-  /*
-     Garis horizontal antar summary.
-  */
   .technical-summary-item {
+
     min-height: 78px;
 
     padding:
@@ -2095,420 +2607,617 @@ body > footer.footer .container {
 
     border-bottom:
       1px solid rgba(255, 255, 255, 0.14);
+
   }
 
 
   .technical-summary-item:last-child {
+
     border-bottom: none;
+
   }
 
 
   /* ------------------------------------------------------------------------
-     SECTION MOBILE
+     SECTION
      ------------------------------------------------------------------------ */
 
   .technical-section {
+
     padding-top: 58px;
+
     padding-bottom: 58px;
+
   }
 
 
   .section-intro {
+
     margin-bottom: 32px;
+
   }
 
 
   .section-intro h2 {
+
     font-size: 2.7rem;
 
     line-height: 1.25;
+
   }
 
 
   .section-intro p {
+
     font-size: 1.35rem;
 
     line-height: 2.25rem;
+
   }
 
 
   /* ------------------------------------------------------------------------
-     TECHNICAL GRID MOBILE
+     TECHNICAL GRID
      ------------------------------------------------------------------------ */
 
   .technical-grid {
-    grid-template-columns: 1fr;
+
+    grid-template-columns:
+      1fr;
 
     gap: 13px;
+
   }
 
 
   .technical-card {
-    padding: 23px 22px;
+
+    padding:
+      23px 22px;
+
   }
 
 
   .technical-card h2 {
+
     font-size: 2.1rem;
+
   }
 
 
   .technical-card h3 {
+
     font-size: 1.45rem;
+
   }
 
 
   .technical-card p {
+
     font-size: 1.25rem;
 
     line-height: 2.1rem;
+
+  }
+
+
+  .technical-card li {
+
+    font-size: 1.25rem;
+
+    line-height: 2rem;
+
   }
 
 
   /* ------------------------------------------------------------------------
-     SCOPE MOBILE
+     SCOPE
      ------------------------------------------------------------------------ */
 
   .scope-list {
-    grid-template-columns: 1fr;
+
+    grid-template-columns:
+      1fr;
 
     gap: 0;
+
   }
 
 
   .scope-item {
-    grid-template-columns: 42px minmax(0, 1fr);
+
+    grid-template-columns:
+      42px minmax(0, 1fr);
 
     gap: 12px;
 
-    padding: 21px 0;
+    padding:
+      21px 0;
+
   }
 
 
   .scope-item h3 {
+
     font-size: 1.4rem;
+
   }
 
 
   .scope-item p {
+
     font-size: 1.25rem;
 
     line-height: 2rem;
+
   }
 
 
   /* ------------------------------------------------------------------------
-     SPEC TABLE MOBILE
+     PARAMETER + EQUIPMENT PHOTO
      ------------------------------------------------------------------------ */
+
+  .parameter-layout {
+
+    grid-template-columns:
+      1fr;
+
+    gap: 18px;
+
+  }
+
+
+  .spec-table-wrapper {
+
+    border-radius:
+      var(--sondir-radius);
+
+  }
+
 
   .spec-table th,
   .spec-table td {
-    padding: 14px 16px;
+
+    padding:
+      14px 16px;
 
     font-size: 1.2rem;
 
     line-height: 1.8rem;
+
   }
 
 
   .spec-table th {
+
     width: 40%;
+
+  }
+
+
+  /*
+     Foto alat dibuat sedikit lebih besar secara visual
+     setelah tabel pada mobile.
+  */
+
+  .equipment-showcase {
+
+    padding:
+      14px;
+
+  }
+
+
+  .equipment-image {
+
+    aspect-ratio:
+      4 / 3;
+
+  }
+
+
+  .equipment-showcase figcaption {
+
+    padding:
+      13px 2px 2px 2px;
+
+  }
+
+
+  .equipment-showcase figcaption strong {
+
+    font-size: 1.2rem;
+
+  }
+
+
+  .equipment-showcase figcaption span {
+
+    font-size: 1.1rem;
+
   }
 
 
   /* ------------------------------------------------------------------------
-     WORKFLOW MOBILE
+     WORKFLOW
      ------------------------------------------------------------------------ */
 
   .workflow-grid {
-    grid-template-columns: 1fr;
+
+    grid-template-columns:
+      1fr;
 
     gap: 12px;
+
   }
 
 
   .workflow-item {
+
     min-height: auto;
 
-    padding: 24px 22px;
+    padding:
+      24px 22px;
+
   }
 
 
   .workflow-number {
+
     margin-bottom: 13px;
+
   }
 
 
   .workflow-item h3 {
+
     font-size: 1.4rem;
+
   }
 
 
   .workflow-item p {
+
     font-size: 1.25rem;
 
     line-height: 2rem;
+
   }
 
 
   /* ------------------------------------------------------------------------
-     RESULT MOBILE
+     RESULT
      ------------------------------------------------------------------------ */
 
   .result-list {
-    grid-template-columns: 1fr;
+
+    grid-template-columns:
+      1fr;
 
     column-gap: 0;
+
   }
 
 
   .result-item {
+
     min-height: 64px;
+
   }
 
 
   .result-item p {
+
     font-size: 1.25rem;
 
     line-height: 1.95rem;
+
   }
 
 
   /* ------------------------------------------------------------------------
-     REPORT PREVIEW MOBILE
+     REPORT
      ------------------------------------------------------------------------ */
 
   .report-preview {
-    grid-template-columns: 1fr;
+
+    grid-template-columns:
+      1fr;
+
   }
 
 
   .report-preview-content {
-    padding: 30px 23px 32px 23px;
+
+    padding:
+      30px 23px 32px 23px;
+
   }
 
 
   .report-preview-content h3 {
+
     font-size: 2rem;
 
     line-height: 1.35;
+
   }
 
 
   .report-preview-content p {
+
     font-size: 1.25rem;
 
     line-height: 2rem;
+
   }
 
 
   .report-preview-structure {
-    padding: 25px 23px;
+
+    padding:
+      25px 23px;
+
   }
 
 
   .report-document-line {
+
     min-height: 51px;
+
   }
 
 
   .report-document-line strong {
+
     font-size: 1.2rem;
+
   }
 
 
-  /*
-     Tombol report full width agar mudah disentuh.
-  */
   .report-preview-content .btn {
+
     width: 100%;
+
   }
 
 
   /* ------------------------------------------------------------------------
-     EXPERIENCE MOBILE
+     EXPERIENCE
      ------------------------------------------------------------------------ */
 
   .experience-placeholder {
-    padding: 38px 22px;
+
+    padding:
+      38px 22px;
+
   }
 
 
   .experience-placeholder h3 {
+
     font-size: 2rem;
+
   }
 
 
   .experience-placeholder p {
+
     font-size: 1.25rem;
 
     line-height: 2rem;
+
   }
 
 
   /* ------------------------------------------------------------------------
-     REFERENCES MOBILE
+     REFERENCES
      ------------------------------------------------------------------------ */
 
   .reference-item {
-    grid-template-columns: 1fr;
+
+    grid-template-columns:
+      1fr;
 
     gap: 3px;
 
-    padding: 17px 0;
+    padding:
+      17px 0;
+
   }
 
 
   .reference-item strong {
+
     font-size: 1.2rem;
+
   }
 
 
   .reference-item span {
+
     font-size: 1.2rem;
 
     line-height: 1.9rem;
+
   }
 
 
   /* ------------------------------------------------------------------------
-     CTA MOBILE
+     CTA
      ------------------------------------------------------------------------ */
 
   .service-cta {
+
     padding-top: 58px;
+
     padding-bottom: 58px;
+
   }
 
 
   .service-cta-box {
-    padding: 38px 22px;
+
+    padding:
+      38px 22px;
+
   }
 
 
   .service-cta-box h2 {
+
     font-size: 2.6rem;
+
   }
 
 
   .service-cta-box > p {
+
     font-size: 1.3rem;
 
     line-height: 2.2rem;
+
   }
 
 
-  /*
-     Tombol CTA dibuat full width dan bertumpuk.
-  */
   .service-cta-actions {
+
     flex-direction: column;
 
     width: 100%;
+
   }
 
 
   .service-cta-actions .btn {
+
     width: 100%;
+
   }
 
 
   /* ------------------------------------------------------------------------
-     FOOTER MOBILE
+     FOOTER
      ------------------------------------------------------------------------ */
 
   .footer-content {
+
     flex-direction: column;
 
     text-align: center;
 
     gap: 15px;
+
   }
 
 
   body > footer.footer .container {
+
     padding:
       32px 20px 22px 20px;
+
   }
 
 
   .footer-content strong {
+
     font-size: 1.3rem;
+
   }
 
 
   .footer-content p {
+
     font-size: 1.1rem;
+
   }
 
 }
 
 
 /* ==========================================================================
-   25. VERY SMALL MOBILE
+   29. VERY SMALL MOBILE
    ========================================================================== */
 
 @media only screen and (max-width: 400px) {
 
-  /*
-     Ukuran hero pada perangkat sangat kecil.
-  */
+
   .service-hero h1 {
+
     font-size: 3rem;
+
   }
 
 
   .service-eyebrow {
+
     font-size: 0.95rem;
 
     letter-spacing: 0.11rem;
+
   }
 
 
-  /*
-     Padding card diperkecil.
-  */
   .technical-card {
-    padding: 21px 19px;
+
+    padding:
+      21px 19px;
+
   }
 
 
   .workflow-item {
-    padding: 22px 19px;
+
+    padding:
+      22px 19px;
+
   }
 
 
-  /*
-     CTA lebih rapat.
-  */
+  .equipment-showcase {
+
+    padding:
+      12px;
+
+  }
+
+
   .service-cta-box {
+
     padding:
       34px 18px;
+
   }
 
 
   .service-cta-box h2 {
+
     font-size: 2.35rem;
+
   }
 
 }
 
 
 /* ==========================================================================
-   26. REDUCED MOTION
+   30. REDUCED MOTION
    ========================================================================== */
 
 /*
-   Menghormati pengaturan accessibility pengguna
-   yang memilih mengurangi animasi.
+   Selain reveal, hover transition juga dihentikan ketika user
+   mengaktifkan preferensi reduced motion.
 */
+
 @media (prefers-reduced-motion: reduce) {
 
   .technical-card,
   .workflow-item,
+  .equipment-showcase .equipment-image img,
   .service-cta .btn,
   .report-preview-content .btn {
+
     transition: none;
+
   }
 
 }
